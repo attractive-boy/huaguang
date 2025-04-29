@@ -10,7 +10,7 @@
 			
 			<view class="login-tip">
 				<text>已有账户？</text>
-				<uv-link text="登录" color="#4893FF" @click="goToLogin" :custom-style="{ fontSize: '14px' }" />
+				<text class="login-link" @click="goToLogin">登录</text>
 			</view>
 			<view class="input-group">
 				<uv-text class="input-label" text="全名" size="25" color="#333" />
@@ -19,7 +19,7 @@
 					v-model="fullName"
 					type="text"
 					placeholder="请输入您的全名"
-					:border="false"
+					border="none"
 					:custom-style="inputStyle"
 				/>
 				<uv-text class="input-label" text="电子邮件" size="25" color="#333" />
@@ -28,7 +28,7 @@
 					v-model="email"
 					type="text"
 					placeholder="请输入您的电子邮件"
-					:border="false"
+					border="none"
 					:custom-style="inputStyle"
 				/>
 				<uv-text class="input-label" text="出生日期" size="25" color="#333" />
@@ -41,7 +41,7 @@
 					v-model="phone"
 					type="number"
 					placeholder="请输入您的手机号码"
-					:border="false"
+					border="none"
 					:custom-style="inputStyle"
 				>
 					<template v-slot:suffix>
@@ -71,7 +71,7 @@
 					v-model="verifyCode"
 					type="number"
 					placeholder="请输入验证码"
-					:border="false"
+					border="none"
 					:custom-style="inputStyle"
 				/>
 				<uv-text class="input-label" text="设置密码" size="25" color="#333" />
@@ -80,7 +80,7 @@
 					v-model="password"
 					type="password"
 					placeholder="请设置您的密码（8-20位，包含字母和数字）"
-					:border="false"
+					border="none"
 					:custom-style="inputStyle"
 				/>
 				<uv-text class="input-label" text="确认密码" size="25" color="#333" />
@@ -89,7 +89,7 @@
 					v-model="confirmPassword"
 					type="password"
 					placeholder="请再次输入密码"
-					:border="false"
+					border="none"
 					:custom-style="inputStyle"
 				/>
 				<uv-text class="input-label" text="昵称" size="25" color="#333" />
@@ -98,7 +98,7 @@
 					v-model="nickname"
 					type="text"
 					placeholder="请输入您的昵称（选填）"
-					:border="false"
+					border="none"
 					:custom-style="inputStyle"
 				/>
 				<view class="register-button">
@@ -152,7 +152,7 @@
 		methods: {
 			// 跳转到登录页面
 			goToLogin() {
-				uni.navigateTo({
+				uni.$uv.route({
 					url: '/pages/login/login'
 				})
 			},
@@ -162,11 +162,14 @@
 			},
 			// 确认日期选择
 			confirmDate(e) {
-				const date = new Date(e)
-				const year = date.getFullYear()
-				const month = String(date.getMonth() + 1).padStart(2, '0')
-				const day = String(date.getDate()).padStart(2, '0')
-				this.birthDate = `${year}-${month}-${day}`
+				if (!e || !e.value) return;
+				const date = new Date(e.value);
+				if (isNaN(date.getTime())) return;
+				
+				const year = date.getFullYear();
+				const month = String(date.getMonth() + 1).padStart(2, '0');
+				const day = String(date.getDate()).padStart(2, '0');
+				this.birthDate = `${year}-${month}-${day}`;
 			},
 			codeChange(text) {
 				this.tips = text
@@ -185,13 +188,18 @@
 						})
 						
 						// 调用发送验证码接口
-						await post('/api/v1/users/send-verify-code', {
-							phone: this.phone
+						const data = await post('/sms/send-code', {
+							phone: this.phone,
+							type: 1 // 1-注册
 						})
 						
 						uni.hideLoading()
-						toast('验证码已发送')
-						this.$refs.uCode.start()
+						if (data.data?.success) {
+							toast('验证码已发送')
+							this.$refs.uCode.start()
+						} else {
+							toast(data.data?.message || '发送失败')
+						}
 					} catch (error) {
 						// 错误已经在请求拦截器中处理
 					}
@@ -344,6 +352,11 @@
 	color: #666;
 	display: flex;
 	align-items: center;
+}
+.login-link {
+	color: #4893FF;
+	font-size: 14px;
+	margin-left: 10px;
 }
 .register-button {
 	margin-top: 24px;

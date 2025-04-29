@@ -6,8 +6,8 @@
 			</view>
 			
 			<view class="register-tip">
-				<text>您没有账户吗？</text>
-				<uv-link text="注册" color="#4893FF" @click="goToRegister" :custom-style="{ fontSize: '14px' }" />
+				<text>还没有账户？</text>
+				<text class="register-link" @click="goToRegister">注册</text>
 			</view>
 			<view class="input-group">
 				<uv-text class="input-label" text="电子邮箱/手机号码" size="25" color="#333" />
@@ -16,7 +16,7 @@
 					v-model="email"
 					type="text"
 					placeholder="请输入电子邮箱/手机号码"
-					:border="false"
+					border="none"
 					:custom-style="inputStyle"
 				/>
 				<uv-text class="input-label" text="密码" size="25" color="#333" />
@@ -25,15 +25,16 @@
 					v-model="password"
 					type="password"
 					placeholder="请输入密码"
-					:border="false"
+					border="none"
 					:custom-style="inputStyle"
 				/>
 				<view class="password-options">
 					<view class="left-option">
-						<uv-checkbox v-model="rememberPassword" label="记住密码" :label-size="25" />
+						<checkbox :checked="rememberPassword" @click="rememberPassword = !rememberPassword" />
+						<text class="remember-text">记住密码</text>
 					</view>
 					<view class="right-option">
-						<uv-link text="忘记密码？" color="#4893FF" @click="forgotPassword" :custom-style="{ fontSize: '25rpx' }" />
+						<text class="forgot-password" @click="forgotPassword">忘记密码？</text>
 					</view>
 				</view>
 				<view class="login-button">
@@ -68,7 +69,7 @@
 		methods: {
 			// 跳转到注册页面
 			goToRegister() {
-				uni.navigateTo({
+				uni.$uv.route({
 					url: '/pages/register/register'
 				})
 			},
@@ -224,5 +225,18 @@
 .login-button {
 	margin-top: 24px;
 	width: 100%;
+}
+.register-link {
+	color: #4893FF;
+	font-size: 14px;
+	margin-left: 10px;
+}
+.remember-text {
+	margin-left: 5px;
+}
+.forgot-password {
+	color: #4893FF;
+	font-size: 14px;
+	margin-left: 10px;
 }
 </style>
