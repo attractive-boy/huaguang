@@ -10,7 +10,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "首页"
 			}
 		},
 		{
@@ -21,9 +21,80 @@
 			}
 		}
 	],
+	"subPackages": [
+		{
+			"root": "pages/user",
+			"pages": [
+				{
+					"path": "index/index",
+					"style": {
+						"navigationBarTitleText": "用户首页"
+					}
+				},
+				{
+					"path": "profile/profile",
+					"style": {
+						"navigationBarTitleText": "个人中心"
+					}
+				},
+				{
+					"path": "appointment/appointment",
+					"style": {
+						"navigationBarTitleText": "预约咨询"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/lawyer",
+			"pages": [
+				{
+					"path": "index/index",
+					"style": {
+						"navigationBarTitleText": "律师工作台"
+					}
+				},
+				{
+					"path": "cases/cases",
+					"style": {
+						"navigationBarTitleText": "案件管理"
+					}
+				},
+				{
+					"path": "consultation/consultation",
+					"style": {
+						"navigationBarTitleText": "咨询管理"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/psychologist",
+			"pages": [
+				{
+					"path": "index/index",
+					"style": {
+						"navigationBarTitleText": "心理师工作台"
+					}
+				},
+				{
+					"path": "consultation/consultation",
+					"style": {
+						"navigationBarTitleText": "咨询管理"
+					}
+				},
+				{
+					"path": "reports/reports",
+					"style": {
+						"navigationBarTitleText": "评估报告"
+					}
+				}
+			]
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "华光法律咨询",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},

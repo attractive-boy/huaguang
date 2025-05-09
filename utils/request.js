@@ -1,5 +1,5 @@
 // 基础URL
-const BASE_URL = 'http://huaguang.djjp.cn'
+const BASE_URL = 'https://huaguang.xiaoxiangruyi.cn/api'
 
 // 请求拦截器
 const requestInterceptor = (config) => {

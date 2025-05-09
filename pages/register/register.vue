@@ -248,15 +248,15 @@
 					})
 					
 					// 调用注册接口
-					const data = await post('/api/v1/users/register', {
-						fullName: this.fullName,
-						email: this.email,
-						birthDate: this.birthDate,
+					const data = await post('/user/register', {
 						phone: this.phone,
 						verifyCode: this.verifyCode,
 						password: this.password,
 						confirmPassword: this.confirmPassword,
-						nickname: this.nickname
+						nickname: this.nickname,
+						realName: this.fullName,
+						birthDate: this.birthDate,
+						email: this.email
 					})
 					
 					uni.showToast({
@@ -266,7 +266,9 @@
 					
 					// 跳转到登录页面
 					setTimeout(() => {
-						uni.navigateBack()
+						uni.$uv.route({
+							url: '/pages/login/login'
+						})
 					}, 1500)
 				} catch (error) {
 					// 错误已经在请求拦截器中处理

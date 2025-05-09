@@ -99,7 +99,7 @@
 					})
 					
 					// 调用登录接口
-					const data = await post('/api/v1/users/login/password', {
+					const data = await post('/user/login', {
 						username: this.email,
 						password: this.password
 					})
@@ -115,8 +115,10 @@
 					}
 					
 					// 保存用户信息和token
-					uni.setStorageSync('token', data.token)
-					uni.setStorageSync('userInfo', data.userInfo)
+					uni.setStorageSync('token', data.data.token)
+					uni.setStorageSync('userInfo', data.data.userInfo)
+					uni.setStorageSync('tokenExpireTime', data.data.tokenExpireTime)
+					uni.setStorageSync('userId', data.data.userId)
 					
 					uni.showToast({
 						title: '登录成功',
