@@ -30,7 +30,7 @@
 				/>
 				<view class="password-options">
 					<view class="left-option">
-						<checkbox :checked="rememberPassword" @click="rememberPassword = !rememberPassword" />
+						<checkbox :checked="rememberPassword" @tap="toggleRememberPassword" />
 						<text class="remember-text">记住密码</text>
 					</view>
 					<view class="right-option">
@@ -75,12 +75,22 @@
 			},
 			// 检查记住的密码
 			checkRememberedPassword() {
-				const rememberedData = uni.getStorageSync('rememberedLogin')
-				if (rememberedData) {
-					this.email = rememberedData.email
-					this.password = rememberedData.password
-					this.rememberPassword = true
+				try {
+					const rememberedData = uni.getStorageSync('rememberedLogin')
+					console.log('记住的密码数据：', rememberedData)
+					if (rememberedData) {
+						const data = JSON.parse(rememberedData)
+						this.email = data.email
+						this.password = data.password
+						this.rememberPassword = true
+					}
+				} catch (e) {
+					console.error('读取记住的密码失败：', e)
 				}
+			},
+			// 切换记住密码状态
+			toggleRememberPassword() {
+				this.rememberPassword = !this.rememberPassword
 			},
 			// 处理登录
 			async handleLogin() {
@@ -97,38 +107,42 @@
 					uni.showLoading({
 						title: '登录中...'
 					})
-					
+					console.log('登录中...')
 					// 调用登录接口
 					const data = await post('/user/login', {
 						username: this.email,
 						password: this.password
 					})
-					
+					console.log('登录成功：', data)
+					console.log('是否记住密码：', this.rememberPassword)
 					// 处理记住密码
 					if (this.rememberPassword) {
-						uni.setStorageSync('rememberedLogin', {
+						const loginData = {
 							email: this.email,
 							password: this.password
-						})
+						}
+						uni.setStorageSync('rememberedLogin', JSON.stringify(loginData))
+						console.log('保存记住的密码：', loginData)
 					} else {
 						uni.removeStorageSync('rememberedLogin')
+						console.log('清除记住的密码')
 					}
-					
+
 					// 保存用户信息和token
-					uni.setStorageSync('token', data.data.token)
-					uni.setStorageSync('userInfo', data.data.userInfo)
-					uni.setStorageSync('tokenExpireTime', data.data.tokenExpireTime)
-					uni.setStorageSync('userId', data.data.userId)
+					uni.setStorageSync('token', data.token)
+					uni.setStorageSync('userInfo', data.userInfo)
+					uni.setStorageSync('tokenExpireTime', data.tokenExpireTime)
+					uni.setStorageSync('userId', data.userId)
 					
 					uni.showToast({
 						title: '登录成功',
 						icon: 'success'
 					})
 					
-					// 跳转到首页
+					// 直接跳转到用户端首页
 					setTimeout(() => {
-						uni.reLaunch({
-							url: '/pages/index/index'
+						uni.switchTab({
+							url: '/pages/user/index/index'
 						})
 					}, 1500)
 				} catch (error) {

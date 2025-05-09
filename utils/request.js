@@ -17,21 +17,10 @@ const requestInterceptor = (config) => {
 // 响应拦截器
 const responseInterceptor = (response) => {
 	const { statusCode, data } = response
-	
+	console.log('响应拦截器：', response)
 	// 请求成功
 	if (statusCode === 200) {
-		// 业务成功
-		if (data.success) {
-			return data.data
-		}
-		// 业务失败
-		else {
-			uni.showToast({
-				title: data.message || '请求失败',
-				icon: 'none'
-			})
-			return Promise.reject(data)
-		}
+		return data.data
 	}
 	// 请求失败
 	else {

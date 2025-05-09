@@ -1,13 +1,13 @@
 <template>
 	<view class="container">
 		<view class="header">
-			<text class="title">律师工作台</text>
+			<text class="title">心理师工作台</text>
 		</view>
 		<view class="content">
 			<view class="stats-cards">
 				<view class="stat-card">
 					<text class="stat-number">0</text>
-					<text class="stat-label">待处理案件</text>
+					<text class="stat-label">待处理咨询</text>
 				</view>
 				<view class="stat-card">
 					<text class="stat-number">0</text>
@@ -20,12 +20,12 @@
 			</view>
 			
 			<view class="menu-list">
-				<view class="menu-item" @click="goToCases">
-					<text class="menu-title">案件管理</text>
-					<text class="arrow">></text>
-				</view>
 				<view class="menu-item" @click="goToConsultation">
 					<text class="menu-title">咨询管理</text>
+					<text class="arrow">></text>
+				</view>
+				<view class="menu-item" @click="goToReports">
+					<text class="menu-title">评估报告</text>
 					<text class="arrow">></text>
 				</view>
 				<view class="menu-item" @click="goToSchedule">
@@ -45,14 +45,14 @@
 			}
 		},
 		methods: {
-			goToCases() {
-				uni.navigateTo({
-					url: '/pages/lawyer/cases/cases'
-				})
-			},
 			goToConsultation() {
 				uni.navigateTo({
-					url: '/pages/lawyer/consultation/consultation'
+					url: '/pages/psychologist/consultation/consultation'
+				})
+			},
+			goToReports() {
+				uni.navigateTo({
+					url: '/pages/psychologist/reports/reports'
 				})
 			},
 			goToSchedule() {
