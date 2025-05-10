@@ -1,0 +1,19 @@
+// API配置
+export const API_CONFIG = {
+  BASE_URL: 'https://huaguang.xiaoxiangruyi.cn/api',
+  TIMEOUT: 10000,
+  HEADERS: {
+    'Content-Type': 'application/json'
+  }
+}
+
+//静态图标地址baseurl
+export const staticBaseUrl = 'https://huaguang-admin.djjp.cn/static'
+
+// 导出所有配置
+export default {
+  API_CONFIG,
+  staticBaseUrl
+} 
+
+

@@ -141,7 +141,7 @@
 					
 					// 直接跳转到用户端首页
 					setTimeout(() => {
-						uni.switchTab({
+						uni.redirectTo({
 							url: '/pages/user/index/index'
 						})
 					}, 1500)

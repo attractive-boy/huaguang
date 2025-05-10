@@ -1,5 +1,4 @@
-// 基础URL
-const BASE_URL = 'https://huaguang.xiaoxiangruyi.cn/api'
+import { API_CONFIG } from '@/config/index'
 
 // 请求拦截器
 const requestInterceptor = (config) => {
@@ -36,13 +35,14 @@ const responseInterceptor = (response) => {
 const request = (options) => {
 	// 处理请求配置
 	const config = requestInterceptor({
-		url: `${BASE_URL}${options.url}`,
+		url: `${API_CONFIG.BASE_URL}${options.url}`,
 		method: options.method || 'GET',
 		data: options.data,
 		header: {
-			'Content-Type': 'application/json',
+			...API_CONFIG.HEADERS,
 			...options.header
-		}
+		},
+		timeout: API_CONFIG.TIMEOUT
 	})
 	
 	// 返回Promise

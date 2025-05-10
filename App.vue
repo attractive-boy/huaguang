@@ -14,4 +14,5 @@
 
 <style lang="scss">
 	@import '@/uni_modules/uv-ui-tools/index.scss';
+	@import './styles/variables.scss';
 </style>
