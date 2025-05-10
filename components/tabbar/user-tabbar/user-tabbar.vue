@@ -48,6 +48,17 @@ export default {
       staticBaseUrl
     }
   },
+  created() {
+    // 根据当前路由设置 current 值
+    const routes = [
+      '/pages/user/index/index',
+      '/pages/user/fund/index',
+      '/pages/user/info/index',
+      '/pages/user/profile/profile'
+    ]
+    const currentRoute = getCurrentPages()[getCurrentPages().length - 1].route
+    this.current = routes.findIndex(route => route.includes(currentRoute))
+  },
   methods: {
     onChange(index) {
       this.current = index

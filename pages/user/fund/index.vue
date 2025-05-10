@@ -1,24 +1,506 @@
 <template>
   <view class="fund-page">
-    <view class="content">
-      青年帮扶基金
+    <!-- 功能按钮 -->
+    <view class="grid-section">
+      <uv-grid :col="3" @click="handleGridClick">
+        <uv-grid-item v-for="(item, index) in gridList" :key="index">
+          <view class="icon-wrapper" :class="{ 'legal-icon': item.title === '法律咨询' }">
+            <uv-image :src="item.icon" :width="item.title === '法律咨询' ? '100rpx' : '60rpx'"
+              :height="item.title === '法律咨询' ? '100rpx' : '60rpx'" mode="aspectFit"></uv-image>
+          </view>
+          <text class="grid-text">{{ item.title }}</text>
+        </uv-grid-item>
+      </uv-grid>
     </view>
+
+    <!-- 统计数据 Banner -->
+    <view class="statistics-banner">
+      <view class="stat-item">
+        <text class="stat-title">已帮扶人数</text>
+        <text class="stat-number">{{ statistics.helpedCount || 0 }}</text>
+      </view>
+      <view class="divider"></view>
+      <view class="stat-item">
+        <text class="stat-title">正在帮扶人数</text>
+        <text class="stat-number">{{ statistics.helpingCount || 0 }}</text>
+      </view>
+    </view>
+
+    <!-- 帮扶案例模块 -->
+    <view class="case-section">
+      <view class="section-header">
+        <view class="header-left">
+          <uv-image :src="`${config.staticBaseUrl}/icons/case.png`" width="40rpx" height="40rpx"
+            mode="aspectFit"></uv-image>
+          <text class="header-title">帮扶案例</text>
+        </view>
+        <view class="header-right">
+          <view class="more-btn">
+            <text class="more-text">了解更多</text>
+            <view class="triangle"></view>
+          </view>
+        </view>
+      </view>
+      
+      <view class="case-content">
+        <view class="case-item" v-for="(item, index) in caseList" :key="index">
+          <view class="case-info">
+            <text>{{item.maskedName}} 获得帮扶金额 {{item.loanAmount}}元</text>
+            <text class="case-time">{{item.createTime}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 功能模块 -->
+    <view class="feature-section">
+      <view class="feature-left">
+        <view class="feature-item" style="background-color: #A8C8FF;">
+          <view class="feature-header">
+            <text class="feature-title" style="color: #3c5d9f;">帮扶类型</text>
+            <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/help-type.png`" width="120rpx"
+              height="120rpx" mode="aspectFit"></uv-image>
+          </view>
+          <view class="feature-desc">
+            <text style="color: #3c5d9f;">选择帮扶项目</text>
+            <text style="color: #3c5d9f;">填写遇到的问题困境</text>
+          </view>
+        </view>
+        <view class="feature-item" style="background-color: #A8E3FF;">
+          <view class="feature-header">
+            <text class="feature-title" style="color: #4c3d9f;">帮扶申请</text>
+            <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/help-apply.png`" width="120rpx"
+              height="120rpx" mode="aspectFit"></uv-image>
+          </view>
+          <view class="feature-desc">
+            <text style="color: #4c3d9f;">选择帮扶项目</text>
+            <text style="color: #4c3d9f;">填写遇到的问题困境</text>
+          </view>
+        </view>
+      </view>
+      <view class="feature-item" style="background-color: #FFB217;">
+        <view class="feature-header"
+          style="display: flex; flex-direction: column; justify-content: center; height: 200rpx;">
+          <view class="title-group" style="position: absolute; top: 50%;">
+            <text class="feature-title" style="color: #9f5f3c; font-size: 40rpx; z-index: 1;">在线申请</text>
+            <text class="feature-subtitle" style="color: #9f5f3c; z-index: 1; font-size: 36rpx;">信用记录修复</text>
+          </view>
+          <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/credit-repair.png`" width="200rpx"
+            height="200rpx" mode="aspectFit"></uv-image>
+        </view>
+        <view class="feature-desc" style="position: absolute; bottom: 12%;">
+          <text style="color: #9f5f3c;">信用教育知识普及</text>
+          <text style="color: #9f5f3c;">修复逾期记录 提升信用积分</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 心理咨询模块 -->
+    <view class="counseling-section" style="margin: 20rpx 30rpx;">
+      <view class="feature-item" style="background: linear-gradient(to right, #FF7F7F, #FDDCDC); position: relative; height: 400rpx; border-radius: 20rpx; overflow: hidden;">
+        <view class="counseling-header" style="display: flex; align-items: center; padding: 20rpx 30rpx;">
+          <uv-image :src="`${config.staticBaseUrl}/icons/counseling.png`" width="60rpx" height="60rpx"
+            mode="aspectFit"></uv-image>
+          <text style="color: #A83333; font-size: 32rpx; margin-left: 12rpx;">心理咨询</text>
+        </view>
+        <view class="counseling-content" style="padding: 0 30rpx;">
+          <view style="display: flex; align-items: baseline;">
+            <text style="color: #A83333; font-size: 56rpx; font-weight: bold; margin: 10rpx 0; text-wrap: nowrap;">1,188,777</text>
+            <text style="color: #A83333; font-size: 36rpx; margin-left: 4rpx;">人</text>
+          </view>
+          <text style="color: #A83333; font-size: 28rpx; display: block; margin-bottom: 20rpx;">在这里选择了咨询师</text>
+        </view>
+        <view class="counseling-footer" style="position: absolute; bottom: 30rpx; left: 30rpx;">
+          <text style="color: #A83333; font-size: 32rpx;">勇敢迈出第一步 ></text>
+        </view>
+        <uv-image class="counseling-bg" :src="`${config.staticBaseUrl}/icons/counseling-bg.png`" width="280rpx"
+          height="280rpx" mode="aspectFit" style="position: absolute; right: -10%; bottom: 0;"></uv-image>
+      </view>
+    </view>
+
+    <!-- 引入用户 TabBar -->
+    <user-tabbar></user-tabbar>
   </view>
 </template>
 
 <script>
+import UserTabbar from '@/components/tabbar/user-tabbar/user-tabbar.vue'
+import config from '@/config/index.js'
+import request from '@/utils/request.js'
+
 export default {
-  name: 'FundPage'
+  name: 'FundPage',
+  components: {
+    UserTabbar
+  },
+  data() {
+    return {
+      gridList: [
+        {
+          title: '填写申请表',
+          icon: `${config.staticBaseUrl}/icons/apply.png`,
+          bgColor: '#0049FF'
+        },
+        {
+          title: '法律咨询',
+          icon: `${config.staticBaseUrl}/icons/legal2.png`,
+          bgColor: '#C06FF7'
+        },
+        {
+          title: '就业帮扶',
+          icon: `${config.staticBaseUrl}/icons/job2.png`,
+          bgColor: '#FFB217'
+        }
+      ],
+      statistics: {
+        helpingCount: 0,
+        helpedCount: 0,
+        totalAmount: 0,
+        monthlyNewCount: 0
+      },
+      caseList: [],
+      config: config
+    }
+  },
+  onLoad() {
+    this.getStatistics()
+    this.getCaseList()
+  },
+  methods: {
+    handleGridClick(index) {
+      const item = this.gridList[index]
+      if (item.title === '填写申请表') {
+        uni.navigateTo({
+          url: '/pages/user/apply/index'
+        })
+      } else {
+        uni.showToast({
+          icon: 'none',
+          title: `点击了${item.title}`
+        })
+      }
+    },
+    async getStatistics() {
+      try {
+        const res = await request({
+          url: '/api/help-loan/statistics',
+          method: 'GET'
+        })
+        if (res.code === 0) {
+          this.statistics = res.data
+        }
+      } catch (error) {
+        console.error('获取统计数据失败：', error)
+      }
+    },
+    async getCaseList() {
+      try {
+        const res = await request({
+          url: '/api/help-loan/cases',
+          method: 'GET'
+        })
+        if (res.code === 0 && res.data && res.data.length > 0) {
+          let cases = res.data
+          if (cases.length > 3) {
+            // 如果数据超过3个，按金额排序取前三个
+            cases = cases.sort((a, b) => b.loanAmount - a.loanAmount).slice(0, 3)
+          } else if (cases.length < 3) {
+            // 如果数据不足3个，随机重复填充到3个
+            const randomCases = []
+            while (randomCases.length < 3) {
+              const randomIndex = Math.floor(Math.random() * cases.length)
+              randomCases.push(cases[randomIndex])
+            }
+            cases = randomCases
+          }
+          this.caseList = cases
+        } else {
+          // 默认数据
+          this.caseList = [
+            {
+              maskedName: '张**',
+              loanAmount: 50000,
+              createTime: '2024-03-15'
+            },
+            {
+              maskedName: '李**',
+              loanAmount: 30000,
+              createTime: '2024-03-10'
+            },
+            {
+              maskedName: '王**',
+              loanAmount: 20000,
+              createTime: '2024-03-05'
+            }
+          ]
+        }
+      } catch (error) {
+        console.error('获取帮扶案例列表失败：', error)
+        // 发生错误时也使用默认数据
+        this.caseList = [
+          {
+            maskedName: '张**',
+            loanAmount: 50000,
+            createTime: '2024-03-15'
+          },
+          {
+            maskedName: '李**',
+            loanAmount: 30000,
+            createTime: '2024-03-10'
+          },
+          {
+            maskedName: '王**',
+            loanAmount: 20000,
+            createTime: '2024-03-05'
+          }
+        ]
+      }
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/variables.scss';
+
 .fund-page {
   min-height: 100vh;
-  background-color: #f5f5f5;
-  
-  .content {
+  padding-bottom: 100rpx;
+  /* 为 TabBar 预留空间 */
+  background-image: $fund-bg-image;
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+
+  .grid-section {
     padding: 20rpx;
+    margin: 0 20rpx;
+
+    .icon-wrapper {
+      width: 100rpx;
+      height: 100rpx;
+      border-radius: 20rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10rpx;
+      overflow: hidden;
+      flex-shrink: 0;
+
+      &.legal-icon {
+        .uv-image {
+          transform: scale(1.4);
+        }
+      }
+    }
+
+    .grid-text {
+      font-size: 28rpx;
+      color: #fff;
+    }
+  }
+
+  .statistics-banner {
+    margin: 20rpx 30rpx;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.5));
+    border-radius: 16rpx;
+    padding: 30rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .stat-title {
+        font-size: 28rpx;
+        color: #333;
+        margin-bottom: 10rpx;
+      }
+
+      .stat-number {
+        font-size: 48rpx;
+        color: #1D5DD9;
+        font-weight: bold;
+      }
+    }
+
+    .divider {
+      width: 2rpx;
+      height: 80rpx;
+      background-color: #225BCB;
+    }
+  }
+
+  .case-section {
+    margin: 20rpx 30rpx;
+    background: white;
+    border-radius: 16rpx;
+    padding: 20rpx;
+    position: relative;
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20rpx;
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 10rpx;
+
+        .header-title {
+          font-family: $font-family-youshe;
+          font-size: 32rpx;
+          color: #3C5D9F;
+          font-weight: 500;
+        }
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        .more-btn {
+          position: relative;
+          padding: 8rpx 40rpx 8rpx 60rpx;
+          background: linear-gradient(to left, #42B0FF, #DCF0FF);
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%);
+          min-width: 200rpx;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          border-top-right-radius: 16rpx;
+
+          .more-text {
+            font-size: 28rpx;
+            color: #3C5D9F;
+            margin-right: 4rpx;
+          }
+
+          .triangle {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 8rpx 0 8rpx 12rpx;
+            border-color: transparent transparent transparent #3C5D9F;
+          }
+        }
+      }
+    }
+
+    .case-item {
+      margin-right: 20rpx;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .case-content {
+      border-radius: 12rpx;
+      padding: 20rpx;
+      margin-top: 20rpx;
+      display: flex;
+      flex-direction: column;
+      gap: 12rpx;
+      
+      .case-item {
+        font-size: 28rpx;
+        color: #3C5D9F;
+        line-height: 1.5;
+        background-color: #F5F8FF;
+        padding: 16rpx 20rpx;
+        border-radius: 8rpx;
+        width: 100%;
+        box-sizing: border-box;
+
+        .case-info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .case-time {
+          font-size: 24rpx;
+          color: #999;
+        }
+      }
+    }
+  }
+
+  .feature-section {
+    margin: 20rpx 30rpx;
+    display: flex;
+    gap: 20rpx;
+
+    .feature-left {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 20rpx;
+
+      .feature-item {
+        width: 100%;
+      }
+    }
+
+    .feature-item {
+      width: 50%;
+      border-radius: 16rpx;
+      padding: 20rpx;
+      color: #fff;
+      box-sizing: border-box;
+
+      .feature-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 16rpx;
+        position: relative;
+
+        .title-group {
+          display: flex;
+          flex-direction: column;
+          gap: 8rpx;
+        }
+
+        .feature-title {
+          font-size: 32rpx;
+          font-weight: bold;
+        }
+
+        .feature-subtitle {
+          font-size: 28rpx;
+        }
+
+        .feature-icon {
+          position: absolute;
+          right: 0;
+          top: 10%;
+
+        }
+      }
+
+      .feature-desc {
+        display: flex;
+        flex-direction: column;
+        gap: 8rpx;
+
+        text {
+          font-size: 24rpx;
+          opacity: 0.9;
+        }
+      }
+    }
   }
 }
-</style> 
+</style>

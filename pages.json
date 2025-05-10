@@ -52,6 +52,13 @@
 						"navigationBarTitleText": "我的",
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "apply/index",
+					"style": {
+						"navigationBarTitleText": "填写申请表",
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},

@@ -4,6 +4,9 @@ $static-base-url: 'https://huaguang-admin.djjp.cn/static';
 // 背景图
 $bg-image: url($static-base-url + '/bg.png');
 
+//fund页面背景
+$fund-bg-image: url($static-base-url + '/fund-bg.png');
+
 // 字体配置
 $font-family-youshe: 'YouSheBiaoTiHei';
 $font-url-youshe: $static-base-url + '/fonts/YouSheBiaoTiHei.ttf';
