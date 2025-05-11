@@ -119,6 +119,7 @@
 <script>
 	import { post } from '@/utils/request.js'
 	import { toast } from '@/uni_modules/uv-ui-tools/libs/function/index.js'
+	import { sendSmsCode } from '@/utils/sms.js'
 	
 	export default {
 		data() {
@@ -176,36 +177,11 @@
 			},
 			
 			async getCode() {
-				if (!this.isPhoneValid) {
-					toast('请输入正确的手机号码')
-					return
-				}
-				
-				if (this.$refs.uCode.canGetCode) {
-					try {
-						uni.showLoading({
-							title: '正在获取验证码'
-						})
-						
-						// 调用发送验证码接口
-						const data = await post('/sms/send-code', {
-							phone: this.phone,
-							type: 1 // 1-注册
-						})
-						
-						uni.hideLoading()
-						if (data.data?.success) {
-							toast('验证码已发送')
-							this.$refs.uCode.start()
-						} else {
-							toast(data.data?.message || '发送失败')
-						}
-					} catch (error) {
-						// 错误已经在请求拦截器中处理
-					}
-				} else {
-					toast('倒计时结束后再发送')
-				}
+				await sendSmsCode({
+					phone: this.phone,
+					type: 1, // 1-注册
+					codeRef: this.$refs.uCode
+				})
 			},
 			// 处理注册
 			async handleRegister() {
