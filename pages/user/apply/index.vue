@@ -304,11 +304,16 @@ export default {
       this.debtList.splice(index, 1)
     },
     async afterRead(event) {
+      console.log('afterRead event:', event)
       // 当设置 multiple 为 true 时, file 为数组格式，否则为对象格式
       let lists = [].concat(event.file)
+      console.log('处理前的文件列表:', lists)
       let fileListLen = this.debtList[event.name].images.length
+      console.log('当前负债项索引:', event.name)
+      console.log('当前图片列表长度:', fileListLen)
       
       lists.map((item) => {
+        console.log('添加文件项:', item)
         this.debtList[event.name].images.push({
           ...item,
           status: 'uploading',
@@ -318,30 +323,58 @@ export default {
       
       for (let i = 0; i < lists.length; i++) {
         try {
-          const fileRes = await uploadFile({
-            file: lists[i].url,
-            businessType: 'DEBT_IMAGE'
-          })
+          console.log('开始上传第', i + 1, '个文件')
+          
+          // 获取文件对象
+          const file = lists[i]
+          console.log('文件对象:', file)
+          
+          // 根据环境获取文件路径
+          let uploadParams = {}
+          
+
+          uploadParams = {
+            file: file.url,
+            businessType: 'DEBT_IMAGE',
+            businessId: this.debtList[event.name].id
+          }
+          
+          console.log('上传参数:', uploadParams)
+          
+          const fileRes = await uploadFile(uploadParams)
+          
+          console.log('上传成功,返回数据:', fileRes)
           
           let item = this.debtList[event.name].images[fileListLen]
+          console.log('更新前的图片项:', item)
+          
           this.debtList[event.name].images.splice(fileListLen, 1, Object.assign(item, {
             status: 'success',
             message: '',
             url: fileRes.fileUrl,
             id: fileRes.fileId
           }))
+          
+          console.log('更新后的图片列表:', this.debtList[event.name].images)
           fileListLen++
         } catch (error) {
+          console.error('上传失败,错误详情:', error)
+          console.error('错误堆栈:', error.stack)
           uni.showToast({
             title: '图片上传失败',
             icon: 'none'
           })
+          // 上传失败时移除该图片
+          this.debtList[event.name].images.splice(fileListLen, 1)
         }
       }
     },
     
     deletePic(event) {
+      console.log('删除图片事件:', event)
+      console.log('删除前的图片列表:', this.debtList[event.name].images)
       this.debtList[event.name].images.splice(event.index, 1)
+      console.log('删除后的图片列表:', this.debtList[event.name].images)
     }
   }
 }

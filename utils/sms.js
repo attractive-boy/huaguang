@@ -36,12 +36,13 @@ export const sendSmsCode = async (options) => {
     })
 
     uni.hideLoading()
-    if (data.data?.success) {
+    console.log('发送验证码结果：', data)
+    if (data) {
       toast('验证码已发送')
       codeRef.start()
       return true
     } else {
-      toast(data.data?.message || '发送失败')
+      toast('发送失败')
       return false
     }
   } catch (error) {

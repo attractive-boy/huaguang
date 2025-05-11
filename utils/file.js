@@ -1,4 +1,5 @@
 import request from './request'
+import { API_CONFIG } from '@/config/index'
 
 /**
  * 文件上传
@@ -10,29 +11,40 @@ import request from './request'
  */
 export const uploadFile = async (options) => {
   try {
-    const formData = new FormData()
-    formData.append('file', options.file)
-    if (options.businessType) {
-      formData.append('businessType', options.businessType)
-    }
-    if (options.businessId) {
-      formData.append('businessId', options.businessId)
+    // 构建完整的URL，包含query参数
+    let url = '/file/upload'
+    if (options.businessType || options.businessId) {
+      const params = new URLSearchParams()
+      if (options.businessType) params.append('businessType', options.businessType)
+      if (options.businessId) params.append('businessId', options.businessId)
+      url += `?${params.toString()}`
     }
 
-    const res = await request({
-      url: '/file/upload',
-      method: 'POST',
-      data: formData,
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+    return new Promise((resolve, reject) => {
+      uni.uploadFile({
+        url: `${API_CONFIG.BASE_URL}${url}`,
+        filePath: options.file.path || options.file,
+        name: 'file',
+        header: {
+          'Content-Type': 'multipart/form-data'
+        },
+        success: (uploadRes) => {
+          try {
+            const res = JSON.parse(uploadRes.data)
+            if (res.code === 0) {
+              resolve(res.data)
+            } else {
+              reject(new Error(res.message || '文件上传失败'))
+            }
+          } catch (error) {
+            reject(new Error('解析响应数据失败'))
+          }
+        },
+        fail: (error) => {
+          reject(new Error(error.errMsg || '文件上传失败'))
+        }
+      })
     })
-
-    if (res.code === 0) {
-      return res.data
-    } else {
-      throw new Error(res.message || '文件上传失败')
-    }
   } catch (error) {
     console.error('文件上传失败：', error)
     throw error
