@@ -42,3 +42,8 @@ uni.$uv.setConfig({
 		// 修改uv-text组件的size参数的默认值，注意：默认值都要用default声明
 	}
 })
+
+// #ifndef VUE3
+import VueCompositionAPI from '@vue/composition-api';
+Vue.use(VueCompositionAPI);
+// #endif
