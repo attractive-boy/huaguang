@@ -69,6 +69,13 @@
 					}
 				},
 				{
+					"path": "fund/legal/index",
+					"style": {
+						"navigationBarTitleText": "法律护航申请",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "info/index",
 					"style": {
 						"navigationBarTitleText": "信息",

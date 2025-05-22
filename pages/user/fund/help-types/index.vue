@@ -135,13 +135,12 @@ export default {
           })
           break
         case 'legal':
-          uni.showToast({
-            title: '法律护航功能开发中',
-            icon: 'none'
+          // 跳转到法律护航申请页面
+          uni.navigateTo({
+            url: '/pages/user/fund/legal/index'
           })
           break
         default:
-          break
       }
     }
   }
