@@ -76,6 +76,13 @@
 					}
 				},
 				{
+					"path": "fund/psychological-apply/index",
+					"style": {
+						"navigationBarTitleText": "心理支持申请",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "info/index",
 					"style": {
 						"navigationBarTitleText": "信息",

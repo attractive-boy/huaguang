@@ -129,9 +129,9 @@ export default {
           })
           break
         case 'psychological':
-          // 跳转到心理咨询页面
+          // 跳转到心理支持页面
           uni.navigateTo({
-            url: '/pages/user/fund/counseling/index'
+            url: '/pages/user/fund/psychological-apply/index'
           })
           break
         case 'legal':
