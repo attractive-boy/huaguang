@@ -90,6 +90,13 @@
 					}
 				},
 				{
+					"path": "fund/unemployment-apply/index",
+					"style": {
+						"navigationBarTitleText": "失业援助申请",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "info/index",
 					"style": {
 						"navigationBarTitleText": "信息",

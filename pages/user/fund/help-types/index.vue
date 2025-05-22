@@ -117,9 +117,8 @@ export default {
     handleCardClick(type) {
       switch(type) {
         case 'unemployment':
-          uni.showToast({
-            title: '失业援助功能开发中',
-            icon: 'none'
+          uni.navigateTo({
+            url: '/pages/user/fund/unemployment-apply/index'
           })
           break
         case 'debt':
