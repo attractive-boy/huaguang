@@ -97,7 +97,7 @@
 
     <!-- 心理咨询模块 -->
     <view class="counseling-section" style="margin: 20rpx 30rpx;">
-      <view class="feature-item" style="background: linear-gradient(to right, #FF7F7F, #FDDCDC); position: relative; height: 400rpx; border-radius: 20rpx; overflow: hidden;">
+      <view class="feature-item" style="background: linear-gradient(to right, #FF7F7F, #FDDCDC); position: relative; height: 400rpx; border-radius: 20rpx; overflow: hidden;" @click="navigateToCounseling">
         <view class="counseling-header" style="display: flex; align-items: center; padding: 20rpx 30rpx;">
           <uv-image :src="`${config.staticBaseUrl}/icons/counseling.png`" width="60rpx" height="60rpx"
             mode="aspectFit"></uv-image>
@@ -183,6 +183,11 @@ export default {
     navigateToApply() {
       uni.navigateTo({
         url: '/pages/user/fund/apply/index'
+      })
+    },
+    navigateToCounseling() {
+      uni.navigateTo({
+        url: '/pages/user/fund/counseling/index'
       })
     },
     async getStatistics() {

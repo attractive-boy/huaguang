@@ -47,6 +47,14 @@
 					}
 				},
 				{
+					"path": "fund/counseling/index",
+					"style": {
+						"navigationBarTitleText": "心理咨询",
+						"navigationStyle": "custom",
+						"enablePullDownRefresh": true
+					}
+				},
+				{
 					"path": "info/index",
 					"style": {
 						"navigationBarTitleText": "信息",
