@@ -40,6 +40,13 @@
 					}
 				},
 				{
+					"path": "fund/apply/index",
+					"style": {
+						"navigationBarTitleText": "青年帮扶基金申请表",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "info/index",
 					"style": {
 						"navigationBarTitleText": "信息",

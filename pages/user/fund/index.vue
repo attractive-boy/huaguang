@@ -66,7 +66,7 @@
             <text style="color: #3c5d9f;">填写遇到的问题困境</text>
           </view>
         </view>
-        <view class="feature-item" style="background-color: #A8E3FF;">
+        <view class="feature-item" style="background-color: #A8E3FF;" @click="navigateToApply">
           <view class="feature-header">
             <text class="feature-title" style="color: #4c3d9f;">帮扶申请</text>
             <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/help-apply.png`" width="120rpx"
@@ -171,7 +171,7 @@ export default {
       const item = this.gridList[index]
       if (item.title === '填写申请表') {
         uni.navigateTo({
-          url: '/pages/user/apply/index'
+          url: '/pages/user/fund/apply/index'
         })
       } else {
         uni.showToast({
@@ -179,6 +179,11 @@ export default {
           title: `点击了${item.title}`
         })
       }
+    },
+    navigateToApply() {
+      uni.navigateTo({
+        url: '/pages/user/fund/apply/index'
+      })
     },
     async getStatistics() {
       try {
