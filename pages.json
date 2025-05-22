@@ -62,6 +62,13 @@
 					}
 				},
 				{
+					"path": "fund/help-types/index",
+					"style": {
+						"navigationBarTitleText": "帮扶类型",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "info/index",
 					"style": {
 						"navigationBarTitleText": "信息",

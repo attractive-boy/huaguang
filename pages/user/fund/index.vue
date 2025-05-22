@@ -41,12 +41,12 @@
           </view>
         </view>
       </view>
-      
+
       <view class="case-content">
         <view class="case-item" v-for="(item, index) in caseList" :key="index">
           <view class="case-info">
-            <text>{{item.maskedName}} 获得帮扶金额 {{item.loanAmount}}元</text>
-            <text class="case-time">{{item.createTime}}</text>
+            <text>{{ item.maskedName }} 获得帮扶金额 {{ item.loanAmount }}元</text>
+            <text class="case-time">{{ item.createTime }}</text>
           </view>
         </view>
       </view>
@@ -55,16 +55,12 @@
     <!-- 功能模块 -->
     <view class="feature-section">
       <view class="feature-left">
-        <view class="feature-item" style="background-color: #A8C8FF;">
-          <view class="feature-header">
-            <text class="feature-title" style="color: #3c5d9f;">帮扶类型</text>
-            <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/help-type.png`" width="120rpx"
-              height="120rpx" mode="aspectFit"></uv-image>
-          </view>
-          <view class="feature-desc">
-            <text style="color: #3c5d9f;">选择帮扶项目</text>
-            <text style="color: #3c5d9f;">填写遇到的问题困境</text>
-          </view>
+        <view class="feature-item" style="background-color: #A8C8FF;" @click="navigateToHelpTypes">
+          <view class="feature-header"> <text class="feature-title" style="color: #3c5d9f;">帮扶类型</text> <uv-image
+              class="feature-icon" :src="`${config.staticBaseUrl}/icons/help-type.png`" width="120rpx" height="120rpx"
+              mode="aspectFit"></uv-image> </view>
+          <view class="feature-desc"> <text style="color: #3c5d9f;">选择帮扶项目</text> <text
+              style="color: #3c5d9f;">填写遇到的问题困境</text> </view>
         </view>
         <view class="feature-item" style="background-color: #A8E3FF;" @click="navigateToApply">
           <view class="feature-header">
@@ -97,7 +93,9 @@
 
     <!-- 心理咨询模块 -->
     <view class="counseling-section" style="margin: 20rpx 30rpx;">
-      <view class="feature-item" style="background: linear-gradient(to right, #FF7F7F, #FDDCDC); position: relative; height: 400rpx; border-radius: 20rpx; overflow: hidden;" @click="navigateToCounseling">
+      <view class="feature-item"
+        style="background: linear-gradient(to right, #FF7F7F, #FDDCDC); position: relative; height: 400rpx; border-radius: 20rpx; overflow: hidden;"
+        @click="navigateToCounseling">
         <view class="counseling-header" style="display: flex; align-items: center; padding: 20rpx 30rpx;">
           <uv-image :src="`${config.staticBaseUrl}/icons/counseling.png`" width="60rpx" height="60rpx"
             mode="aspectFit"></uv-image>
@@ -105,7 +103,8 @@
         </view>
         <view class="counseling-content" style="padding: 0 30rpx;">
           <view style="display: flex; align-items: baseline;">
-            <text style="color: #A83333; font-size: 56rpx; font-weight: bold; margin: 10rpx 0; text-wrap: nowrap;">1,188,777</text>
+            <text
+              style="color: #A83333; font-size: 56rpx; font-weight: bold; margin: 10rpx 0; text-wrap: nowrap;">1,188,777</text>
             <text style="color: #A83333; font-size: 36rpx; margin-left: 4rpx;">人</text>
           </view>
           <text style="color: #A83333; font-size: 28rpx; display: block; margin-bottom: 20rpx;">在这里选择了咨询师</text>
@@ -180,16 +179,7 @@ export default {
         })
       }
     },
-    navigateToApply() {
-      uni.navigateTo({
-        url: '/pages/user/fund/apply/index'
-      })
-    },
-    navigateToCounseling() {
-      uni.navigateTo({
-        url: '/pages/user/fund/counseling/index'
-      })
-    },
+    navigateToApply() { uni.navigateTo({ url: '/pages/user/fund/apply/index' }) }, navigateToHelpTypes() { uni.navigateTo({ url: '/pages/user/fund/help-types/index' }) }, navigateToCounseling() { uni.navigateTo({ url: '/pages/user/fund/counseling/index' }) },
     async getStatistics() {
       try {
         const res = await request({
@@ -422,7 +412,7 @@ export default {
       display: flex;
       flex-direction: column;
       gap: 12rpx;
-      
+
       .case-item {
         font-size: 28rpx;
         color: #3C5D9F;
