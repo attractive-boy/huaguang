@@ -55,6 +55,13 @@
 					}
 				},
 				{
+					"path": "fund/counseling/test",
+					"style": {
+						"navigationBarTitleText": "咨询测评",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "info/index",
 					"style": {
 						"navigationBarTitleText": "信息",

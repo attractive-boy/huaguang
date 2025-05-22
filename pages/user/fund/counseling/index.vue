@@ -96,7 +96,7 @@
                 <text class="price-value">¥{{ item.price }}</text>
                 <text class="price-unit">/30分钟</text>
               </view>
-              <view class="consult-btn">
+              <view class="consult-btn" @click.stop="consultCounselor(item)">
                 <text>立即咨询</text>
               </view>
             </view>
@@ -369,11 +369,14 @@ export default {
     
     // 咨询操作
     consultCounselor(counselor) {
-      uni.showToast({
-        title: `开始咨询 ${counselor.name}`,
-        icon: 'none'
+      // 跳转到咨询前测试页面
+      uni.navigateTo({
+        url: '/pages/user/fund/counseling/test',
+        success: (res) => {
+          // 传递咨询师信息到测试页面
+          res.eventChannel.emit('counselorData', { counselor })
+        }
       })
-      // TODO: 实际项目中跳转到咨询详情页
     },
     
     // 模拟数据生成
