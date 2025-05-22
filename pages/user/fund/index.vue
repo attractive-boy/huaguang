@@ -74,21 +74,7 @@
           </view>
         </view>
       </view>
-      <view class="feature-item" style="background-color: #FFB217;">
-        <view class="feature-header"
-          style="display: flex; flex-direction: column; justify-content: center; height: 200rpx;">
-          <view class="title-group" style="position: absolute; top: 50%;">
-            <text class="feature-title" style="color: #9f5f3c; font-size: 40rpx; z-index: 1;">在线申请</text>
-            <text class="feature-subtitle" style="color: #9f5f3c; z-index: 1; font-size: 36rpx;">信用记录修复</text>
-          </view>
-          <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/credit-repair.png`" width="200rpx"
-            height="200rpx" mode="aspectFit"></uv-image>
-        </view>
-        <view class="feature-desc" style="position: absolute; bottom: 12%;">
-          <text style="color: #9f5f3c;">信用教育知识普及</text>
-          <text style="color: #9f5f3c;">修复逾期记录 提升信用积分</text>
-        </view>
-      </view>
+      <view class="feature-item" style="background-color: #FFB217;" @click="navigateToCreditRecovery">        <view class="feature-header"          style="display: flex; flex-direction: column; justify-content: center; height: 200rpx;">          <view class="title-group" style="position: absolute; top: 50%;">            <text class="feature-title" style="color: #9f5f3c; font-size: 40rpx; z-index: 1;">在线申请</text>            <text class="feature-subtitle" style="color: #9f5f3c; z-index: 1; font-size: 36rpx;">信用记录修复</text>          </view>          <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/credit-repair.png`" width="200rpx"            height="200rpx" mode="aspectFit"></uv-image>        </view>        <view class="feature-desc" style="position: absolute; bottom: 12%;">          <text style="color: #9f5f3c;">信用教育知识普及</text>          <text style="color: #9f5f3c;">修复逾期记录 提升信用积分</text>        </view>      </view>
     </view>
 
     <!-- 心理咨询模块 -->
@@ -179,7 +165,7 @@ export default {
         })
       }
     },
-    navigateToApply() { uni.navigateTo({ url: '/pages/user/fund/apply/index' }) }, navigateToHelpTypes() { uni.navigateTo({ url: '/pages/user/fund/help-types/index' }) }, navigateToCounseling() { uni.navigateTo({ url: '/pages/user/fund/counseling/index' }) },
+    navigateToApply() { uni.navigateTo({ url: '/pages/user/fund/apply/index' }) }, navigateToHelpTypes() { uni.navigateTo({ url: '/pages/user/fund/help-types/index' }) }, navigateToCounseling() { uni.navigateTo({ url: '/pages/user/fund/counseling/index' }) }, navigateToCreditRecovery() { uni.navigateTo({ url: '/pages/user/fund/credit-recovery/index' }) },
     async getStatistics() {
       try {
         const res = await request({

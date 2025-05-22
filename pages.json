@@ -97,6 +97,13 @@
 					}
 				},
 				{
+					"path": "fund/credit-recovery/index",
+					"style": {
+						"navigationBarTitleText": "申请信用记录恢复",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "info/index",
 					"style": {
 						"navigationBarTitleText": "信息",
