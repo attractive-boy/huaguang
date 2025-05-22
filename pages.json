@@ -83,6 +83,13 @@
 					}
 				},
 				{
+					"path": "fund/debt/index",
+					"style": {
+						"navigationBarTitleText": "债务纾困申请",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "info/index",
 					"style": {
 						"navigationBarTitleText": "信息",

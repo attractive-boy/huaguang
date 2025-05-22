@@ -123,9 +123,8 @@ export default {
           })
           break
         case 'debt':
-          uni.showToast({
-            title: '债务纾困功能开发中',
-            icon: 'none'
+          uni.navigateTo({
+            url: '/pages/user/fund/debt/index'
           })
           break
         case 'psychological':
