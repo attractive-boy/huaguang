@@ -146,28 +146,37 @@ export default {
     },
     handleSubmit() {
       // 简单的表单验证
-      const { loanInfo, repaymentInfo } = this.formData
+      // const { loanInfo, repaymentInfo } = this.formData
       
-      if (!loanInfo.bank || !loanInfo.loanTime || !loanInfo.amount || !loanInfo.overdueTime) {
-        uni.showToast({
-          title: '请完善借款逾期信息',
-          icon: 'none'
-        })
-        return
-      }
+      // if (!loanInfo.bank || !loanInfo.loanTime || !loanInfo.amount || !loanInfo.overdueTime) {
+      //   uni.showToast({
+      //     title: '请完善借款逾期信息',
+      //     icon: 'none'
+      //   })
+      //   return
+      // }
       
-      if (!repaymentInfo.remainingAmount || !repaymentInfo.repaymentAmount) {
-        uni.showToast({
-          title: '请完善补交信息',
-          icon: 'none'
-        })
-        return
-      }
+      // if (!repaymentInfo.remainingAmount || !repaymentInfo.repaymentAmount) {
+      //   uni.showToast({
+      //     title: '请完善补交信息',
+      //     icon: 'none'
+      //   })
+      //   return
+      // }
       
+      // 显示提交成功提示
       uni.showToast({
-        title: '提交功能开发中',
-        icon: 'none'
+        title: '提交成功',
+        icon: 'success',
+        duration: 1500
       })
+      
+      // 延时跳转到信用评分页面
+      setTimeout(() => {
+        uni.navigateTo({
+          url: '/pages/user/fund/credit-score/index'
+        })
+      }, 1500)
     }
   }
 }

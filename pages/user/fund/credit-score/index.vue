@@ -1,0 +1,423 @@
+<template>
+  <view class="credit-score-page">
+    <!-- 自定义导航栏 -->
+    <view class="custom-navbar">
+      <view class="navbar-content">
+        <view class="navbar-left" @click="goBack">
+          <uv-icon name="arrow-left" color="#333333" size="20"></uv-icon>
+          <text class="back-text">返回</text>
+        </view>
+        <text class="navbar-title">信用评分</text>
+      </view>
+    </view>
+
+    <!-- 主视觉区域 -->
+    <view class="hero-section">
+      <view class="diamond-container">
+        <view class="diamond-shape">
+          <view class="diamond-content">
+            <text class="amount-number">{{ remainingDebt.toLocaleString() }}</text>
+            <text class="amount-unit">元</text>
+            <text class="amount-desc">剩余欠款</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 内容区域 -->
+    <view class="content-section">
+      <!-- 还款提醒卡片 -->
+      <view class="card payment-reminder-card">
+        <view class="card-content">
+          <view class="card-left">
+            <view class="icon-container credit-card-icon">
+              <uv-icon name="credit-card" color="#FFFFFF" size="16"></uv-icon>
+            </view>
+            <view class="text-content">
+              <text class="main-text">按时完成信用卡还款</text>
+              <text class="sub-text">点击设置提醒</text>
+            </view>
+          </view>
+          <view class="card-right">
+            <uv-button type="primary" size="small" shape="circle" @click="handleSetReminder">去设置</uv-button>
+          </view>
+        </view>
+      </view>
+
+      <!-- 信用基础认知卡片 -->
+      <view class="card knowledge-card">
+        <text class="card-title">信用基础认知</text>
+        
+        <!-- 问题1 -->
+        <view class="question-block">
+          <view class="question-header">
+            <view class="question-icon">
+              <uv-icon name="help" color="#FFFFFF" size="12"></uv-icon>
+            </view>
+            <text class="question-text">{{ creditKnowledge.question1.question }}</text>
+          </view>
+          <text class="answer-text">{{ creditKnowledge.question1.answer }}</text>
+        </view>
+
+        <!-- 问题2 -->
+        <view class="question-block">
+          <view class="question-header">
+            <view class="question-icon">
+              <uv-icon name="help" color="#FFFFFF" size="12"></uv-icon>
+            </view>
+            <text class="question-text">{{ creditKnowledge.question2.question }}</text>
+          </view>
+          <view class="points-list">
+            <view v-for="(point, index) in creditKnowledge.question2.points" :key="index" class="point-item">
+              <view class="point-icon" :class="point.type">
+                <uv-icon :name="point.type === 'success' ? 'checkmark' : 'close'" color="#FFFFFF" size="10"></uv-icon>
+              </view>
+              <text class="point-text">{{ point.text }}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 信用记录管理与维护卡片 -->
+      <view class="card maintenance-card">
+        <text class="card-title">信用记录的管理与维护</text>
+        <view class="maintenance-list">
+          <view v-for="(item, index) in maintenancePoints" :key="index" class="maintenance-item">
+            <text class="maintenance-title">{{ item.title }}</text>
+            <text class="maintenance-desc">{{ item.desc }}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部TabBar -->
+    <user-tabbar></user-tabbar>
+  </view>
+</template>
+
+<script>
+import UserTabbar from '@/components/tabbar/user-tabbar/user-tabbar.vue'
+import config from '@/config/index.js'
+
+export default {
+  name: 'CreditScorePage',
+  components: {
+    UserTabbar
+  },
+  data() {
+    return {
+      remainingDebt: 85166,
+      creditKnowledge: {
+        question1: {
+          question: "什么是信用?",
+          answer: "信用是你的\"经济身份证\"，记录了你借钱、还款、消费的历史。它决定了银行、网贷平台、甚至房东是否信任你。"
+        },
+        question2: {
+          question: "为什么信用重要?",
+          points: [
+            { type: 'success', text: '贷款/信用卡审批：信用分高=更低利率、更高额度' },
+            { type: 'success', text: '租房/求职：部分房东/雇主会查征信' },
+            { type: 'success', text: '生活便利：免押金租车、酒店入住等' },
+            { type: 'warning', text: '失信代价：被列入黑名单后，高铁/飞机出行受限' }
+          ]
+        }
+      },
+      maintenancePoints: [
+        { title: '按时还款', desc: '· 设置自动还款，避免1次逾期影响5年' },
+        { title: '控制负债率', desc: '· 信用卡使用额≤70%（如额度1万，账单最好不超7千）' },
+        { title: '减少硬查询', desc: '· 3个月内贷款/申卡不超过2次' },
+        { title: '长期保持活跃', desc: '· 保留1-2张最老的信用卡，不用也每年刷1次' }
+      ],
+      config: config
+    }
+  },
+  methods: {
+    goBack() {
+      uni.navigateBack()
+    },
+    handleSetReminder() {
+      uni.showToast({
+        icon: 'none',
+        title: '设置提醒功能'
+      })
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import '@/styles/variables.scss';
+
+.credit-score-page {
+  height: 100vh;
+  min-height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: linear-gradient(to bottom, #E0F2FF 0%, #87CEFA 40%, #F0F8FF 100%);
+  padding-bottom: 100rpx; /* 为TabBar预留空间 */
+}
+
+/* 自定义导航栏 */
+.custom-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: transparent;
+  
+  .navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 88rpx;
+    padding: 0 30rpx;
+    padding-top: var(--status-bar-height, 44rpx);
+    position: relative;
+    
+    .navbar-left {
+      position: absolute;
+      left: 30rpx;
+      display: flex;
+      align-items: center;
+      gap: 8rpx;
+      
+      .back-text {
+        font-size: 32rpx;
+        color: #333333;
+      }
+    }
+    
+    .navbar-title {
+      font-size: 36rpx;
+      color: #333333;
+      font-weight: 500;
+    }
+  }
+}
+
+/* 主视觉区域 */
+.hero-section {
+  padding-top: 140rpx; /* 导航栏高度 + 间距 */
+  padding-bottom: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  .diamond-container {
+    position: relative;
+    
+    .diamond-shape {
+      width: 300rpx;
+      height: 300rpx;
+      background: #007AFF;
+      transform: rotate(45deg);
+      border-radius: 20rpx;
+      border: 4rpx solid #FFFFFF;
+      box-shadow: 
+        0 0 20rpx rgba(0, 122, 255, 0.3),
+        0 0 40rpx rgba(0, 122, 255, 0.2),
+        0 0 60rpx rgba(0, 122, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      .diamond-content {
+        transform: rotate(-45deg);
+        text-align: center;
+        color: #FFFFFF;
+        
+        .amount-number {
+          display: block;
+          font-size: 72rpx;
+          font-weight: bold;
+          line-height: 1;
+        }
+        
+        .amount-unit {
+          font-size: 32rpx;
+          margin-left: 8rpx;
+        }
+        
+        .amount-desc {
+          display: block;
+          font-size: 24rpx;
+          margin-top: 8rpx;
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+}
+
+/* 内容区域 */
+.content-section {
+  padding: 0 30rpx;
+  
+  .card {
+    background: #FFFFFF;
+    border-radius: 16rpx;
+    margin-bottom: 20rpx;
+    padding: 30rpx;
+    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+    
+    .card-title {
+      font-size: 32rpx;
+      color: #000000;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 30rpx;
+    }
+  }
+}
+
+/* 还款提醒卡片 */
+.payment-reminder-card {
+  .card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    .card-left {
+      display: flex;
+      align-items: center;
+      gap: 20rpx;
+      flex: 1;
+      
+      .icon-container {
+        width: 80rpx;
+        height: 60rpx;
+        border-radius: 12rpx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        &.credit-card-icon {
+          background: #007AFF;
+        }
+      }
+      
+      .text-content {
+        display: flex;
+        flex-direction: column;
+        gap: 8rpx;
+        
+        .main-text {
+          font-size: 30rpx;
+          color: #333333;
+        }
+        
+        .sub-text {
+          font-size: 24rpx;
+          color: #888888;
+        }
+      }
+    }
+  }
+}
+
+/* 信用基础认知卡片 */
+.knowledge-card {
+  .question-block {
+    margin-bottom: 30rpx;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    .question-header {
+      display: flex;
+      align-items: center;
+      gap: 12rpx;
+      margin-bottom: 16rpx;
+      
+      .question-icon {
+        width: 32rpx;
+        height: 32rpx;
+        background: #555555;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .question-text {
+        font-size: 30rpx;
+        color: #007AFF;
+        font-weight: 500;
+      }
+    }
+    
+    .answer-text {
+      font-size: 26rpx;
+      color: #666666;
+      line-height: 1.5;
+      margin-left: 44rpx;
+    }
+    
+    .points-list {
+      margin-left: 44rpx;
+      
+      .point-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12rpx;
+        margin-bottom: 12rpx;
+        
+        .point-icon {
+          width: 28rpx;
+          height: 28rpx;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 4rpx;
+          flex-shrink: 0;
+          
+          &.success {
+            background: #007AFF;
+          }
+          
+          &.warning {
+            background: #FF6347;
+          }
+        }
+        
+        .point-text {
+          font-size: 26rpx;
+          color: #666666;
+          line-height: 1.5;
+          flex: 1;
+        }
+      }
+    }
+  }
+}
+
+/* 信用记录管理与维护卡片 */
+.maintenance-card {
+  .maintenance-list {
+    .maintenance-item {
+      margin-bottom: 24rpx;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      .maintenance-title {
+        font-size: 30rpx;
+        color: #007AFF;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 8rpx;
+      }
+      
+      .maintenance-desc {
+        font-size: 26rpx;
+        color: #666666;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+</style> 

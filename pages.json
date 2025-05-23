@@ -104,6 +104,13 @@
 					}
 				},
 				{
+					"path": "fund/credit-score/index",
+					"style": {
+						"navigationBarTitleText": "信用评分",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "info/index",
 					"style": {
 						"navigationBarTitleText": "信息",
