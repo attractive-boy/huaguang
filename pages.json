@@ -125,6 +125,27 @@
 					}
 				},
 				{
+					"path": "index/lawyer-detail/index",
+					"style": {
+						"navigationBarTitleText": "律师详情",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/consultation-order/index",
+					"style": {
+						"navigationBarTitleText": "咨询订单",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/order-detail/index",
+					"style": {
+						"navigationBarTitleText": "订单详情",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "info/index",
 					"style": {
 						"navigationBarTitleText": "信息",
@@ -142,6 +163,13 @@
 					"path": "apply/index",
 					"style": {
 						"navigationBarTitleText": "填写申请表",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/chat/index",
+					"style": {
+						"navigationBarTitleText": "律师咨询",
 						"navigationStyle": "custom"
 					}
 				}

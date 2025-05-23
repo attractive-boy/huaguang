@@ -194,6 +194,9 @@ export default {
         title: `咨询${lawyer.name}`,
         icon: 'none'
       })
+      uni.navigateTo({
+        url: '/pages/user/index/lawyer-detail/index'
+      })
     },
     calculateScrollHeight() {
       // 获取系统信息
