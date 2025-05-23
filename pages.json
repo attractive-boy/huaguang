@@ -194,6 +194,20 @@
 						"navigationStyle": "custom",
 						"backgroundColor": "#F0F8FF"
 					}
+				},
+				{
+					"path": "index/work-service/index",
+					"style": {
+						"navigationBarTitleText": "工作服务",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/job-search-result/index",
+					"style": {
+						"navigationBarTitleText": "职位搜索",
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},

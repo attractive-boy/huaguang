@@ -249,6 +249,21 @@ export default {
         return
       }
       
+      // 如果点击的是就业求职，跳转到职位搜索结果页面
+      if (item.title === '就业求职') {
+        uni.navigateTo({
+          url: '/pages/user/index/work-service/index',
+          fail: (err) => {
+            console.error('跳转失败：', err)
+            uni.showToast({
+              icon: 'none',
+              title: '页面跳转失败'
+            })
+          }
+        })
+        return
+      }
+      
       // 其他项目显示toast提示
       uni.showToast({
         icon: 'none',
