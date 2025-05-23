@@ -58,7 +58,7 @@
           <text>高效求职</text>
         </view>
       </view>
-      <view class="feature-item" style="background-color: #A8E3FF;">
+      <view class="feature-item" style="background-color: #A8E3FF;" @click="handleSkillTrainingClick">
         <view class="feature-header">
           <text class="feature-title">技能网课</text>
           <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/course.png`" width="120rpx" height="120rpx" mode="aspectFit"></uv-image>
@@ -253,6 +253,19 @@ export default {
       uni.showToast({
         icon: 'none',
         title: `点击了${item.title}`
+      })
+    },
+    handleSkillTrainingClick() {
+      // 跳转到技能培训页面
+      uni.navigateTo({
+        url: '/pages/user/index/skill-training/index',
+        fail: (err) => {
+          console.error('跳转失败：', err)
+          uni.showToast({
+            icon: 'none',
+            title: '页面跳转失败'
+          })
+        }
       })
     }
   }

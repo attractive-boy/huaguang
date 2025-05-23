@@ -172,6 +172,28 @@
 						"navigationBarTitleText": "律师咨询",
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "index/skill-training/index",
+					"style": {
+						"navigationBarTitleText": "技能培训",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/skill-training/detail/index",
+					"style": {
+						"navigationBarTitleText": "课程详情",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/search/index",
+					"style": {
+						"navigationBarTitleText": "搜索",
+						"navigationStyle": "custom",
+						"backgroundColor": "#F0F8FF"
+					}
 				}
 			]
 		},
