@@ -6,8 +6,8 @@
         <view class="navbar-left" @click="goBack">
           <uv-icon name="arrow-left" size="20" color="#333"></uv-icon>
         </view>
-        <view class="navbar-title">工作服务</view>
-        <view class="navbar-right"></view>
+        <!-- <view class="navbar-title">工作服务</view> -->
+        <!-- <view class="navbar-right"></view> -->
       </view>
     </view>
 
@@ -39,12 +39,20 @@
         </view>
       </view>
     </view>
+
+    <!-- 底部导航栏 -->
+    <UserTabbar />
   </view>
 </template>
 
 <script>
+import UserTabbar from '@/components/tabbar/user-tabbar/user-tabbar.vue'
+
 export default {
   name: 'WorkService',
+  components: {
+    UserTabbar
+  },
   data() {
     return {
       // 页面数据
@@ -61,10 +69,16 @@ export default {
     
     // 处理找工作点击
     handleJobSearch() {
-      // 暂时只显示提示，后续添加跳转逻辑
-      uni.showToast({
-        title: '找工作功能',
-        icon: 'none'
+      // 跳转到招聘平台页面
+      uni.navigateTo({
+        url: '/pages/user/index/job-platform/index',
+        fail: (err) => {
+          console.error('跳转招聘平台失败：', err)
+          uni.showToast({
+            icon: 'none',
+            title: '页面跳转失败'
+          })
+        }
       })
     },
     
@@ -93,7 +107,7 @@ export default {
   left: 0;
   right: 0;
   z-index: 999;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.8);
   padding-top: var(--status-bar-height);
   
   .navbar-content {
@@ -127,9 +141,10 @@ export default {
 .main-content {
   padding-top: calc(var(--status-bar-height) + 44px + 20px);
   padding: calc(var(--status-bar-height) + 44px + 20px) 16px 20px;
+  padding-bottom: calc(100rpx + 20px); /* 为底部导航栏留出空间 */
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 100rpx;
 }
 
 /* 服务卡片 */
@@ -175,13 +190,5 @@ export default {
   }
 }
 
-/* 找工作卡片特殊样式 */
-.job-search-card {
-  background: linear-gradient(135deg, #E6F3FF 0%, #CCE7FF 100%);
-}
 
-/* 招聘卡片特殊样式 */
-.recruitment-card {
-  background: linear-gradient(135deg, #F0F8FF 0%, #E1F0FF 100%);
-}
 </style> 

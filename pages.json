@@ -208,6 +208,13 @@
 						"navigationBarTitleText": "职位搜索",
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "index/job-platform/index",
+					"style": {
+						"navigationBarTitleText": "招聘平台",
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},
