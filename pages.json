@@ -111,6 +111,20 @@
 					}
 				},
 				{
+					"path": "index/legal-help/index",
+					"style": {
+						"navigationBarTitleText": "获取法律帮助",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/consultation/index",
+					"style": {
+						"navigationBarTitleText": "律师咨询",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "info/index",
 					"style": {
 						"navigationBarTitleText": "信息",

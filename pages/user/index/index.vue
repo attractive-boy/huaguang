@@ -233,6 +233,23 @@ export default {
     },
     handleGridClick(index) {
       const item = this.gridList[index]
+      
+      // 如果点击的是法律咨询，跳转到法律帮助页面
+      if (item.title === '法律咨询') {
+        uni.navigateTo({
+          url: '/pages/user/index/legal-help/index',
+          fail: (err) => {
+            console.error('跳转失败：', err)
+            uni.showToast({
+              icon: 'none',
+              title: '页面跳转失败'
+            })
+          }
+        })
+        return
+      }
+      
+      // 其他项目显示toast提示
       uni.showToast({
         icon: 'none',
         title: `点击了${item.title}`
