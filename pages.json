@@ -153,9 +153,37 @@
 					}
 				},
 				{
-					"path": "profile/profile",
+					"path": "profile/index",
 					"style": {
 						"navigationBarTitleText": "我的",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/help-records/index",
+					"style": {
+						"navigationBarTitleText": "我的帮扶记录",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/edit/index",
+					"style": {
+						"navigationBarTitleText": "编辑个人资料",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/video-collection/index",
+					"style": {
+						"navigationBarTitleText": "我的收藏视频",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/consultation-records/index",
+					"style": {
+						"navigationBarTitleText": "咨询记录",
 						"navigationStyle": "custom"
 					}
 				},
@@ -241,6 +269,34 @@
 					"path": "index/company-detail/index",
 					"style": {
 						"navigationBarTitleText": "公司详情",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/about/index",
+					"style": {
+						"navigationBarTitleText": "关于",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/security/index",
+					"style": {
+						"navigationBarTitleText": "账号与安全",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/invitation/index",
+					"style": {
+						"navigationBarTitleText": "邀请管理",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/invitation-poster/index",
+					"style": {
+						"navigationBarTitleText": "邀请海报",
 						"navigationStyle": "custom"
 					}
 				}

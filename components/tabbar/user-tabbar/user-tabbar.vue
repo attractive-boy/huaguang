@@ -54,7 +54,7 @@ export default {
       '/pages/user/index/index',
       '/pages/user/fund/index',
       '/pages/user/info/index',
-      '/pages/user/profile/profile'
+      '/pages/user/profile/index'
     ]
     const currentRoute = getCurrentPages()[getCurrentPages().length - 1].route
     this.current = routes.findIndex(route => route.includes(currentRoute))
@@ -66,7 +66,7 @@ export default {
         '/pages/user/index/index',
         '/pages/user/fund/index',
         '/pages/user/info/index',
-        '/pages/user/profile/profile'
+        '/pages/user/profile/index'
       ]
       uni.reLaunch({
         url: routes[index]
