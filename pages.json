@@ -236,6 +236,13 @@
 						"navigationBarTitleText": "职位详情",
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "index/company-detail/index",
+					"style": {
+						"navigationBarTitleText": "公司详情",
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},
