@@ -37,12 +37,8 @@
           <uv-icon name="arrow-right" size="16" color="#87CEFA"></uv-icon>
         </view>
         <uv-scroll-list :indicator="false">
-          <view 
-            v-for="(company, index) in companies" 
-            :key="company.id" 
-            class="company-card"
-            @click="handleCompanyClick(company)"
-          >
+          <view v-for="(company, index) in companies" :key="company.id" class="company-card"
+            @click="handleCompanyClick(company)">
             <view class="company-logo">
               <!-- 圆形企业logo占位符 -->
             </view>
@@ -59,11 +55,7 @@
           <uv-icon name="arrow-right" size="16" color="#87CEFA"></uv-icon>
         </view>
         <view class="jobs-list">
-          <view 
-            v-for="(job, index) in jobs" 
-            :key="job.id" 
-            class="job-item-wrapper"
-          >
+          <view v-for="(job, index) in jobs" :key="job.id" class="job-item-wrapper">
             <view class="job-item">
               <view class="job-main">
                 <view class="job-title-row">
@@ -83,10 +75,7 @@
               </view>
             </view>
             <!-- 分割线 -->
-            <view 
-              v-if="index < jobs.length - 1" 
-              class="job-divider"
-            ></view>
+            <view v-if="index < jobs.length - 1" class="job-divider"></view>
           </view>
         </view>
       </view>
@@ -218,7 +207,7 @@ export default {
     goBack() {
       uni.navigateBack()
     },
-    
+
     // 处理企业卡片点击
     handleCompanyClick(company) {
       console.log('点击企业：', company.name)
@@ -227,25 +216,35 @@ export default {
         icon: 'none'
       })
     },
-    
+
     // 处理更多企业点击
     handleMoreCompanies() {
       console.log('查看更多企业')
-      uni.showToast({
-        title: '更多企业功能开发中',
-        icon: 'none'
+      uni.navigateTo({
+        url: '/pages/user/index/company-list/index',
+        success: () => {
+          console.log('跳转成功');
+        },
+        fail: (err) => {
+          console.log('跳转失败', err);
+        }
       })
     },
-    
+
     // 处理更多职业点击
     handleMoreJobs() {
       console.log('查看更多职业')
-      uni.showToast({
-        title: '更多职业功能开发中',
-        icon: 'none'
+      uni.navigateTo({
+        url: '/pages/user/index/recommended-jobs/index',
+        success: () => {
+          console.log('跳转成功');
+        },
+        fail: (err) => {
+          console.log('跳转失败', err);
+        }
       })
     },
-    
+
     // 处理快速投递
     handleQuickApply(job) {
       console.log('快速投递职位：', job.title)
@@ -273,13 +272,13 @@ export default {
   z-index: 999;
   background: rgba(255, 255, 255, 0.8);
   padding-top: var(--status-bar-height);
-  
+
   .navbar-content {
     height: 44px;
     display: flex;
     align-items: center;
     padding: 0 16px;
-    
+
     .navbar-left {
       width: 44px;
       height: 44px;
@@ -294,7 +293,8 @@ export default {
 .main-content {
   padding-top: calc(var(--status-bar-height) + 44px + 20px);
   padding: calc(var(--status-bar-height) + 44px + 20px) 20rpx 20rpx;
-  padding-bottom: calc(100rpx + 20px); /* 为底部导航栏留出空间 */
+  padding-bottom: calc(100rpx + 20px);
+  /* 为底部导航栏留出空间 */
 }
 
 /* Banner区域 */
@@ -305,17 +305,17 @@ export default {
   margin-bottom: 30rpx;
   position: relative;
   overflow: hidden;
-  
+
   .banner-content {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 30rpx;
-    
+
     .banner-text {
       flex: 1;
-      
+
       .banner-title {
         display: block;
         font-size: 44rpx;
@@ -325,7 +325,7 @@ export default {
         margin-bottom: 8rpx;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
-      
+
       .banner-subtitle {
         display: block;
         font-size: 40rpx;
@@ -335,17 +335,17 @@ export default {
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
     }
-    
+
     .banner-image {
       width: 200rpx;
       height: 200rpx;
       position: relative;
-      
+
       .handshake-illustration {
         width: 100%;
         height: 100%;
         position: relative;
-        
+
         .person-left {
           position: absolute;
           left: 20rpx;
@@ -356,7 +356,7 @@ export default {
           border-radius: 30rpx 30rpx 10rpx 10rpx;
           opacity: 0.9;
         }
-        
+
         .person-right {
           position: absolute;
           right: 20rpx;
@@ -367,7 +367,7 @@ export default {
           border-radius: 30rpx 30rpx 10rpx 10rpx;
           opacity: 0.9;
         }
-        
+
         .handshake {
           position: absolute;
           left: 50%;
@@ -391,35 +391,35 @@ export default {
   padding: 30rpx;
   margin-bottom: 30rpx;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  
+
   .section-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30rpx;
-    
+
     .section-title {
       font-size: 32rpx;
       font-weight: bold;
       color: #333333;
     }
   }
-  
+
   // 推荐企业模块固定高度
   &:first-of-type {
     height: 300rpx;
-    
+
     .uv-scroll-list {
       height: 200rpx;
       overflow-x: auto;
       overflow-y: hidden;
     }
   }
-  
+
   // 推荐职业模块固定高度
   &:last-of-type {
     height: 500rpx;
-    
+
     .jobs-list {
       height: 400rpx;
       overflow-y: auto;
@@ -438,7 +438,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   .company-logo {
     width: 70rpx;
     height: 70rpx;
@@ -446,14 +446,14 @@ export default {
     border-radius: 50%;
     margin-bottom: 15rpx;
   }
-  
+
   .company-name {
     font-size: 26rpx;
     color: #555555;
     margin-bottom: 8rpx;
     text-align: center;
   }
-  
+
   .company-jobs {
     font-size: 22rpx;
     color: #888888;
@@ -465,38 +465,38 @@ export default {
 .jobs-list {
   .job-item-wrapper {
     position: relative;
-    
+
     .job-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 20rpx 0;
-      
+
       .job-main {
         flex: 1;
-        
+
         .job-title-row {
           display: flex;
           align-items: baseline;
           margin-bottom: 10rpx;
-          
+
           .job-title {
             font-size: 30rpx;
             font-weight: bold;
             color: #333333;
             margin-right: 20rpx;
           }
-          
+
           .job-company {
             font-size: 26rpx;
             color: #666666;
           }
         }
-        
+
         .job-info-row {
           display: flex;
           align-items: center;
-          
+
           .job-info {
             font-size: 24rpx;
             color: #888888;
@@ -504,13 +504,13 @@ export default {
           }
         }
       }
-      
+
       .job-action {
         .apply-btn {
           background: #1E90FF;
           border-radius: 8rpx;
           padding: 12rpx 24rpx;
-          
+
           .apply-text {
             font-size: 26rpx;
             color: #FFFFFF;
@@ -518,7 +518,7 @@ export default {
         }
       }
     }
-    
+
     .job-divider {
       height: 1rpx;
       background: #EEEEEE;
@@ -526,4 +526,4 @@ export default {
     }
   }
 }
-</style> 
+</style>

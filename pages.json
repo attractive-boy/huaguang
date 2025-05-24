@@ -215,6 +215,27 @@
 						"navigationBarTitleText": "招聘平台",
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "index/company-list/index",
+					"style": {
+						"navigationBarTitleText": "公司列表",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/recommended-jobs/index",
+					"style": {
+						"navigationBarTitleText": "推荐职业",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/job-detail/index",
+					"style": {
+						"navigationBarTitleText": "职位详情",
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},
