@@ -299,6 +299,48 @@
 						"navigationBarTitleText": "邀请海报",
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "index/change-password/index",
+					"style": {
+						"navigationBarTitleText": "修改密码",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/profile/index",
+					"style": {
+						"navigationBarTitleText": "我的",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/lawyer-profile/index",
+					"style": {
+						"navigationBarTitleText": "律师个人信息编辑",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/arbitration-review/index",
+					"style": {
+						"navigationBarTitleText": "劳动仲裁申请书审核",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/legal-document-list/index",
+					"style": {
+						"navigationBarTitleText": "法律文书列表",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/consultation-message/index",
+					"style": {
+						"navigationBarTitleText": "咨询信息",
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},
@@ -309,6 +351,48 @@
 					"path": "index/index",
 					"style": {
 						"navigationBarTitleText": "律师工作台"
+					}
+				},
+				{
+					"path": "index/dashboard/index",
+					"style": {
+						"navigationBarTitleText": "首页",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/consultation-info/index",
+					"style": {
+						"navigationBarTitleText": "消息",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/income-management/index",
+					"style": {
+						"navigationBarTitleText": "收入管理",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/notification-settings/index",
+					"style": {
+						"navigationBarTitleText": "通知设置",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/online-status/index",
+					"style": {
+						"navigationBarTitleText": "在线状态设置",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/document-review/index",
+					"style": {
+						"navigationBarTitleText": "法律文书审核列表",
+						"navigationStyle": "custom"
 					}
 				},
 				{
@@ -335,6 +419,13 @@
 					}
 				},
 				{
+					"path": "index/dashboard/index",
+					"style": {
+						"navigationBarTitleText": "心理端首页",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "consultation/consultation",
 					"style": {
 						"navigationBarTitleText": "咨询管理"
@@ -344,6 +435,13 @@
 					"path": "reports/reports",
 					"style": {
 						"navigationBarTitleText": "评估报告"
+					}
+				},
+				{
+					"path": "profile/index/index",
+					"style": {
+						"navigationBarTitleText": "心理师个人资料",
+						"navigationStyle": "custom"
 					}
 				}
 			]
