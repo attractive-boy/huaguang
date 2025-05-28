@@ -7,7 +7,7 @@
     <view class="custom-navbar">
       <view class="navbar-content">
         <view class="back-button" @click="goBack">
-          <uv-icon name="arrow-left" color="#FFFFFF" size="18"></uv-icon>
+          <uv-icon name="arrow-left" color="#FFFFFF" size="32"></uv-icon>
           <text class="back-text">返回</text>
         </view>
       </view>
@@ -16,7 +16,7 @@
     <!-- 可滚动内容区域 -->
     <scroll-view class="page-scroll" scroll-y="true" :style="{ height: scrollHeight }">
       <!-- 横幅英雄区域 -->
-      <view class="hero-banner">
+      <view class="hero-banner">   
         <view class="banner-content">
           <view class="text-content">
             <text class="main-title">法律帮助</text>
@@ -43,9 +43,7 @@
             >
               <text class="tab-text">{{ tab.name }}</text>
             </view>
-            <view class="more-tab">
-              <text class="more-text">...</text>
-            </view>
+            
           </view>
         </scroll-view>
         
@@ -78,7 +76,7 @@
                     :key="sIndex"
                     class="service-item"
                   >
-                    <uv-icon :name="service.icon" color="#3A82F8" size="16"></uv-icon>
+                    <image :src="`http://localhost:3000/static/icons/${service.icon}.png`" style="width: 12px; height: 12px;" mode="aspectFit"></image>
                     <text class="service-name">{{ service.type }}</text>
                     <view class="service-price-container">
                       <text class="service-price">¥{{ service.price }}</text>
@@ -128,7 +126,8 @@ export default {
         { name: '劳动纠纷', active: true },
         { name: '合同纠纷', active: false },
         { name: '婚姻家庭', active: false },
-        { name: '消费维权', active: false }
+        { name: '消费维权', active: false },
+        { name: '知识产权', active: false },
       ],
       // 律师信息数据
       lawyerList: [
@@ -140,8 +139,8 @@ export default {
           successRate: '胜诉率91%',
           consultCount: '400+人已咨询',
           services: [
-            { type: '图文咨询', price: 60, unit: '次', icon: 'file-text' },
-            { type: '语音咨询', price: 120, unit: '30分钟', icon: 'phone' }
+            { type: '图文咨询', price: 60, unit: '次', icon: 'img' },
+            { type: '语音咨询', price: 120, unit: '30分钟', icon: 'call' }
           ],
           achievement: '成功帮助某员工追回工资5万元'
         },
@@ -153,8 +152,8 @@ export default {
           successRate: '胜诉率95%',
           consultCount: '600+人已咨询',
           services: [
-            { type: '图文咨询', price: 80, unit: '次', icon: 'file-text' },
-            { type: '语音咨询', price: 150, unit: '30分钟', icon: 'phone' }
+            { type: '图文咨询', price: 80, unit: '次', icon: 'img' },
+            { type: '语音咨询', price: 150, unit: '30分钟', icon: 'call' }
           ],
           achievement: '成功处理合同纠纷案件300余起'
         },
@@ -166,8 +165,8 @@ export default {
           successRate: '胜诉率88%',
           consultCount: '800+人已咨询',
           services: [
-            { type: '图文咨询', price: 70, unit: '次', icon: 'file-text' },
-            { type: '语音咨询', price: 140, unit: '30分钟', icon: 'phone' }
+            { type: '图文咨询', price: 70, unit: '次', icon: 'img' },
+            { type: '语音咨询', price: 140, unit: '30分钟', icon: 'call' }
           ],
           achievement: '专业处理离婚财产分割案件'
         }
@@ -321,7 +320,7 @@ export default {
   .tab-item {
     background-color: #E8EAF6;
     border-radius: 8px;
-    padding: 8px 16px;
+    padding: 6px 14px;
     margin-right: 10px;
     flex-shrink: 0;
     
@@ -422,8 +421,9 @@ export default {
             .service-name {
               color: #333333;
               font-size: 14px;
-              margin-left: 8px;
-              flex: 1;
+              margin-left: 8rpx;
+              margin-right: 16rpx;
+              // flex: 1;
             }
             
             .service-price-container {
