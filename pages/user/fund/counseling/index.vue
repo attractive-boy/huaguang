@@ -562,15 +562,16 @@ export default {
       
       .filter-tag {
         display: inline-block;
-        padding: 8rpx 24rpx;
+        padding: 3rpx 12rpx;
         background-color: #FFF0F0;
-        border-radius: 100rpx;
+        border-radius: 10rpx;
         margin-right: 16rpx;
         transition: all 0.3s;
         
+        
         text {
           font-size: 24rpx;
-          color: #E57373;
+          color: #6B1C1C;
         }
         
         &-active {

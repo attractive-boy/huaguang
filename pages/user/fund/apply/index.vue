@@ -358,9 +358,12 @@ export default {
 
 .apply-page {
   min-height: 100vh;
-  background-color: #F0F2F5;
   padding-bottom: 100rpx;
   position: relative;
+  background-image: $fund-bg-image;
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
 
   /* 状态栏 */
   .status-bar {
@@ -372,7 +375,7 @@ export default {
   /* 导航栏 */
   .navbar {
     padding: 20rpx 30rpx;
-    background: linear-gradient(to right, #5DAAFF, #407BFF);
+    // background: linear-gradient(to right, #5DAAFF, #407BFF);
     
     .back-btn {
       display: flex;
@@ -393,7 +396,7 @@ export default {
     font-weight: bold;
     text-align: left;
     padding: 20rpx 30rpx 40rpx;
-    background: linear-gradient(to right, #5DAAFF, #407BFF);
+    // background: linear-gradient(to right, #5DAAFF, #407BFF);
   }
 
   /* 表单内容区域 */
@@ -404,7 +407,7 @@ export default {
     z-index: 1;
 
     .form-group {
-      background-color: #F0F2F5;
+      background-color: transparent;
       border-radius: 30rpx 30rpx 0 0;
       padding: 30rpx 20rpx;
       margin: 0 0 30rpx;
@@ -545,7 +548,7 @@ export default {
   cursor: pointer;
 
   .add-text {
-    color: #407BFF;
+    color: rgba(61, 61, 61, 0.8);
     font-size: 28rpx;
   }
 }

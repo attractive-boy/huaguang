@@ -299,48 +299,6 @@
 						"navigationBarTitleText": "邀请海报",
 						"navigationStyle": "custom"
 					}
-				},
-				{
-					"path": "index/change-password/index",
-					"style": {
-						"navigationBarTitleText": "修改密码",
-						"navigationStyle": "custom"
-					}
-				},
-				{
-					"path": "index/profile/index",
-					"style": {
-						"navigationBarTitleText": "我的",
-						"navigationStyle": "custom"
-					}
-				},
-				{
-					"path": "index/lawyer-profile/index",
-					"style": {
-						"navigationBarTitleText": "律师个人信息编辑",
-						"navigationStyle": "custom"
-					}
-				},
-				{
-					"path": "index/arbitration-review/index",
-					"style": {
-						"navigationBarTitleText": "劳动仲裁申请书审核",
-						"navigationStyle": "custom"
-					}
-				},
-				{
-					"path": "index/legal-document-list/index",
-					"style": {
-						"navigationBarTitleText": "法律文书列表",
-						"navigationStyle": "custom"
-					}
-				},
-				{
-					"path": "index/consultation-message/index",
-					"style": {
-						"navigationBarTitleText": "咨询信息",
-						"navigationStyle": "custom"
-					}
 				}
 			]
 		},
