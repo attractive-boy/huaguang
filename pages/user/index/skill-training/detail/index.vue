@@ -23,39 +23,12 @@
     <view class="page-content">
       <!-- 横幅插画区域 -->
       <view class="banner-section">
-        <view class="banner-background">
-          <!-- 左侧女性人物 -->
-          <view class="character-female">
-            <view class="female-head"></view>
-            <view class="female-body"></view>
-            <view class="female-jacket"></view>
-            <view class="female-shirt"></view>
-          </view>
-          
-          <!-- 中央笔记本电脑 -->
-          <view class="laptop-container">
-            <view class="laptop-base"></view>
-            <view class="laptop-screen">
-              <view class="play-button-container">
-                <view class="play-button">
-                  <view class="play-triangle"></view>
-                </view>
-              </view>
-            </view>
-          </view>
-          
-          <!-- 右侧男性人物 -->
-          <view class="character-male">
-            <view class="male-head"></view>
-            <view class="male-body"></view>
-            <view class="male-jacket"></view>
-            <view class="male-shirt"></view>
-            <view class="male-tie"></view>
-          </view>
-        </view>
+        <image 
+          class="banner-image" 
+          src="http://localhost:3000/static/skill.png" 
+          mode="aspectFill"
+        ></image>
         
-        <!-- 技能培训标题叠加 -->
-        <view class="banner-title">技能培训</view>
       </view>
 
       <!-- 课程标题区域 -->
@@ -73,13 +46,13 @@
           <view class="stat-item" @click="toggleFavorite">
             <uv-icon 
               name="star-fill" 
-              size="14" 
+              size="32" 
               :color="favoriteIconColor"
             ></uv-icon>
             <text class="stat-text">{{ courseInfo.favoriteCount }}</text>
           </view>
           <view class="stat-item" @click="handleShare">
-            <uv-icon name="share" size="14" :color="statIconColor"></uv-icon>
+            <uv-icon name="share-fill" size="32" :color="statIconColor"></uv-icon>
             <text class="stat-text">{{ courseInfo.shareCount }}</text>
           </view>
         </view>
@@ -99,9 +72,9 @@ export default {
   data() {
     return {
       // 导航栏配色
-      navbarBgColor: '#E0F2FF',
-      navIconColor: '#2563EB',
-      statIconColor: '#888888',
+      navbarBgColor: '#bae1ff',
+      navIconColor: '#467bff',
+      statIconColor: '#888',
       
       // 课程信息
       courseInfo: {
@@ -200,7 +173,10 @@ export default {
 
 .skill-detail-container {
   min-height: 100vh;
-  background: linear-gradient(to bottom, var(--page-bg-start), var(--page-bg-end));
+  background-image: url('http://localhost:3000/static/bg3.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 // 导航栏样式
@@ -229,182 +205,10 @@ export default {
   overflow: hidden;
 }
 
-.banner-background {
-  position: relative;
+.banner-image {
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-// 左侧女性人物
-.character-female {
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 80px;
-  height: 120px;
-}
-
-.female-head {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 32px;
-  height: 32px;
-  background: #F4C2A1;
-  border-radius: 50%;
-}
-
-.female-body {
-  position: absolute;
-  top: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 60px;
-  background: var(--white);
-  border-radius: 8px;
-}
-
-.female-jacket {
-  position: absolute;
-  top: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 48px;
-  height: 50px;
-  background: #1E3A8A;
-  border-radius: 8px;
-}
-
-.female-shirt {
-  position: absolute;
-  top: 35px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 36px;
-  height: 30px;
-  background: var(--white);
-  border-radius: 4px;
-}
-
-// 中央笔记本电脑
-.laptop-container {
-  position: relative;
-  z-index: 2;
-}
-
-.laptop-base {
-  width: 100px;
-  height: 8px;
-  background: #374151;
-  border-radius: 4px;
-  margin-top: 60px;
-}
-
-.laptop-screen {
-  position: relative;
-  width: 90px;
-  height: 60px;
-  background: #4285F4;
-  border-radius: 4px;
-  margin: -4px auto 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.play-button-container {
-  position: relative;
-}
-
-.play-button {
-  width: 24px;
-  height: 24px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.play-triangle {
-  width: 0;
-  height: 0;
-  border-left: 8px solid var(--white);
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  margin-left: 2px;
-}
-
-// 右侧男性人物
-.character-male {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 80px;
-  height: 120px;
-}
-
-.male-head {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 32px;
-  height: 32px;
-  background: #F4C2A1;
-  border-radius: 50%;
-}
-
-.male-body {
-  position: absolute;
-  top: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 60px;
-  background: var(--white);
-  border-radius: 8px;
-}
-
-.male-jacket {
-  position: absolute;
-  top: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 48px;
-  height: 50px;
-  background: #1E3A8A;
-  border-radius: 8px;
-}
-
-.male-shirt {
-  position: absolute;
-  top: 35px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 36px;
-  height: 30px;
-  background: var(--white);
-  border-radius: 4px;
-}
-
-.male-tie {
-  position: absolute;
-  top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 25px;
-  background: #93C5FD;
-  border-radius: 2px;
+  object-fit: cover;
 }
 
 // 横幅标题
@@ -480,4 +284,4 @@ export default {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   text-align: justify;
 }
-</style> 
+</style>

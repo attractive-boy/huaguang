@@ -1,8 +1,8 @@
 <template>
-  <view class="legal-help-page">
+  <view class="legal-help-page" :style="pageStyle">
     <!-- 状态栏占位 -->
     <view class="status-bar"></view>
-    
+
     <!-- 页眉Banner区域 -->
     <view class="page-header">
       <view class="header-content">
@@ -14,57 +14,51 @@
         <!-- 这里将放置律师插画 -->
       </view>
     </view>
-    
+
     <!-- 主内容区域 -->
     <view class="content-background">
       <!-- 功能入口卡片 -->
       <view class="main-options-card">
         <view class="option-item" @click="handleDocumentDownload">
-          <uv-icon name="file-text" color="#3A7AF0" size="36"></uv-icon>
+          <uv-icon name="file-text" color="#3A7AF0" size="60"></uv-icon>
           <view class="option-text">
             <text class="option-title">法律文书下载</text>
             <text class="option-desc">提供法律文书模版</text>
           </view>
         </view>
         <view class="option-item" @click="handleLawyerRecommend">
-          <uv-icon name="account" color="#3A7AF0" size="36"></uv-icon>
+          <image :src="lawyerIconPath" style="width: 60rpx; height: 60rpx;"></image>
           <view class="option-text">
             <text class="option-title">推荐律师</text>
             <text class="option-desc">专业律师推荐</text>
           </view>
         </view>
       </view>
-      
+
       <!-- 法律文书下载卡片 -->
       <view class="content-card">
         <view class="card-title">法律文书下载</view>
         <view class="card-subtitle">常用合同、协议模版免费下载</view>
         <view class="document-grid">
-          <view 
-            v-for="(doc, index) in documentList" 
-            :key="index" 
-            class="document-item"
-            @click="handleDocumentClick(doc)"
-          >
-            <uv-icon name="file-text" color="#AAAAAA" size="16"></uv-icon>
+          <view v-for="(doc, index) in documentList" :key="index" class="document-item"
+            @click="handleDocumentClick(doc)">
+            <uv-icon name="file-text" color="#AAAAAA" size="35"></uv-icon>
             <text class="document-name">{{ doc.name }}</text>
           </view>
         </view>
       </view>
-      
+
       <!-- 推荐律师卡片 -->
       <view class="content-card">
         <view class="card-title">推荐律师</view>
         <view class="card-subtitle">精选经验丰富律师，快速响应您的需求</view>
         <uv-scroll-list :indicator="false">
-          <view 
-            v-for="(lawyer, index) in lawyerList" 
-            :key="index" 
-            class="lawyer-item"
-          >
+          <view v-for="(lawyer, index) in lawyerList" :key="index" class="lawyer-item">
             <view class="lawyer-avatar"></view>
-            <text class="lawyer-name">{{ lawyer.name }}</text>
-            <text class="lawyer-specialty">{{ lawyer.specialty }}</text>
+            <view class="lawyer-info">
+              <text class="lawyer-name">{{ lawyer.name }}</text>
+              <text class="lawyer-specialty">{{ lawyer.specialty }}</text>
+            </view>
             <view class="lawyer-footer">
               <text class="lawyer-price">{{ lawyer.price }}</text>
               <view class="consult-btn" @click="handleConsult(lawyer)">
@@ -74,17 +68,13 @@
           </view>
         </uv-scroll-list>
       </view>
-      
+
       <!-- 法律知识科普卡片 -->
       <view class="content-card">
         <view class="card-title">法律知识科普</view>
         <view class="card-subtitle">常见法律问题一读即懂，保护自己的第一步从了解权利开始。</view>
         <view class="knowledge-list">
-          <view 
-            v-for="(item, index) in knowledgeList" 
-            :key="index" 
-            class="knowledge-item"
-          >
+          <view v-for="(item, index) in knowledgeList" :key="index" class="knowledge-item">
             <view class="question-row">
               <view class="question-icon">?</view>
               <text class="question-text">{{ item.question }}</text>
@@ -94,7 +84,7 @@
         </view>
       </view>
     </view>
-    
+
     <!-- 底部导航栏 -->
     <user-tabbar></user-tabbar>
   </view>
@@ -112,6 +102,9 @@ export default {
   data() {
     return {
       config: config,
+      // 图片路径
+      lawyerIconPath: config.staticBaseUrl + '/icons/lvshi.png',
+      backgroundImagePath: config.staticBaseUrl + '/lvshi_bg2.png',
       // 法律文书列表
       documentList: [
         { name: '劳动合同模版' },
@@ -122,21 +115,21 @@ export default {
       ],
       // 推荐律师列表
       lawyerList: [
-        { 
-          name: '李律师', 
-          specialty: '劳动纠纷', 
+        {
+          name: '李律师',
+          specialty: '劳动纠纷',
           price: '60元/30分钟',
           avatar: ''
         },
-        { 
-          name: '王律师', 
-          specialty: '合同纠纷', 
+        {
+          name: '王律师',
+          specialty: '合同纠纷',
           price: '80元/30分钟',
           avatar: ''
         },
-        { 
-          name: '张律师', 
-          specialty: '房产纠纷', 
+        {
+          name: '张律师',
+          specialty: '房产纠纷',
           price: '100元/30分钟',
           avatar: ''
         }
@@ -158,6 +151,13 @@ export default {
       ]
     }
   },
+  computed: {
+    pageStyle() {
+      return {
+        backgroundImage: `url('${this.backgroundImagePath}')`
+      }
+    }
+  },
   methods: {
     handleDocumentDownload() {
       uni.showToast({
@@ -167,7 +167,7 @@ export default {
     },
     handleLawyerRecommend() {
       console.log('handleLawyerRecommend');
-      
+
       uni.navigateTo({
         url: '/pages/user/index/consultation/index'
       })
@@ -190,39 +190,46 @@ export default {
 
 <style lang="scss" scoped>
 .legal-help-page {
-  background-color: #F0F2F8;
-  
+  height: 100vh;
+  overflow-y: auto;
+  // background-color: #F0F2F8;
+  background-size: cover;
+  background-position: center -10px; // 向下偏移100px
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
   .status-bar {
     height: var(--status-bar-height);
     background: transparent;
   }
-  
+
   .page-header {
     position: relative;
-    background: linear-gradient(135deg, #4A90E2 0%, #6F80E0 100%);
     padding: 20rpx 30rpx 60rpx;
     overflow: hidden;
-    
+    margin-top: 70rpx;
+
     .header-content {
       z-index: 10;
       position: relative;
-      
+
       .main-title {
         color: #FFFFFF;
-        font-size: 52rpx;
+        font-size: 40rpx;
         font-weight: 600;
         display: block;
         margin-bottom: 16rpx;
       }
-      
+
       .sub-title {
         color: #FFFFFF;
-        font-size: 32rpx;
+        font-size: 39rpx;
         font-weight: 400;
         display: block;
+        letter-spacing: 5rpx;
       }
     }
-    
+
     .lawyer-illustration {
       position: absolute;
       right: 30rpx;
@@ -232,9 +239,9 @@ export default {
       // 这里将添加律师插画背景
     }
   }
-  
+
   .content-background {
-    background-color: #F0F2F8;
+    // background-color: #F0F2F8;
     border-top-left-radius: 40rpx;
     border-top-right-radius: 40rpx;
     margin-top: -40rpx;
@@ -242,7 +249,7 @@ export default {
     z-index: 2;
     padding: 30rpx 30rpx 100rpx;
   }
-  
+
   .main-options-card {
     background: #FFFFFF;
     border-radius: 30rpx;
@@ -251,19 +258,19 @@ export default {
     margin-bottom: 30rpx;
     display: flex;
     justify-content: space-between;
-    
+
     .option-item {
       display: flex;
       align-items: center;
       flex: 1;
-      
+
       &:first-child {
         margin-right: 20rpx;
       }
-      
+
       .option-text {
         margin-left: 20rpx;
-        
+
         .option-title {
           color: #333333;
           font-size: 32rpx;
@@ -271,7 +278,7 @@ export default {
           display: block;
           margin-bottom: 8rpx;
         }
-        
+
         .option-desc {
           color: #888888;
           font-size: 24rpx;
@@ -280,37 +287,37 @@ export default {
       }
     }
   }
-  
+
   .content-card {
     background: #FFFFFF;
     border-radius: 30rpx;
     padding: 40rpx;
     box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
     margin-bottom: 30rpx;
-    
+
     .card-title {
       color: #333333;
       font-size: 34rpx;
       font-weight: 600;
       margin-bottom: 12rpx;
     }
-    
+
     .card-subtitle {
       color: #888888;
       font-size: 26rpx;
       margin-bottom: 30rpx;
     }
-    
+
     .document-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20rpx;
-      
+
       .document-item {
         display: flex;
         align-items: center;
         padding: 12rpx 0;
-        
+
         .document-name {
           color: #3A7AF0;
           font-size: 28rpx;
@@ -319,51 +326,66 @@ export default {
         }
       }
     }
-    
+
     .lawyer-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 200rpx;
+      display: grid;
+      grid-template-columns: 96rpx 1fr;
+      grid-template-rows: auto auto;
+      gap: 8rpx 16rpx;
+      width: 270rpx !important;   // 使用 !important 强制覆盖
+      min-width: 270rpx !important;
       margin-right: 20rpx;
-      
+
       .lawyer-avatar {
         width: 96rpx;
         height: 96rpx;
         border-radius: 50%;
         background-color: #E0E0E0;
-        margin-bottom: 16rpx;
+        grid-row: 1 / 2;
+        grid-column: 1 / 2;
       }
-      
-      .lawyer-name {
-        color: #333333;
-        font-size: 30rpx;
-        font-weight: 500;
-        margin-bottom: 8rpx;
+
+      .lawyer-info {
+        display: flex;
+        flex-direction: column;
+        grid-row: 1 / 2;
+        grid-column: 2 / 3;
+
+        .lawyer-name {
+          color: #333333;
+          font-size: 30rpx;
+          font-weight: 500;
+          margin-bottom: 8rpx;
+        }
+
+        .lawyer-specialty {
+          color: #888888;
+          font-size: 24rpx;
+        }
       }
-      
-      .lawyer-specialty {
-        color: #888888;
-        font-size: 24rpx;
-        margin-bottom: 16rpx;
-      }
-      
+
       .lawyer-footer {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 100%;
-        
+        grid-row: 2 / 3;
+        grid-column: 1 / 3;
+        margin-top: 8rpx;
+
         .lawyer-price {
           color: #333333;
           font-size: 24rpx;
+          flex-shrink: 0;
         }
-        
+
         .consult-btn {
           background-color: #3A7AF0;
           border-radius: 30rpx;
-          padding: 8rpx 16rpx;
-          
+          padding: 3rpx 16rpx;
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+
           .consult-text {
             color: #FFFFFF;
             font-size: 24rpx;
@@ -371,20 +393,20 @@ export default {
         }
       }
     }
-    
+
     .knowledge-list {
       .knowledge-item {
         margin-bottom: 30rpx;
-        
+
         &:last-child {
           margin-bottom: 0;
         }
-        
+
         .question-row {
           display: flex;
           align-items: center;
           margin-bottom: 16rpx;
-          
+
           .question-icon {
             width: 32rpx;
             height: 32rpx;
@@ -397,7 +419,7 @@ export default {
             justify-content: center;
             margin-right: 16rpx;
           }
-          
+
           .question-text {
             color: #333333;
             font-size: 30rpx;
@@ -405,7 +427,7 @@ export default {
             flex: 1;
           }
         }
-        
+
         .answer-text {
           color: #666666;
           font-size: 26rpx;
@@ -416,4 +438,4 @@ export default {
     }
   }
 }
-</style> 
+</style>
