@@ -1,10 +1,10 @@
 <template>
-  <view class="credit-score-page">
+  <view class="credit-score-page" :style="pageBackgroundStyle">
     <!-- 自定义导航栏 -->
     <view class="custom-navbar">
       <view class="navbar-content">
         <view class="navbar-left" @click="goBack">
-          <uv-icon name="arrow-left" color="#333333" size="20"></uv-icon>
+          <uv-icon name="arrow-left" color="#333333" bold="true" size="32"></uv-icon>
           <text class="back-text">返回</text>
         </view>
         <text class="navbar-title">信用评分</text>
@@ -14,10 +14,10 @@
     <!-- 主视觉区域 -->
     <view class="hero-section">
       <view class="diamond-container">
-        <view class="diamond-shape">
+        <view class="diamond-shape" :style="diamondBackgroundStyle">
           <view class="diamond-content">
-            <text class="amount-number">{{ remainingDebt.toLocaleString() }}</text>
-            <text class="amount-unit">元</text>
+            <text class="amount-number">{{ remainingDebt.toLocaleString() }}元</text>
+            <!-- <text class="amount-unit">元</text> -->
             <text class="amount-desc">剩余欠款</text>
           </view>
         </view>
@@ -31,7 +31,7 @@
         <view class="card-content">
           <view class="card-left">
             <view class="icon-container credit-card-icon">
-              <uv-icon name="credit-card" color="#FFFFFF" size="16"></uv-icon>
+              <image :src="config.staticBaseUrl + '/icons/card.png'" style="width: 60rpx; height: 60rpx;"></image>
             </view>
             <view class="text-content">
               <text class="main-text">按时完成信用卡还款</text>
@@ -52,9 +52,9 @@
         <view class="question-block">
           <view class="question-header">
             <view class="question-icon">
-              <uv-icon name="help" color="#FFFFFF" size="12"></uv-icon>
+              <uv-icon name="question-circle-fill" color="#FFFFFF" size="32"></uv-icon>
             </view>
-            <text class="question-text">{{ creditKnowledge.question1.question }}</text>
+            <text class="question-text">什么是<text style="color: #0049FF;">信用</text>？</text>
           </view>
           <text class="answer-text">{{ creditKnowledge.question1.answer }}</text>
         </view>
@@ -63,9 +63,9 @@
         <view class="question-block">
           <view class="question-header">
             <view class="question-icon">
-              <uv-icon name="help" color="#FFFFFF" size="12"></uv-icon>
+              <uv-icon name="question-circle-fill" color="#FFFFFF" size="32"></uv-icon>
             </view>
-            <text class="question-text">{{ creditKnowledge.question2.question }}</text>
+            <text class="question-text">为什么<text style="color: #0049FF;">信用</text>重要?</text>
           </view>
           <view class="points-list">
             <view v-for="(point, index) in creditKnowledge.question2.points" :key="index" class="point-item">
@@ -83,7 +83,23 @@
         <text class="card-title">信用记录的管理与维护</text>
         <view class="maintenance-list">
           <view v-for="(item, index) in maintenancePoints" :key="index" class="maintenance-item">
-            <text class="maintenance-title">{{ item.title }}</text>
+            <text class="maintenance-title">
+              <template v-if="index === 0">
+                按时<text style="color: #0049FF;">还款</text>
+              </template>
+              <template v-else-if="index === 1">
+                控制<text style="color: #0049FF;">负债率</text>
+              </template>
+              <template v-else-if="index === 2">
+                <text style="color: #0049FF;">减少</text>硬查询
+              </template>
+              <template v-else-if="index === 3">
+                长期保持<text style="color: #0049FF;">活跃</text>
+              </template>
+              <template v-else>
+                {{ item.title }}
+              </template>
+            </text>
             <text class="maintenance-desc">{{ item.desc }}</text>
           </view>
         </view>
@@ -131,6 +147,19 @@ export default {
       config: config
     }
   },
+  computed: {
+    pageBackgroundStyle() {
+      return {
+        background: `url('${this.config.staticBaseUrl}/apply-bg.png') no-repeat center center`,
+        backgroundSize: 'cover'
+      }
+    },
+    diamondBackgroundStyle() {
+      return {
+        background: `url('${this.config.staticBaseUrl}/score_bg.png') no-repeat center center`
+      }
+    }
+  },
   methods: {
     goBack() {
       uni.navigateBack()
@@ -153,7 +182,6 @@ export default {
   min-height: 100vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  background: linear-gradient(to bottom, #E0F2FF 0%, #87CEFA 40%, #F0F8FF 100%);
   padding-bottom: 100rpx; /* 为TabBar预留空间 */
 }
 
@@ -189,9 +217,8 @@ export default {
     }
     
     .navbar-title {
-      font-size: 36rpx;
+      font-size: 30rpx;
       color: #333333;
-      font-weight: 500;
     }
   }
 }
@@ -208,28 +235,20 @@ export default {
     position: relative;
     
     .diamond-shape {
-      width: 300rpx;
-      height: 300rpx;
-      background: #007AFF;
-      transform: rotate(45deg);
-      border-radius: 20rpx;
-      border: 4rpx solid #FFFFFF;
-      box-shadow: 
-        0 0 20rpx rgba(0, 122, 255, 0.3),
-        0 0 40rpx rgba(0, 122, 255, 0.2),
-        0 0 60rpx rgba(0, 122, 255, 0.1);
+      width: 900rpx;
+      height: 500rpx;
       display: flex;
       align-items: center;
       justify-content: center;
       
       .diamond-content {
-        transform: rotate(-45deg);
         text-align: center;
         color: #FFFFFF;
+        margin-top: 42rpx;
         
         .amount-number {
           display: block;
-          font-size: 72rpx;
+          font-size: 45rpx;
           font-weight: bold;
           line-height: 1;
         }
@@ -257,7 +276,7 @@ export default {
   .card {
     background: #FFFFFF;
     border-radius: 16rpx;
-    margin-bottom: 20rpx;
+    margin-bottom: 40rpx;
     padding: 30rpx;
     box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
     
@@ -292,9 +311,9 @@ export default {
         align-items: center;
         justify-content: center;
         
-        &.credit-card-icon {
-          background: #007AFF;
-        }
+        // &.credit-card-icon {
+        //   background: #007AFF;
+        // }
       }
       
       .text-content {
@@ -343,7 +362,7 @@ export default {
       
       .question-text {
         font-size: 30rpx;
-        color: #007AFF;
+        color: #666;
         font-weight: 500;
       }
     }
@@ -406,7 +425,7 @@ export default {
       
       .maintenance-title {
         font-size: 30rpx;
-        color: #007AFF;
+        color: #666;
         font-weight: 500;
         display: block;
         margin-bottom: 8rpx;
@@ -420,4 +439,4 @@ export default {
     }
   }
 }
-</style> 
+</style>

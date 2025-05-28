@@ -1,5 +1,5 @@
 <template>
-  <view class="skill-training-container">
+  <view class="skill-training-container" :style="{ backgroundImage: `url(${backgroundImage})` }">
     <!-- 自定义导航栏 -->
     <uv-navbar 
       :safeAreaInsetTop="true"
@@ -10,15 +10,16 @@
       <template #left>
         <uv-icon 
           name="arrow-left" 
-          size="20" 
+          size="42" 
           color="#50A0E0"
+          bold="true"
           @click="goBack"
         ></uv-icon>
       </template>
       <template #right>
         <uv-icon 
           name="search" 
-          size="20" 
+          size="42" 
           color="#50A0E0"
           @click="handleSearch"
         ></uv-icon>
@@ -27,51 +28,24 @@
 
     <!-- 页面内容 -->
     <view class="content">
-      <!-- 插画Banner区域 -->
-      <view class="banner-section">
-        <view class="illustration-container">
-          <!-- 左侧女性人物 -->
-          <view class="character-left">
-            <view class="character-head"></view>
-            <view class="character-body"></view>
-            <view class="character-arm"></view>
-          </view>
-          
-          <!-- 中央笔记本电脑 -->
-          <view class="laptop-center">
-            <view class="laptop-base"></view>
-            <view class="laptop-screen">
-              <view class="play-button"></view>
-            </view>
-            <view class="envelope-icon">
-              <view class="envelope-body"></view>
-              <view class="envelope-arrow"></view>
-            </view>
-          </view>
-          
-          <!-- 右侧男性人物 -->
-          <view class="character-right">
-            <view class="character-head male"></view>
-            <view class="character-body male"></view>
-            <view class="character-tie"></view>
-          </view>
-        </view>
-        
+      <!-- Banner区域 -->
+      <view class="banner-section" :style="{ backgroundImage: `url(${skillBannerImage})` }">
         <!-- 技能培训标题 -->
-        <view class="banner-title">技能培训</view>
       </view>
 
       <!-- 标签导航栏 -->
       <view class="tabs-section">
-        <uv-tabs 
-          :list="tabsList" 
-          :current="currentTab"
-          @change="handleTabChange"
-          lineColor="#007AFF"
-          activeColor="#007AFF"
-          inactiveColor="#4A90E2"
-          :scrollable="true"
-        ></uv-tabs>
+        <view class="custom-tabs">
+          <view 
+            v-for="(tab, index) in tabsList" 
+            :key="index"
+            class="tab-item"
+            :class="{ 'tab-item--active': currentTab === index }"
+            @click="handleTabChange(index)"
+          >
+            {{ tab.name }}
+          </view>
+        </view>
       </view>
 
       <!-- 可滚动的课程列表容器 -->
@@ -95,7 +69,7 @@
                     <uv-icon 
                       :name="course.isFavorite ? 'heart-fill' : 'heart'" 
                       :color="course.isFavorite ? '#FF4D4F' : '#FFFFFF'"
-                      size="16"
+                      size="32"
                     ></uv-icon>
                   </view>
                   <!-- 视频时长 -->
@@ -109,9 +83,7 @@
                 <view class="course-info">
                   <text class="play-count">{{ course.playCount }}次播放</text>
                   <view class="share-icon">
-                    <view class="share-dot"></view>
-                    <view class="share-line1"></view>
-                    <view class="share-line2"></view>
+                    <uv-icon name="share-fill" size="28" color="#888888"></uv-icon>
                   </view>
                 </view>
               </view>
@@ -124,11 +96,15 @@
 </template>
 
 <script>
+import { staticBaseUrl } from '@/config/index.js'
+
 export default {
   data() {
     return {
       currentTab: 0,
       scrollViewHeight: 400, // 滚动容器高度，单位px
+      backgroundImage: `${staticBaseUrl}/bg3.png`, // 背景图片
+      skillBannerImage: `${staticBaseUrl}/skill.png`, // 技能培训banner图片
       tabsList: [
         { name: '办公技能' },
         { name: '软件开发' },
@@ -232,7 +208,9 @@ export default {
 
 .skill-training-container {
   height: 100vh;
-  background: linear-gradient(to bottom, #D0E8FF, #E8F4FF);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
 
@@ -241,22 +219,14 @@ export default {
 }
 
 .banner-section {
-  height: 500rpx;
+  height: 400rpx;
   position: relative;
   margin-bottom: 30rpx;
-  background: linear-gradient(135deg, #4A90E2 0%, #7BB3E8 50%, #A0D8FF 100%);
-  border-radius: 0 0 40rpx 40rpx;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  // border-radius: 0 0 40rpx 40rpx;
   overflow: hidden;
-  
-  .illustration-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 60rpx;
-  }
   
   .banner-title {
     position: absolute;
@@ -275,27 +245,40 @@ export default {
   margin-bottom: 30rpx;
   padding: 0 20rpx;
   
-  :deep(.uv-tabs) {
-    background-color: transparent;
+  .custom-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16rpx;
+    overflow-x: auto;
+    padding-bottom: 10rpx;
     
-    .uv-tabs__wrapper__nav__item {
-      background-color: #E6F2FF;
-      color: #4A90E2;
+    /* 隐藏滚动条但保持滚动功能 */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    
+    .tab-item {
+      background-color: #d7f0ff;
+      color: #666;
       border-radius: 25rpx;
-      margin: 0 8rpx;
       padding: 12rpx 24rpx;
       font-size: 28rpx;
       font-weight: 500;
       transition: all 0.3s ease;
+      cursor: pointer;
+      flex-shrink: 0;
+      white-space: nowrap;
       
-      &.uv-tabs__wrapper__nav__item--active {
-        background-color: #007AFF;
-        color: #FFFFFF;
+      &.tab-item--active {
+        background-color: #1871d7;
+        color: #fff;
       }
-    }
-    
-    .uv-tabs__wrapper__nav__line {
-      display: none;
+      
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 }
@@ -310,11 +293,11 @@ export default {
 }
 
 .course-card {
-  background-color: #FFFFFF;
+  // background-color: #FFFFFF;
   border-radius: 20rpx;
   margin: 15rpx;
   overflow: hidden;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+  // box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease;
   
   &:active {
@@ -329,7 +312,8 @@ export default {
     .placeholder-image {
       width: 100%;
       height: 100%;
-      background-color: #F0F0F0;
+      border-radius: 20rpx;
+      background-color: #d8d8d8;
     }
     
     .favorite-icon {
@@ -341,7 +325,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: rgba(0, 0, 0, 0.3);
+      // background-color: rgba(0, 0, 0, 0.3);
       border-radius: 50%;
     }
     
@@ -349,9 +333,9 @@ export default {
       position: absolute;
       bottom: 20rpx;
       right: 20rpx;
-      color: #FFFFFF;
+      color: #666;
       font-size: 24rpx;
-      background-color: rgba(0, 0, 0, 0.6);
+      // background-color: rgba(0, 0, 0, 0.6);
       padding: 6rpx 12rpx;
       border-radius: 8rpx;
       font-weight: 500;
@@ -382,303 +366,17 @@ export default {
       font-weight: 400;
     }
     
-    .share-icon {
-      width: 28rpx;
-      height: 28rpx;
-      position: relative;
-      
-      &::before {
-        content: '';
-        position: absolute;
-        width: 6rpx;
-        height: 6rpx;
-        background-color: #888888;
-        border-radius: 50%;
-        top: 2rpx;
-        left: 11rpx;
-      }
-      
-      &::after {
-        content: '';
-        position: absolute;
-        width: 6rpx;
-        height: 6rpx;
-        background-color: #888888;
-        border-radius: 50%;
-        bottom: 2rpx;
-        left: 5rpx;
-      }
-      
-      .share-dot {
-        position: absolute;
-        width: 6rpx;
-        height: 6rpx;
-        background-color: #888888;
-        border-radius: 50%;
-        bottom: 2rpx;
-        right: 5rpx;
-      }
-      
-      .share-line1 {
-        position: absolute;
-        width: 12rpx;
-        height: 2rpx;
-        background-color: #888888;
-        top: 8rpx;
-        left: 8rpx;
-        transform: rotate(-30deg);
-      }
-      
-      .share-line2 {
-        position: absolute;
-        width: 12rpx;
-        height: 2rpx;
-        background-color: #888888;
-        top: 18rpx;
-        left: 8rpx;
-        transform: rotate(30deg);
-      }
-    }
-  }
-}
 
-// 插画元素样式
-.character-left, .character-right {
-  position: relative;
-  width: 120rpx;
-  height: 300rpx;
-  flex-shrink: 0;
-  
-  .character-head {
-    width: 80rpx;
-    height: 80rpx;
-    background-color: #FDBCB4;
-    border-radius: 50%;
-    position: absolute;
-    top: 20rpx;
-    left: 20rpx;
-    
-    &.male {
-      left: 20rpx;
-    }
-    
-    &::before {
-      content: '';
-      position: absolute;
-      width: 60rpx;
-      height: 40rpx;
-      background-color: #2A4A87;
-      border-radius: 30rpx 30rpx 0 0;
-      top: -20rpx;
-      left: 10rpx;
-    }
-  }
-  
-  .character-body {
-    width: 100rpx;
-    height: 160rpx;
-    background-color: #2A4A87;
-    border-radius: 20rpx;
-    position: absolute;
-    top: 80rpx;
-    left: 10rpx;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      width: 80rpx;
-      height: 120rpx;
-      background-color: #FFFFFF;
-      border-radius: 15rpx;
-      top: 20rpx;
-      left: 10rpx;
-    }
-    
-    &.male::after {
-      content: '';
-      position: absolute;
-      width: 20rpx;
-      height: 80rpx;
-      background-color: #4A90E2;
-      top: 30rpx;
-      left: 40rpx;
-    }
-  }
-  
-  .character-arm {
-    width: 40rpx;
-    height: 80rpx;
-    background-color: #2A4A87;
-    border-radius: 20rpx;
-    position: absolute;
-    top: 100rpx;
-    right: -20rpx;
-    transform: rotate(-30deg);
-  }
-  
-  .character-tie {
-    width: 20rpx;
-    height: 80rpx;
-    background-color: #4A90E2;
-    position: absolute;
-    top: 110rpx;
-    left: 50rpx;
-    border-radius: 0 0 10rpx 10rpx;
-  }
-}
-
-.laptop-center {
-  position: relative;
-  width: 200rpx;
-  height: 200rpx;
-  flex-shrink: 0;
-  
-  .laptop-base {
-    width: 180rpx;
-    height: 20rpx;
-    background-color: #4A90E2;
-    border-radius: 10rpx;
-    position: absolute;
-    bottom: 40rpx;
-    left: 10rpx;
-  }
-  
-  .laptop-screen {
-    width: 160rpx;
-    height: 120rpx;
-    background-color: #4A90E2;
-    border-radius: 15rpx;
-    position: absolute;
-    bottom: 60rpx;
-    left: 20rpx;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      width: 140rpx;
-      height: 100rpx;
-      background-color: #FFFFFF;
-      border-radius: 10rpx;
-      top: 10rpx;
-      left: 10rpx;
-    }
-  }
-  
-  .play-button {
-    width: 40rpx;
-    height: 40rpx;
-    background-color: #FFFFFF;
-    border-radius: 50%;
-    position: absolute;
-    top: 50rpx;
-    left: 80rpx;
-    z-index: 2;
-    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
-    
-    &::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 0;
-      border-left: 15rpx solid #4A90E2;
-      border-top: 10rpx solid transparent;
-      border-bottom: 10rpx solid transparent;
-      top: 10rpx;
-      left: 15rpx;
-    }
-  }
-  
-  .envelope-icon {
-    position: absolute;
-    bottom: 10rpx;
-    left: 30rpx;
-    
-    .envelope-body {
-      width: 40rpx;
-      height: 30rpx;
-      background-color: #D8D8D8;
-      border-radius: 5rpx;
-      position: relative;
-      
-      &::before {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-left: 20rpx solid transparent;
-        border-right: 20rpx solid transparent;
-        border-top: 15rpx solid #D8D8D8;
-        top: 0;
-        left: 0;
-      }
-    }
-    
-    .envelope-arrow {
-      width: 0;
-      height: 0;
-      border-left: 10rpx solid transparent;
-      border-right: 10rpx solid transparent;
-      border-bottom: 15rpx solid #D8D8D8;
-      position: absolute;
-      top: -10rpx;
-      left: 10rpx;
-    }
   }
 }
 
 // 响应式优化
 @media screen and (max-width: 750rpx) {
   .banner-section {
-    .illustration-container {
-      padding: 0 40rpx;
-    }
-    
     .banner-title {
       font-size: 60rpx;
       right: 60rpx;
     }
   }
-  
-  .character-left, .character-right {
-    width: 100rpx;
-    
-    .character-head {
-      width: 70rpx;
-      height: 70rpx;
-    }
-    
-    .character-body {
-      width: 90rpx;
-      height: 140rpx;
-    }
-  }
-  
-  .laptop-center {
-    width: 160rpx;
-    height: 160rpx;
-    
-    .laptop-screen {
-      width: 140rpx;
-      height: 100rpx;
-    }
-  }
 }
-
-// 动画效果
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10rpx);
-  }
-}
-
-.play-button {
-  animation: float 2s ease-in-out infinite;
-}
-
-.character-arm {
-  animation: float 3s ease-in-out infinite;
-}
-</style> 
+</style>
