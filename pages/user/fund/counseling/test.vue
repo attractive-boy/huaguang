@@ -13,7 +13,7 @@
     <!-- 介绍文本区 -->
     <view class="intro-section">
       <text class="intro-text-1">Hi, 在进行咨询前</text>
-      <text class="intro-text-2">让我们一起进行一个小测试吧</text>
+      <text class="intro-text-2">让我们一起进行一个<text style="color: #FA5353;">小测试</text>吧</text>
     </view>
     
     <!-- 装饰几何图形 -->
@@ -148,6 +148,10 @@ export default {
         title: '测试完成',
         icon: 'none'
       })
+      // 跳转到 chat 页面
+      uni.navigateTo({
+        url: '/pages/user/index/chat/index',
+      })
       
       // 延迟后跳转到咨询页面
       setTimeout(() => {
@@ -193,7 +197,7 @@ export default {
 <style lang="scss" scoped>
 .counseling-test-page {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #FFB6C1, #FFC0CB, #FFAAB5);
+  background: linear-gradient(to bottom, rgb(255, 115, 115), rgb(255, 248, 248));
   position: relative;
   display: flex;
   flex-direction: column;
@@ -269,17 +273,21 @@ export default {
     padding: 30rpx 40rpx;
     display: flex;
     flex-direction: column;
+    align-items: center; // 水平居中对齐
     
     .intro-text-1 {
       font-size: 36rpx;
       color: #FFFFFF;
       margin-bottom: 16rpx;
+      text-align: center; // 文本水平居中
+      font-weight: bold;
     }
     
     .intro-text-2 {
       font-size: 48rpx;
       color: #FFFFFF;
       font-weight: bold;
+      text-align: center; // 文本水平居中
     }
   }
   
@@ -343,50 +351,67 @@ export default {
   // 测试卡片
   .test-card {
     margin: 40rpx auto;
-    width: 85%;
+    width: 75%;
+    height: 55vh;
     background-color: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
     border-radius: 48rpx;
-    padding: 50rpx 40rpx;
+    padding: 60rpx 50rpx;
     box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    // 卡片背景渐变
+    background: linear-gradient(to bottom right, rgb(255, 205, 205), rgb(255, 247, 247));
     
     // 问题文本
     .question-section {
-      margin-bottom: 60rpx;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       text-align: center;
+      margin-bottom: 80rpx;
       
       .question-text {
         display: block;
-        font-size: 36rpx;
+        font-size: 42rpx;
         color: #C8647A;
-        line-height: 1.5;
+        line-height: 1.6;
+        margin-bottom: 20rpx;
+        font-weight: 500;
       }
     }
     
     // 答案选项
     .options-section {
+      flex: 2;
       display: flex;
       flex-direction: column;
-      gap: 30rpx;
-      margin-bottom: 60rpx;
+      gap: 60rpx;
+      margin-bottom: 80rpx;
       
       .option-btn {
-        height: 100rpx;
+        height: 120rpx;
         background-color: #FFF0F5;
-        border-radius: 50rpx;
+        border-radius: 60rpx;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 0 40rpx;
         
         text {
-          font-size: 32rpx;
+          font-size: 36rpx;
           color: #C8647A;
+          text-align: center;
+          line-height: 1.4;
         }
         
         &:active {
           opacity: 0.8;
+          transform: scale(0.98);
         }
       }
     }
@@ -394,9 +419,10 @@ export default {
     // 回到上一题
     .prev-question {
       text-align: center;
+      padding: 20rpx 0;
       
       text {
-        font-size: 28rpx;
+        font-size: 32rpx;
         color: #DDA0AF;
       }
       
@@ -430,4 +456,4 @@ export default {
     }
   }
 }
-</style> 
+</style>

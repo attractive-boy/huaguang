@@ -23,12 +23,28 @@
     
     <!-- 筛选/排序区域 -->
     <view class="filter-section">
-      <view class="filter-row">
+      <!-- 第一行：排序和筛选选项 -->
+      <view class="filter-row-top">
         <view class="filter-item" @click="showSortOptions">
           <text>{{ currentSort }}</text>
           <uv-icon name="arrow-down" size="12" color="#333333"></uv-icon>
         </view>
         
+        <view class="filter-right">
+          <view class="filter-item" @click="showSpecialtyOptions">
+            <text>擅长领域</text>
+            <uv-icon name="arrow-down" size="12" color="#333333"></uv-icon>
+          </view>
+          
+          <view class="filter-item" @click="showGenderOptions">
+            <text>性别</text>
+            <uv-icon name="arrow-down" size="12" color="#333333"></uv-icon>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 第二行：标签 -->
+      <view class="filter-row-bottom">
         <scroll-view scroll-x class="filter-tags" :show-scrollbar="false">
           <view class="filter-tags-content">
             <view 
@@ -41,16 +57,6 @@
             </view>
           </view>
         </scroll-view>
-        
-        <view class="filter-item" @click="showSpecialtyOptions">
-          <text>擅长领域</text>
-          <uv-icon name="arrow-down" size="12" color="#333333"></uv-icon>
-        </view>
-        
-        <view class="filter-item" @click="showGenderOptions">
-          <text>性别</text>
-          <uv-icon name="arrow-down" size="12" color="#333333"></uv-icon>
-        </view>
       </view>
     </view>
     
@@ -74,15 +80,16 @@
             </view>
             
             <view class="counselor-tags">
-              <view class="specialty-tag" v-for="(tag, tagIndex) in item.specialties" :key="tagIndex">
-                <text>{{ tag }}</text>
-              </view>
+              <text class="specialty-text">{{ item.specialties.join(' | ') }}</text>
             </view>
             
             <view class="counselor-stats">
               <text class="consultation-count">{{ item.consultationCount }}+人已咨询</text>
-              <view class="return-client-tag" v-if="item.returnClientCount > 0">
-                <text>[{{ item.returnClientCount }}回头客]</text>
+            </view>
+            
+            <view class="return-client-section" v-if="item.returnClientCount > 0">
+              <view class="return-client-tag">
+                <text>{{ item.returnClientCount }}回头客</text>
               </view>
             </view>
             
@@ -97,7 +104,7 @@
                 <text class="price-unit">/30分钟</text>
               </view>
               <view class="consult-btn" @click.stop="consultCounselor(item)">
-                <text>立即咨询</text>
+                <text>立刻咨询</text>
               </view>
             </view>
           </view>
@@ -216,7 +223,7 @@ export default {
         { name: '文字倾诉', active: false, value: 'text_service' },
         { name: '婚恋', active: false, value: 'marriage' },
         { name: '就业压力', active: false, value: 'career' },
-        { name: '擅长倾听', active: true, value: 'good_listener' }
+        { name: '擅长倾听!', active: true, value: 'good_listener' }
       ],
       
       // 擅长领域
@@ -385,11 +392,11 @@ export default {
       const mockSpecialties = ['自我探索', '压力管理', '人际关系', '情绪调节', '焦虑缓解', '职业规划', '家庭关系', '婚恋咨询', '失眠困扰', '自信提升']
       const mockServiceTypes = ['语音/视频', '文字咨询', '语音咨询', '视频咨询']
       const mockMottos = [
-        '每个人都值得被倾听和理解，我在这里等你',
-        '情绪不是敌人，而是内心的信号，让我们一起解读',
-        '心理咨询是一段共同成长的旅程，而非单向的治疗',
+        '每个人都值得被倾听和理解',
+        '情绪不是敌人，而是内心的信号',
+        '心理咨询是一段共同成长的旅程',
         '倾听是疗愈的开始，表达是力量的来源',
-        '每个困境都是成长的机会，让我陪你一起面对'
+        '每个困境都是成长的机会'
       ]
       
       return Array.from({ length: 30 }, (_, i) => {
@@ -401,6 +408,8 @@ export default {
             randomSpecialties.push(specialty)
           }
         }
+        
+      
         
         return {
           id: i + 1,
@@ -529,11 +538,25 @@ export default {
     z-index: 1;
     padding: 30rpx 20rpx;
     
-    .filter-row {
+    .filter-row-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 20rpx;
+      
+      .filter-right {
+        display: flex;
+        align-items: center;
+        gap: 40rpx;
+        
+      }
+    }
+    
+    .filter-row-bottom {
       display: flex;
       align-items: center;
       width: 100%;
-      overflow: hidden;
     }
     
     .filter-item {
@@ -541,7 +564,6 @@ export default {
       align-items: center;
       font-size: 28rpx;
       color: #333333;
-      margin-right: 20rpx;
       white-space: nowrap;
       
       text {
@@ -549,15 +571,19 @@ export default {
       }
     }
     
+    .filter-right .filter-item {
+      color: #8d8d8d;
+    }
+    
     .filter-tags {
       flex: 1;
       white-space: nowrap;
-      margin: 0 20rpx;
       
       .filter-tags-content {
         display: flex;
         white-space: nowrap;
         padding: 5rpx 0;
+        border-radius: 10rpx;
       }
       
       .filter-tag {
@@ -567,7 +593,6 @@ export default {
         border-radius: 10rpx;
         margin-right: 16rpx;
         transition: all 0.3s;
-        
         
         text {
           font-size: 24rpx;
@@ -638,10 +663,14 @@ export default {
       margin-right: 16rpx;
     }
     
+    
     .service-tag {
       background-color: #FFECED;
-      padding: 4rpx 12rpx;
+      padding: 2rpx 6rpx;
       border-radius: 6rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       
       text {
         font-size: 20rpx;
@@ -672,27 +701,38 @@ export default {
           color: #8E44AD;
         }
       }
+      
+      .specialty-text {
+        font-size: 24rpx;
+        color: #666666;
+      }
     }
     
     .counselor-stats {
       display: flex;
       align-items: center;
-      margin-bottom: 16rpx;
+      margin-bottom: 8rpx;
       
       .consultation-count {
         font-size: 22rpx;
         color: #999999;
-        margin-right: 16rpx;
       }
+    }
+    
+    .return-client-section {
+      margin-bottom: 16rpx;
       
       .return-client-tag {
-        border: 1px solid #F44336;
+        border: 1px solid #FFB6C1;
         border-radius: 6rpx;
-        padding: 2rpx 8rpx;
+        padding: 2rpx 4rpx;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         
         text {
           font-size: 20rpx;
-          color: #F44336;
+          color: #FFB6C1;
         }
       }
     }
@@ -704,7 +744,7 @@ export default {
       margin-bottom: 20rpx;
       
       .motto-prefix {
-        color: #FF8A80;
+        color: #FFB6C1;
         font-weight: bold;
         font-size: 24rpx;
         margin-right: 8rpx;
@@ -712,7 +752,7 @@ export default {
       
       .motto-content {
         font-size: 24rpx;
-        color: #757575;
+        color: #C39D9D;
       }
     }
     
@@ -733,20 +773,26 @@ export default {
       }
       
       .price-unit {
-        font-size: 24rpx;
-        color: #757575;
+        font-size: 20rpx;
+        color: #DDA59C;
         margin-left: 4rpx;
       }
       
       .consult-btn {
-        background: linear-gradient(to right, #FF8A65, #FF7043);
+        background: linear-gradient(135deg, #FF6B6B, #FF8E53, #FFB74D);
         padding: 12rpx 30rpx;
         border-radius: 100rpx;
         
         text {
           font-size: 28rpx;
           color: #FFFFFF;
-          font-weight: 500;
+          font-weight: 600;
+          text-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.1);
+        }
+        
+        &:active {
+          transform: translateY(1rpx);
+          box-shadow: 0 2rpx 8rpx rgba(255, 107, 107, 0.3);
         }
       }
     }
@@ -883,4 +929,4 @@ export default {
     }
   }
 }
-</style> 
+</style>
