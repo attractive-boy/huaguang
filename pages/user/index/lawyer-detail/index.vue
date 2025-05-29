@@ -4,7 +4,7 @@
     <view class="custom-navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
       <view class="navbar-content">
         <view class="navbar-left" @click="goBack">
-          <text class="back-icon">‹</text>
+          <uv-icon name="arrow-left" color="#FFFFFF" size="30"></uv-icon>
           <text class="back-text">返回</text>
         </view>
         <view class="navbar-title">
@@ -59,7 +59,7 @@
         <!-- 执业背景 -->
         <view class="detail-section">
           <view class="section-header">
-            <view class="section-icon background-icon"></view>
+            <image class="section-icon" src="http://localhost:3000/static/icons/zhiye.png" mode="aspectFit"></image>
             <text class="section-title">执业背景</text>
           </view>
           <text class="section-content">{{ lawyerInfo.background }}</text>
@@ -68,7 +68,7 @@
         <!-- 服务优势 -->
         <view class="detail-section">
           <view class="section-header">
-            <view class="section-icon advantage-icon"></view>
+            <image class="section-icon" src="http://localhost:3000/static/icons/fuwu.png" mode="aspectFit"></image>
             <text class="section-title">服务优势</text>
           </view>
           <view class="list-content">
@@ -82,7 +82,7 @@
         <!-- 成功案例 -->
         <view class="detail-section">
           <view class="section-header">
-            <view class="section-icon case-icon"></view>
+            <image class="section-icon" src="http://localhost:3000/static/icons/chenggong.png" mode="aspectFit"></image>
             <text class="section-title">成功案例</text>
           </view>
           <view class="list-content">
@@ -96,7 +96,7 @@
         <!-- 咨询范围 -->
         <view class="detail-section">
           <view class="section-header">
-            <view class="section-icon consultation-icon"></view>
+            <image class="section-icon" src="http://localhost:3000/static/icons/zixun.png" mode="aspectFit"></image>
             <text class="section-title">咨询范围</text>
           </view>
           <view class="list-content">
@@ -207,7 +207,10 @@ export default {
   height: 100vh;
   position: relative;
   overflow-y: auto;
-  background: linear-gradient(180deg, #A8C6FF 0%, #FFFFFF 100%);
+  background-image: url('http://localhost:3000/static/bg8.png');
+  background-size: cover;
+  background-position: unset;
+  background-repeat: no-repeat;
 }
 
 /* 自定义导航栏 */
@@ -217,7 +220,6 @@ export default {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: linear-gradient(180deg, #A8C6FF 0%, rgba(168, 198, 255, 0.8) 100%);
   
   .navbar-content {
     height: 88rpx;
@@ -252,7 +254,6 @@ export default {
     text {
       font-size: 36rpx;
       color: #FFFFFF;
-      font-weight: bold;
     }
   }
 }
@@ -327,11 +328,11 @@ export default {
       margin-bottom: 20rpx;
       
       text {
-        background-color: #4A90E2;
+        background-color: #3572f2;
         color: #FFFFFF;
         font-size: 28rpx;
         padding: 8rpx 16rpx;
-        border-radius: 8rpx;
+        border-radius: 15rpx;
       }
     }
     
@@ -488,12 +489,14 @@ export default {
 /* 底部固定按钮 */
 .bottom-button {
   position: fixed;
-  bottom: 0;
+  bottom: 12rpx;
   left: 0;
   right: 0;
-  padding: 20rpx 30rpx;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10rpx);
+  padding: 20rpx 80rpx;
+  // background: rgba(255, 255, 255, 0.95);
+  // backdrop-filter: blur(10rpx);
+  // 添加字间距
+  letter-spacing: 20rpx;
   
   .consult-button {
     width: 100%;
@@ -517,4 +520,4 @@ export default {
     }
   }
 }
-</style> 
+</style>

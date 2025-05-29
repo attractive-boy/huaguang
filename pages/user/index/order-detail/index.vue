@@ -5,13 +5,14 @@
       title="订单详情" 
       :autoBack="true"
       leftText="返回"
-      bgColor="#82A6F9"
+      bgColor="transparent"
       leftIconColor="#FFFFFF"
       :titleStyle="{ color: '#FFFFFF' }"
     ></uv-navbar>
     
     <!-- 主内容区域 -->
     <view class="main-content">
+      
       <!-- 律师信息卡片 -->
       <view class="lawyer-card">
         <view class="lawyer-avatar">
@@ -60,9 +61,11 @@
         :customStyle="{
           backgroundColor: '#4285F4',
           borderRadius: '20rpx',
-          height: '88rpx',
-          fontSize: '32rpx',
-          fontWeight: 'bold'
+          height: '97rpx',
+          fontSize: '36rpx',
+          fontWeight: 'bold',
+          width: '85%',
+          letterSpacing: '13rpx'
         }"
         @click="handlePayment"
       ></uv-button>
@@ -129,7 +132,10 @@ export default {
 <style lang="scss" scoped>
 .order-detail-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #82A6F9 0%, #F0F4FF 50%, #FFFFFF 100%);
+  background-image: url('http://localhost:3000/static/bg8.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
 }
 
@@ -211,7 +217,7 @@ export default {
 
 .info-item {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 20rpx;
 }
@@ -223,11 +229,14 @@ export default {
 .info-label {
   font-size: 28rpx;
   color: #666666;
+  width: 160rpx;
+  flex-shrink: 0;
 }
 
 .info-value {
   font-size: 28rpx;
   color: #333333;
+  margin-left: 40rpx;
 }
 
 /* 底部操作按钮区域样式 */
@@ -236,8 +245,11 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #FFFFFF;
+  // background: #FFFFFF;
   padding: 30rpx 40rpx;
   padding-bottom: calc(30rpx + env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-</style> 
+</style>

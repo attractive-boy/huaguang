@@ -15,18 +15,11 @@
     
     <!-- 可滚动内容区域 -->
     <scroll-view class="page-scroll" scroll-y="true" :style="{ height: scrollHeight }">
-      <!-- 横幅英雄区域 -->
-      <view class="hero-banner">   
-        <view class="banner-content">
-          <view class="text-content">
-            <text class="main-title">法律帮助</text>
-            <text class="sub-title">一对一咨询</text>
-            <text class="description">专业律师为您排忧解难</text>
-          </view>
-          <view class="lawyer-illustration">
-            <!-- 律师插画占位 -->
-          </view>
-        </view>
+      <!-- 页面标题区域 -->
+      <view class="page-header">
+        <text class="main-title">法律帮助</text>
+        <text class="sub-title">一对一咨询</text>
+        <text class="description">专业律师为您排忧解难</text>
       </view>
       
       <!-- 内容区域 -->
@@ -215,7 +208,10 @@ export default {
 
 <style lang="scss" scoped>
 .lawyer-consultation-page {
-  background-color: #F5F5F7;
+  background-image: url('http://localhost:3000/static/bg7.png');
+  background-size: cover;
+  background-position: unset;
+  background-repeat: no-repeat;
   min-height: 100vh;
   position: relative;
 }
@@ -250,49 +246,33 @@ export default {
   }
 }
 
-// 横幅英雄区域
-.hero-banner {
-  background: linear-gradient(135deg, #6B89F8 0%, #A19DFF 100%);
-  padding: 80px 20px 40px;
-  position: relative;
+// 页面标题区域
+.page-header {
+  padding: 132rpx 40rpx 80rpx;
   
-  .banner-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    .text-content {
-      flex: 1;
-      
-      .main-title {
-        color: #FFFFFF;
-        font-size: 28px;
-        font-weight: bold;
-        display: block;
-        margin-bottom: 5px;
-      }
-      
-      .sub-title {
-        color: #FFFFFF;
-        font-size: 42px;
-        font-weight: bold;
-        display: block;
-        margin-bottom: 15px;
-      }
-      
-      .description {
-        color: #FFFFFF;
-        font-size: 15px;
-        display: block;
-      }
-    }
-    
-    .lawyer-illustration {
-      width: 120px;
-      height: 120px;
-      background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMSkiIHJ4PSIxMCIvPgo8Y2lyY2xlIGN4PSI0NSIgY3k9IjQwIiByPSIxNSIgZmlsbD0iIzMzMzMzMyIgb3BhY2l0eT0iMC4zIi8+CjxyZWN0IHg9IjMwIiB5PSI1NSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjMzMzMzMzIiBvcGFjaXR5PSIwLjMiLz4KPHN2ZyB4PSI3MCIgeT0iMzAiIHdpZHRoPSIzMCIgaGVpZ2h0PSIyMCIgZmlsbD0iIzMzMzMzMyIgb3BhY2l0eT0iMC4zIi8+Cjx0ZXh0IHg9IjYwIiB5PSI5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwIiBmaWxsPSIjMzMzMzMzIiBvcGFjaXR5PSIwLjMiPuW+i+W4iDwvdGV4dD4KPC9zdmc+') center/contain no-repeat;
-      border-radius: 10px;
-    }
+  .main-title {
+    color: #FFFFFF;
+    font-size: 72rpx;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    text-shadow: -7px 6px 12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .sub-title {
+    color: #FFFFFF;
+    font-size: 42px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 15px;
+    text-shadow: -7px 6px 12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .description {
+    color: #FFFFFF;
+    font-size: 15px;
+    display: block;
+    letter-spacing: 3rpx;
   }
 }
 
@@ -482,4 +462,4 @@ export default {
 .bottom-safe-area {
   height: 20px;
 }
-</style> 
+</style>

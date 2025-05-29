@@ -5,7 +5,7 @@
       title="咨询订单" 
       :autoBack="true"
       leftText="返回"
-      bgColor="#6A9EFF"
+      bgColor="rgba(255,255,255,0)"
       leftIconColor="#FFFFFF"
       :titleStyle="{ color: '#FFFFFF' }"
     ></uv-navbar>
@@ -33,12 +33,7 @@
           @click="selectConsultationType('text')"
         >
           <view class="option-icon text-icon">
-            <view class="icon-rect"></view>
-            <view class="icon-lines">
-              <view class="line"></view>
-              <view class="line"></view>
-              <view class="line"></view>
-            </view>
+            <image src="http://localhost:3000/static/icons/img_big.png" class="icon-image"></image>
           </view>
           <view class="option-text">
             <text class="option-title">图文咨询</text>
@@ -52,7 +47,7 @@
           @click="selectConsultationType('voice')"
         >
           <view class="option-icon voice-icon">
-            <view class="phone-icon"></view>
+            <image src="http://localhost:3000/static/icons/call_big.png" class="icon-image"></image>
           </view>
           <view class="option-text">
             <text class="option-title">语言咨询</text>
@@ -70,9 +65,10 @@
         :customStyle="{
           backgroundColor: '#2979FF',
           borderRadius: '12rpx',
-          height: '88rpx',
+          height: '97rpx',
           fontSize: '36rpx',
-          fontWeight: 'bold'
+          fontWeight: 'bold',
+          letterSpacing: '12rpx'
         }"
         @click="handleConsultation"
       ></uv-button>
@@ -114,11 +110,15 @@ export default {
 <style lang="scss" scoped>
 .consultation-order-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #87CEEB 0%, #ADD8E6 50%, #F0F8FF 100%);
+  background-image: url('http://localhost:3000/static/bg8.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
 }
 
 .main-content {
+  margin-top: 12rpx;
   padding: 200rpx 40rpx 200rpx;
 }
 
@@ -158,8 +158,16 @@ export default {
 .lawyer-tag {
   background: #2979FF;
   border-radius: 8rpx;
-  padding: 8rpx 16rpx;
+  padding: 1rpx 16rpx;
   display: inline-block;
+  // 文字垂直居中
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  min-height: 32rpx;
+  width: fit-content;
+  padding: 4rpx 10rpx;
 }
 
 .tag-text {
@@ -196,7 +204,7 @@ export default {
 .option-icon {
   width: 80rpx;
   height: 80rpx;
-  background: #87B8FF;
+  // background: #87B8FF;
   border-radius: 12rpx;
   margin-right: 24rpx;
   display: flex;
@@ -210,24 +218,9 @@ export default {
   flex-direction: column;
 }
 
-.icon-rect {
-  width: 24rpx;
-  height: 18rpx;
-  background: #FFFFFF;
-  border-radius: 2rpx;
-  margin-bottom: 4rpx;
-}
-
-.icon-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 2rpx;
-}
-
-.line {
-  width: 20rpx;
-  height: 2rpx;
-  background: #FFFFFF;
+.icon-image {
+  width: 72rpx;
+  height: 72rpx;
 }
 
 /* 语言咨询图标 */
@@ -256,22 +249,23 @@ export default {
 
 .option-title {
   font-size: 32rpx;
-  color: #333333;
+  color: #3d3d3d;
   display: block;
   margin-bottom: 8rpx;
+  font-weight: bold;
 }
 
 .option-desc {
   font-size: 24rpx;
-  color: #888888;
+  color: #3d3d3d;
 }
 
 /* 底部按钮区域 */
 .action-button-area {
   position: fixed;
   bottom: 60rpx;
-  left: 40rpx;
-  right: 40rpx;
+  left: 140rpx;
+  right: 140rpx;
   z-index: 100;
 }
-</style> 
+</style>
