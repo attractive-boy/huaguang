@@ -1,32 +1,25 @@
 <template>
-  <view class="container">
+  <view class="arbitration-review">
     <!-- 状态栏占位 -->
-    <view class="status-bar"></view>
+    <view class="status-bar" :style="{ height: statusBarHeight + 'px' }"></view>
     
     <!-- 自定义导航栏 -->
-    <view class="custom-navbar">
+    <view class="navbar">
       <view class="navbar-content">
-        <!-- 返回按钮 -->
-        <view class="back-button" @click="goBack">
-          <uv-icon name="arrow-left" :size="16" color="#409EFF"></uv-icon>
+        <view class="back-btn" @click="goBack">
+          <uv-icon name="arrow-left" color="#409EFF" size="32"></uv-icon>
           <text class="back-text">返回</text>
         </view>
       </view>
     </view>
     
-    <!-- 主内容滚动区域 -->
-    <scroll-view 
-      class="main-scroll-view" 
-      scroll-y="true" 
-      :style="{ height: scrollViewHeight + 'px' }"
-      enable-back-to-top="true"
-      show-scrollbar="false"
-    >
-      <!-- 主内容卡片 -->
-      <view class="main-content-card">
-        <!-- 卡片标题区域 -->
-        <view class="card-title-section">
-          <view class="title-left">
+    <!-- 主内容区域 -->
+    <scroll-view class="main-content" scroll-y="true" :style="{ height: scrollViewHeight + 'px' }">
+      <!-- 申请书卡片 -->
+      <view class="application-card">
+        <!-- 卡片头部 -->
+        <view class="card-header">
+          <view class="title-section">
             <text class="main-title">劳动仲裁申请书</text>
             <text class="date-time">2025年5月6日 14:33</text>
           </view>
@@ -35,88 +28,90 @@
           </view>
         </view>
         
-        <!-- 引言段落 -->
-        <view class="intro-paragraph">
-          <text class="intro-text">仲裁委员会：</text>
-          <text class="intro-text">申请人因与用人单位发生劳动争议，现依据《中华人民共和国劳动争议调解仲裁法》的有关规定，向贵委员会申请仲裁，请依法受理。</text>
-        </view>
-        
-        <!-- 一、申请人基本信息 -->
-        <view class="section">
-          <text class="section-title">一、申请人基本信息</text>
-          <view class="info-list">
-            <text class="info-item">姓名：张三</text>
-            <text class="info-item">性别：男</text>
-            <text class="info-item">出生日期：1995年6月1日</text>
-            <text class="info-item">身份证号：32010119950601XXXX</text>
-            <text class="info-item">联系电话：138XXXXXXXX</text>
-            <text class="info-item">联系地址：江苏省南京市玄武区××小区×号楼</text>
+        <!-- 卡片内容 -->
+        <view class="card-content">
+          <!-- 引言段落 -->
+          <view class="content-section">
+            <text class="content-text">仲裁委员会：</text>
+            <text class="content-text">申请人因与用人单位发生劳动争议，现依据《中华人民共和国劳动争议调解仲裁法》的有关规定，向贵委员会申请仲裁，请依法受理。</text>
           </view>
-        </view>
-        
-        <!-- 二、被申请人基本信息 -->
-        <view class="section">
-          <text class="section-title">二、被申请人基本信息</text>
-          <view class="info-list">
-            <text class="info-item">单位名称：南京某科技有限公司</text>
-            <text class="info-item">法定代表人：李四</text>
-            <text class="info-item">单位地址：江苏省南京市雨花台区××路×号</text>
-            <text class="info-item">联系电话：025-8XXXXXXX</text>
+          
+          <!-- 一、申请人基本信息 -->
+          <view class="content-section">
+            <text class="section-title">一、申请人基本信息</text>
+            <view class="info-list">
+              <text class="info-item">姓名： 张三</text>
+              <text class="info-item">性别： 男</text>
+              <text class="info-item">出生日期： 1995年6月1日</text>
+              <text class="info-item">身份证号： 32010119950601XXXX</text>
+              <text class="info-item">联系电话： 138XXXXXXXXX</text>
+              <text class="info-item">联系地址： 江苏省南京市玄武区××小区×号楼</text>
+            </view>
           </view>
-        </view>
-        
-        <!-- 三、仲裁请求 -->
-        <view class="section">
-          <text class="section-title">三、仲裁请求</text>
-          <view class="request-list">
-            <text class="request-item">1. 请求被申请人支付2024年11月至2025年1月的工资共计人民币15,000元；</text>
-            <text class="request-item">2. 请求被申请人支付经济补偿金人民币5,000元；</text>
-            <text class="request-item">3. 请求被申请人出具解除劳动关系证明；</text>
-            <text class="request-item">4. 请求仲裁费用由被申请人承担。</text>
+          
+          <!-- 二、被申请人基本信息 -->
+          <view class="content-section">
+            <text class="section-title">二、被申请人基本信息</text>
+            <view class="info-list">
+              <text class="info-item">单位名称： 南京某科技有限公司</text>
+              <text class="info-item">法定代表人： 李四</text>
+              <text class="info-item">单位地址： 江苏省南京市雨花台区××路×号</text>
+              <text class="info-item">联系电话： 025-8XXXXXXXX</text>
+            </view>
           </view>
-        </view>
-        
-        <!-- 四、事实与理由 -->
-        <view class="section">
-          <text class="section-title">四、事实与理由</text>
-          <view class="reason-paragraph">
-            <text class="reason-text">申请人自2022年5月入职被申请人单位，担任软件工程师一职，双方签订了为期三年的劳动合同。但自2024年11月起，被申请人以经营困难为由拖欠申请人工资。2025年1月20日，被申请人未经协商，单方面以口头方式解除了与申请人的劳动合同，并拒绝出具解除证明及支付相应补偿金。</text>
-            <text class="reason-text">申请人多次与单位协商无果，现依法提起劳动仲裁，望依法维护申请人合法权益。</text>
+          
+          <!-- 三、仲裁请求 -->
+          <view class="content-section">
+            <text class="section-title">三、仲裁请求</text>
+            <view class="request-list">
+              <text class="request-item">1. 请求被申请人支付2024年11月至2025年1月的工资共计人民币15,000元；</text>
+              <text class="request-item">2. 请求被申请人支付经济补偿金人民币5,000元；</text>
+              <text class="request-item">3. 请求被申请人出具解除劳动关系证明；</text>
+              <text class="request-item">4. 请求仲裁费用由被申请人承担。</text>
+            </view>
           </view>
-        </view>
-        
-        <!-- 落款区域 -->
-        <view class="signature-section">
-          <text class="signature-item signature-left">此致</text>
-          <text class="signature-item signature-right">南京市劳动争议仲裁委员会</text>
-          <text class="signature-item signature-right">申请人：张三</text>
-          <text class="signature-item signature-right">2025年5月7日</text>
+          
+          <!-- 四、事实与理由 -->
+          <view class="content-section">
+            <text class="section-title">四、事实与理由</text>
+            <text class="content-text">申请人自2022年5月入职被申请人单位，担任软件工程师一职，双方签订了为期三年的劳动合同。但自2024年11月起，被申请人以经营困难为由拖欠申请人工资。2025年1月20日，被申请人未经协商，单方面以口头方式解除了与申请人的劳动合同，并拒绝出具解除证明及支付相应补偿金。</text>
+            <text class="content-text">申请人多次与单位协商无果，现依法提起劳动仲裁，望依法维护申请人合法权益。</text>
+          </view>
+          
+          <!-- 落款 -->
+          <view class="signature-section">
+            <text class="signature-text">此致</text>
+            <text class="signature-text signature-center">南京市劳动争议仲裁委员会</text>
+            <text class="signature-text signature-right">申请人： 张三</text>
+            <text class="signature-text signature-right">2025年5月7日</text>
+          </view>
         </view>
       </view>
       
-      <!-- 附件链接区域 -->
-      <view class="attachment-section" @click="viewAttachment">
+      <!-- 附件材料区域 -->
+      <view class="attachment-card">
         <view class="attachment-content">
-          <uv-icon name="file-text" :size="24" color="#409EFF"></uv-icon>
-          <text class="attachment-text">证据材料.pdf</text>
+          <uv-icon name="http://localhost:3000/static/icons/cailiao.png" color="#409EFF" size="66"></uv-icon>
+          <text class="attachment-name">证据材料.pdf</text>
         </view>
       </view>
       
       <!-- 操作按钮区域 -->
       <view class="action-buttons">
         <uv-button 
-          type="primary" 
-          shape="circle" 
+          type="primary"
+          shape="circle"
           size="large"
-          :custom-style="{ marginBottom: '15px' }"
+          customStyle="background: #409EFF; border: none; width: 85%;"
           @click="handleApprove"
         >
           确认通过
         </uv-button>
         <uv-button 
-          type="error" 
-          shape="circle" 
+          type="error"
+          shape="circle"
           size="large"
+          customStyle="background: #FF7F7F; border: none; width: 70%;"
           @click="handleReject"
         >
           驳回
@@ -125,49 +120,42 @@
     </scroll-view>
     
     <!-- 底部标签导航栏 -->
-    <view class="bottom-tab-bar">
-      <view class="tab-divider"></view>
-      <view class="tab-content">
-        <view class="tab-item tab-active">
-          <uv-icon name="home" :size="22" color="#409EFF"></uv-icon>
-          <text class="tab-text tab-text-active">首页</text>
-        </view>
-        <view class="tab-item">
-          <uv-icon name="chat" :size="22" color="#8A8A8E"></uv-icon>
-          <text class="tab-text">信息</text>
-        </view>
-        <view class="tab-item">
-          <uv-icon name="account" :size="22" color="#8A8A8E"></uv-icon>
-          <text class="tab-text">我的</text>
-        </view>
+    <view class="bottom-tabbar">
+      <view class="tab-item active" @click="navigateToHome">
+        <uv-icon name="home" color="#409EFF" size="25"></uv-icon>
+        <text class="tab-text active">首页</text>
       </view>
-      <!-- iOS Home Indicator -->
-      <view class="home-indicator"></view>
+      <view class="tab-item" @click="navigateToMessage">
+        <uv-icon name="chat-bubble-text" color="#888888" size="25"></uv-icon>
+        <text class="tab-text">信息</text>
+      </view>
+      <view class="tab-item" @click="navigateToProfile">
+        <uv-icon name="account" color="#888888" size="25"></uv-icon>
+        <text class="tab-text">我的</text>
+      </view>
     </view>
   </view>
 </template>
 
 <script>
 export default {
+  name: 'ArbitrationReview',
   data() {
     return {
-      scrollViewHeight: 400
+      statusBarHeight: 0,
+      scrollViewHeight: 0
     }
   },
-  
-  mounted() {
-    this.calculateScrollViewHeight()
+  onLoad() {
+    this.getSystemInfo()
   },
-  
   methods: {
-    // 计算滚动容器高度
-    calculateScrollViewHeight() {
+    // 获取系统信息
+    getSystemInfo() {
       const systemInfo = uni.getSystemInfoSync()
-      const statusBarHeight = systemInfo.statusBarHeight || 44
-      const navbarHeight = 88 // 自定义导航栏高度
-      const tabBarHeight = 100 // 底部标签栏高度（包含安全区域）
-      
-      this.scrollViewHeight = systemInfo.windowHeight - statusBarHeight - navbarHeight - tabBarHeight
+      this.statusBarHeight = systemInfo.statusBarHeight || 20
+      // 计算滚动视图高度：屏幕高度 - 状态栏高度 - 导航栏高度 - 底部导航栏高度
+      this.scrollViewHeight = systemInfo.screenHeight - this.statusBarHeight - 44 - 80
     },
     
     // 返回上一页
@@ -175,26 +163,18 @@ export default {
       uni.navigateBack()
     },
     
-    // 查看附件
-    viewAttachment() {
-      uni.showToast({
-        title: '查看证据材料',
-        icon: 'none'
-      })
-    },
-    
     // 确认通过
     handleApprove() {
       uni.showModal({
         title: '确认操作',
-        content: '确定要通过这份劳动仲裁申请书吗？',
+        content: '确认通过这份劳动仲裁申请书？',
         success: (res) => {
           if (res.confirm) {
             uni.showToast({
               title: '审核通过',
               icon: 'success'
             })
-            // 这里可以添加实际的审核通过逻辑
+            // 这里可以调用API提交审核结果
           }
         }
       })
@@ -203,17 +183,38 @@ export default {
     // 驳回申请
     handleReject() {
       uni.showModal({
-        title: '确认操作',
-        content: '确定要驳回这份劳动仲裁申请书吗？',
+        title: '确认操作', 
+        content: '确认驳回这份劳动仲裁申请书？',
         success: (res) => {
           if (res.confirm) {
             uni.showToast({
               title: '已驳回',
-              icon: 'none'
+              icon: 'success'
             })
-            // 这里可以添加实际的驳回逻辑
+            // 这里可以调用API提交审核结果
           }
         }
+      })
+    },
+    
+    // 导航到首页
+    navigateToHome() {
+      uni.switchTab({
+        url: '/pages/lawyer/index/index'
+      })
+    },
+    
+    // 导航到信息页
+    navigateToMessage() {
+      uni.switchTab({
+        url: '/pages/lawyer/index/consultation-info/index'
+      })
+    },
+    
+    // 导航到我的页面
+    navigateToProfile() {
+      uni.switchTab({
+        url: '/pages/lawyer/index/profile/index'
       })
     }
   }
@@ -221,281 +222,244 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.arbitration-review {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #EBF4FF 0%, #F8FBFF 100%);
+  background-image: url('http://localhost:3000/static/bg10.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* 状态栏占位 */
 .status-bar {
-  height: var(--status-bar-height);
-  background: transparent;
+  width: 100%;
 }
 
-/* 自定义导航栏 */
-.custom-navbar {
-  height: 88rpx;
-  background: transparent;
+.navbar {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
   
   .navbar-content {
-    height: 100%;
     display: flex;
     align-items: center;
-    padding: 0 30rpx;
     
-    .back-button {
+    .back-btn {
       display: flex;
       align-items: center;
+      gap: 8rpx;
       
       .back-text {
-        margin-left: 10rpx;
-        font-size: 32rpx;
         color: #409EFF;
-        font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
       }
     }
   }
 }
 
-/* 主内容滚动区域 */
-.main-scroll-view {
-  padding: 0 20rpx 30rpx 20rpx;
+.main-content {
+  padding: 20rpx;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
-/* 主内容卡片 */
-.main-content-card {
+// 申请书卡片样式
+.application-card {
   background: #FFFFFF;
-  border-radius: 16rpx;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
   padding: 30rpx;
-  margin-bottom: 20rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
-}
-
-/* 卡片标题区域 */
-.card-title-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   margin-bottom: 30rpx;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
   
-  .title-left {
-    flex: 1;
-    
-    .main-title {
-      display: block;
-      font-size: 44rpx;
-      font-weight: bold;
-      color: #333333;
-      margin-bottom: 10rpx;
-      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
-    }
-    
-    .date-time {
-      display: block;
-      font-size: 24rpx;
-      color: #999999;
-      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
-    }
-  }
-  
-  .status-badge {
-    background: #EBF4FF;
-    border: 2rpx solid #409EFF;
-    border-radius: 8rpx;
-    padding: 6rpx 16rpx;
-    
-    .status-text {
-      font-size: 22rpx;
-      color: #409EFF;
-      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
-    }
-  }
-}
-
-/* 引言段落 */
-.intro-paragraph {
-  margin-bottom: 30rpx;
-  
-  .intro-text {
-    display: block;
-    font-size: 28rpx;
-    color: #303133;
-    line-height: 1.6;
-    margin-bottom: 8rpx;
-    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
-    
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-
-/* 章节样式 */
-.section {
-  margin-bottom: 30rpx;
-  
-  .section-title {
-    display: block;
-    font-size: 32rpx;
-    font-weight: bold;
-    color: #303133;
-    margin-bottom: 16rpx;
-    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
-  }
-}
-
-/* 信息列表 */
-.info-list {
-  .info-item {
-    display: block;
-    font-size: 28rpx;
-    color: #303133;
-    line-height: 1.7;
-    margin-bottom: 8rpx;
-    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
-    
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-
-/* 请求列表 */
-.request-list {
-  .request-item {
-    display: block;
-    font-size: 28rpx;
-    color: #303133;
-    line-height: 1.7;
-    margin-bottom: 8rpx;
-    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
-    
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-
-/* 事实与理由段落 */
-.reason-paragraph {
-  .reason-text {
-    display: block;
-    font-size: 28rpx;
-    color: #303133;
-    line-height: 1.6;
-    margin-bottom: 16rpx;
-    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
-    
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-
-/* 落款区域 */
-.signature-section {
-  margin-top: 40rpx;
-  
-  .signature-item {
-    display: block;
-    font-size: 28rpx;
-    color: #303133;
-    margin-bottom: 10rpx;
-    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
-    
-    &.signature-left {
-      text-align: left;
-      margin-bottom: 20rpx;
-    }
-    
-    &.signature-right {
-      text-align: right;
-    }
-    
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-
-/* 附件链接区域 */
-.attachment-section {
-  background: #FFFFFF;
-  border-radius: 16rpx;
-  padding: 20rpx 30rpx;
-  margin-bottom: 30rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
-  
-  .attachment-content {
+  .card-header {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40rpx;
     
-    .attachment-text {
-      margin-left: 20rpx;
-      font-size: 30rpx;
-      color: #303133;
-      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
-    }
-  }
-}
-
-/* 操作按钮区域 */
-.action-buttons {
-  padding: 0 10rpx;
-  margin-bottom: 20rpx;
-}
-
-/* 底部标签导航栏 */
-.bottom-tab-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #FFFFFF;
-  
-  .tab-divider {
-    height: 2rpx;
-    background: #EFEFEF;
-  }
-  
-  .tab-content {
-    height: 100rpx;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 0 20rpx;
-    
-    .tab-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    .title-section {
       flex: 1;
       
-      .tab-text {
-        margin-top: 4rpx;
-        font-size: 20rpx;
-        color: #8A8A8E;
-        font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+      .main-title {
+        font-size: 42rpx;
+        font-weight: bold;
+        color: #333333;
+        line-height: 1.2;
+        display: block;
+        margin-bottom: 16rpx;
+        word-wrap: break-word;
+      }
+      
+      .date-time {
+        font-size: 24rpx;
+        color: #888888;
+        line-height: 1.2;
+        display: block;
+      }
+    }
+    
+    .status-badge {
+      background: #EBF5FF;
+      border-radius: 10rpx;
+      padding: 8rpx 24rpx;
+      
+      .status-text {
+        font-size: 24rpx;
+        color: #409EFF;
+        font-weight: 400;
+      }
+    }
+  }
+  
+  .card-content {
+    // 内容段落通用样式
+    .content-section {
+      margin-bottom: 30rpx;
+      
+      .section-title {
+        display: block;
+        font-size: 28rpx;
+        font-weight: bold;
+        color: #333333;
+        line-height: 1.5;
+        margin-bottom: 20rpx;
+        word-wrap: break-word;
+      }
+      
+      .content-text {
+        display: block;
+        font-size: 28rpx;
+        color: #333333;
+        line-height: 1.6;
+        margin-bottom: 20rpx;
+        text-align: left;
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      
+      .info-list {
+        .info-item {
+          display: block;
+          font-size: 28rpx;
+          color: #333333;
+          line-height: 1.6;
+          margin-bottom: 8rpx;
+          word-wrap: break-word;
+          word-break: break-all;
+        }
+      }
+      
+      .request-list {
+        .request-item {
+          display: block;
+          font-size: 28rpx;
+          color: #333333;
+          line-height: 1.6;
+          margin-bottom: 12rpx;
+          word-wrap: break-word;
+          word-break: break-all;
+        }
+      }
+    }
+    
+    // 落款样式
+    .signature-section {
+      margin-top: 60rpx;
+      
+      .signature-text {
+        display: block;
+        font-size: 28rpx;
+        color: #333333;
+        line-height: 2;
         
-        &.tab-text-active {
-          color: #409EFF;
+        &.signature-center {
+          text-align: center;
+          margin: 20rpx 0;
+        }
+        
+        &.signature-right {
+          text-align: right;
+          margin-bottom: 8rpx;
         }
       }
     }
   }
+}
+
+// 附件材料区域样式
+.attachment-card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
+  padding: 30rpx;
+  margin-bottom: 40rpx;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
   
-  .home-indicator {
-    height: 20rpx;
-    width: 100rpx;
-    background: #000000;
-    border-radius: 10rpx;
-    margin: 10rpx auto;
+  .attachment-content {
+    display: flex;
+    align-items: center;
+    gap: 20rpx;
+    
+    .attachment-name {
+      font-size: 28rpx;
+      color: #333333;
+      font-weight: 400;
+      word-wrap: break-word;
+      flex: 1;
+      max-width: calc(100% - 50rpx);
+    }
   }
 }
 
-/* 适配安全区域 */
-.bottom-tab-bar {
-  padding-bottom: env(safe-area-inset-bottom);
+// 操作按钮区域样式
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  align-items: center;
 }
-</style> 
+
+// 底部标签导航栏样式
+.bottom-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80rpx;
+  background: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rpx;
+  
+  .tab-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8rpx;
+    
+    .tab-text {
+      font-size: 24rpx;
+      color: #888888;
+      font-weight: 400;
+    }
+    
+    &.active {
+      .tab-text {
+        color: #409EFF;
+        font-weight: 600;
+      }
+    }
+  }
+}
+</style>

@@ -20,20 +20,20 @@ export default {
       currentPath: '',
       tabbarList: [
         {
-          pagePath: '/pages/lawyer/index/index',
-          text: '工作台',
+          pagePath: '/pages/lawyer/index/dashboard/index',
+          text: '首页',
           iconPath: '/static/tabbar/lawyer-home.png',
           selectedIconPath: '/static/tabbar/lawyer-home-active.png'
         },
         {
-          pagePath: '/pages/lawyer/cases/cases',
-          text: '案件管理',
+          pagePath: '/pages/lawyer/index/consultation-info/index',
+          text: '消息',
           iconPath: '/static/tabbar/cases.png',
           selectedIconPath: '/static/tabbar/cases-active.png'
         },
         {
-          pagePath: '/pages/lawyer/consultation/consultation',
-          text: '咨询管理',
+          pagePath: '/pages/lawyer/index/profile/index',
+          text: '我的',
           iconPath: '/static/tabbar/consultation.png',
           selectedIconPath: '/static/tabbar/consultation-active.png'
         }

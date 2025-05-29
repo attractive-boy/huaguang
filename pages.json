@@ -1,4 +1,7 @@
 {
+	"globalStyle": {
+		"navigationStyle": "custom"
+	},
 	"pages": [ 
 		{
 			"path" : "pages/login/login",
@@ -312,6 +315,10 @@
 					}
 				},
 				{
+					"path": "index/consultation-message/index"
+					
+				},
+				{
 					"path": "index/dashboard/index",
 					"style": {
 						"navigationBarTitleText": "首页",
@@ -364,6 +371,19 @@
 					"style": {
 						"navigationBarTitleText": "咨询管理"
 					}
+				},
+				{
+					"path": "index/arbitration-review/index",
+					"style": {
+						"navigationBarTitleText": "文书详情"
+					}
+				},
+				{
+					"path": "index/profile/index",
+					"style": {
+						"navigationBarTitleText": "我的",
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},
@@ -411,11 +431,6 @@
 			"packages": ["TUIKit"]
 		}
 	},
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "华光法律咨询",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
+	
 	"uniIdRouter": {}
 }

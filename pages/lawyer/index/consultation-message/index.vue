@@ -244,7 +244,10 @@ export default {
 .container {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(to bottom, #FFF0F0 0%, #FFF9F9 100%);
+  background-image: url('http://localhost:3000/static/bg10.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
 }
@@ -284,13 +287,13 @@ export default {
     background: transparent;
     
     &.tab-active {
-      background-color: #F26B6B;
+      background-color: #4494FF;
     }
   }
   
   .tab-text {
     font-size: 15px;
-    color: #F26B6B;
+    color: #3183FF;
     font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
     
     &.tab-text-active {
@@ -390,9 +393,9 @@ export default {
     }
     
     .view-button {
-      background-color: #F26B6B;
+      background-color: #4494ff;
       border-radius: 5px;
-      padding: 6px 10px;
+      padding: 2px 6px;
       
       .button-text {
         font-size: 13px;
@@ -510,4 +513,4 @@ export default {
     border-radius: 3px;
   }
 }
-</style> 
+</style>
