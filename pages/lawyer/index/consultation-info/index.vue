@@ -82,11 +82,19 @@
         </view>
       </scroll-view>
     </view>
+    
+    <!-- 底部导航栏 -->
+    <lawyer-tabbar></lawyer-tabbar>
   </view>
 </template>
 
 <script>
+import LawyerTabbar from '@/components/tabbar/lawyer-tabbar/lawyer-tabbar.vue'
+
 export default {
+  components: {
+    LawyerTabbar
+  },
   data() {
     return {
       // 标签列表
@@ -166,8 +174,9 @@ export default {
       const statusBarHeight = systemInfo.statusBarHeight || 0
       const headerHeight = 60 // 页面标题高度
       const filterHeight = 50 // 筛选器高度
+      const tabbarHeight = 55 // 底部导航栏高度
       
-      this.scrollViewHeight = systemInfo.windowHeight - statusBarHeight - headerHeight - filterHeight
+      this.scrollViewHeight = systemInfo.windowHeight - statusBarHeight - headerHeight - filterHeight - tabbarHeight
     },
     
     // 处理标签切换
@@ -210,6 +219,10 @@ export default {
   width: 100%;
   height: 100vh;
   background-color: #F8F8F8;
+  background-image: url('http://localhost:3000/static/bg10.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 // 状态栏占位
@@ -220,7 +233,7 @@ export default {
 
 // 页面标题区域
 .header {
-  background-color: #FFFFFF;
+  // background-color: #FFFFFF;
   padding: 10px 16px 15px;
   
   .title {
@@ -232,7 +245,7 @@ export default {
 
 // 标签筛选器区域
 .filter-section {
-  background-color: #FFFFFF;
+  // background-color: #FFFFFF;
   padding: 0 16px 10px;
   
   .tabs-container {
@@ -267,7 +280,7 @@ export default {
 // 内容区域
 .content-wrapper {
   flex: 1;
-  background: linear-gradient(to bottom, #F0F8FF 0%, #D0E8FF 100%);
+  // background: linear-gradient(to bottom, #F0F8FF 0%, #D0E8FF 100%);
   padding: 15px 12px 0;
 }
 

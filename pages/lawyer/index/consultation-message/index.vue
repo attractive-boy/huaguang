@@ -85,28 +85,17 @@
     </view>
     
     <!-- 底部标签栏 -->
-    <view class="bottom-tab-bar">
-      <view class="tab-bar-item" @click="navigateToHome">
-        <view class="tab-icon home-icon"></view>
-        <text class="tab-label">首页</text>
-      </view>
-      <view class="tab-bar-item active">
-        <view class="tab-icon message-icon active"></view>
-        <text class="tab-label active">信息</text>
-      </view>
-      <view class="tab-bar-item" @click="navigateToProfile">
-        <view class="tab-icon profile-icon"></view>
-        <text class="tab-label">我的</text>
-      </view>
-    </view>
-    
-    <!-- iOS Home Indicator -->
-    <view class="home-indicator"></view>
+    <lawyer-tabbar />
   </view>
 </template>
 
 <script>
+import LawyerTabbar from '@/components/tabbar/lawyer-tabbar/lawyer-tabbar.vue'
+
 export default {
+  components: {
+    LawyerTabbar
+  },
   data() {
     return {
       // 标签列表
@@ -186,9 +175,9 @@ export default {
       const statusBarHeight = systemInfo.statusBarHeight || 0
       const headerHeight = 60 // 页面标题高度
       const tabHeight = 50 // 标签导航高度
-      const bottomTabHeight = 80 // 底部导航栏高度
+      const tabbarHeight = 50 // uv-tabbar 的高度
       
-      this.scrollViewHeight = systemInfo.windowHeight - statusBarHeight - headerHeight - tabHeight - bottomTabHeight
+      this.scrollViewHeight = systemInfo.windowHeight - statusBarHeight - headerHeight - tabHeight - tabbarHeight
     },
     
     // 处理标签切换
@@ -221,20 +210,6 @@ export default {
         // 如果没有更多数据，设置hasMore为false
         // this.hasMore = false
       }, 1000)
-    },
-    
-    // 导航到首页
-    navigateToHome() {
-      uni.switchTab({
-        url: '/pages/lawyer/index/dashboard/index'
-      })
-    },
-    
-    // 导航到我的页面
-    navigateToProfile() {
-      uni.navigateTo({
-        url: '/pages/lawyer/index/profile/index'
-      })
     }
   }
 }
@@ -435,82 +410,6 @@ export default {
   .empty-text {
     font-size: 16px;
     color: #999999;
-  }
-}
-
-// 底部标签栏
-.bottom-tab-bar {
-  background-color: #FFFFFF;
-  border-top: 1px solid #E0E0E0;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0 20px;
-  
-  .tab-bar-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    
-    .tab-icon {
-      width: 24px;
-      height: 24px;
-      margin-bottom: 2px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      
-      // 首页图标
-      &.home-icon {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23999999'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E");
-      }
-      
-      // 信息图标
-      &.message-icon {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23999999'%3E%3Cpath d='M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z'/%3E%3C/svg%3E");
-        
-        &.active {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F26B6B'%3E%3Cpath d='M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z'/%3E%3C/svg%3E");
-        }
-      }
-      
-      // 我的图标
-      &.profile-icon {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23999999'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E");
-      }
-    }
-    
-    .tab-label {
-      font-size: 11px;
-      color: #999999;
-      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
-      
-      &.active {
-        color: #F26B6B;
-      }
-    }
-  }
-}
-
-// iOS Home Indicator
-.home-indicator {
-  height: 34px;
-  background-color: #FFFFFF;
-  position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 134px;
-    height: 5px;
-    background-color: #000000;
-    border-radius: 3px;
   }
 }
 </style>

@@ -119,27 +119,19 @@
       </view>
     </scroll-view>
     
-    <!-- 底部标签导航栏 -->
-    <view class="bottom-tabbar">
-      <view class="tab-item active" @click="navigateToHome">
-        <uv-icon name="home" color="#409EFF" size="25"></uv-icon>
-        <text class="tab-text active">首页</text>
-      </view>
-      <view class="tab-item" @click="navigateToMessage">
-        <uv-icon name="chat-bubble-text" color="#888888" size="25"></uv-icon>
-        <text class="tab-text">信息</text>
-      </view>
-      <view class="tab-item" @click="navigateToProfile">
-        <uv-icon name="account" color="#888888" size="25"></uv-icon>
-        <text class="tab-text">我的</text>
-      </view>
-    </view>
+    <!-- 律师底部导航栏 -->
+    <lawyer-tabbar></lawyer-tabbar>
   </view>
 </template>
 
 <script>
+import LawyerTabbar from '@/components/tabbar/lawyer-tabbar/lawyer-tabbar.vue'
+
 export default {
   name: 'ArbitrationReview',
+  components: {
+    LawyerTabbar
+  },
   data() {
     return {
       statusBarHeight: 0,
@@ -155,7 +147,7 @@ export default {
       const systemInfo = uni.getSystemInfoSync()
       this.statusBarHeight = systemInfo.statusBarHeight || 20
       // 计算滚动视图高度：屏幕高度 - 状态栏高度 - 导航栏高度 - 底部导航栏高度
-      this.scrollViewHeight = systemInfo.screenHeight - this.statusBarHeight - 44 - 80
+      this.scrollViewHeight = systemInfo.screenHeight - this.statusBarHeight - 44 - 100
     },
     
     // 返回上一页
@@ -194,27 +186,6 @@ export default {
             // 这里可以调用API提交审核结果
           }
         }
-      })
-    },
-    
-    // 导航到首页
-    navigateToHome() {
-      uni.switchTab({
-        url: '/pages/lawyer/index/index'
-      })
-    },
-    
-    // 导航到信息页
-    navigateToMessage() {
-      uni.switchTab({
-        url: '/pages/lawyer/index/consultation-info/index'
-      })
-    },
-    
-    // 导航到我的页面
-    navigateToProfile() {
-      uni.switchTab({
-        url: '/pages/lawyer/index/profile/index'
       })
     }
   }
@@ -425,41 +396,5 @@ export default {
   flex-direction: column;
   gap: 20rpx;
   align-items: center;
-}
-
-// 底部标签导航栏样式
-.bottom-tabbar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 80rpx;
-  background: #FFFFFF;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20rpx;
-  
-  .tab-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8rpx;
-    
-    .tab-text {
-      font-size: 24rpx;
-      color: #888888;
-      font-weight: 400;
-    }
-    
-    &.active {
-      .tab-text {
-        color: #409EFF;
-        font-weight: 600;
-      }
-    }
-  }
 }
 </style>

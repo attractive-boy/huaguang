@@ -53,7 +53,7 @@
 						hover-class="setting-item-hover"
 					>
 						<view class="item-left">
-							<uv-icon :name="'http://localhost:3000/static/icons/' + item.icon + '.png'" size="40" color="#888888"></uv-icon>
+							<uv-icon :name="item.icon" size="40" color="#888888"></uv-icon>
 							<text class="item-text">{{ item.text }}</text>
 						</view>
 						<text class="arrow-icon">></text>
@@ -81,17 +81,17 @@ export default {
 			settingsItems: [
 				{
 					type: 'password',
-					icon: 'anquan',
+					icon: 'lock',
 					text: '修改密码'
 				},
 				{
 					type: 'userinfo',
-					icon: 'user',
+					icon: 'account',
 					text: '修改用户信息'
 				},
 				{
 					type: 'notification',
-					icon: 'delete',
+					icon: 'bell',
 					text: '消息通知设置'
 				}
 			]
@@ -149,9 +149,7 @@ export default {
 	padding: 0 30rpx;
 	box-sizing: border-box;
 }
-.user-info-card{
-	margin-top: 120rpx;
-}
+
 /* 卡片通用样式 */
 .user-info-card,
 .service-status-card,
@@ -234,7 +232,7 @@ export default {
 }
 
 .arrow-icon {
-	font-size: 32rpx;
+	font-size: 24rpx;
 	color: #CCCCCC;
 }
 
@@ -290,4 +288,4 @@ export default {
 	color: #333333;
 	margin-left: 20rpx;
 }
-</style> 
+</style>

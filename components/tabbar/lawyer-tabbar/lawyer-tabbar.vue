@@ -1,14 +1,31 @@
 <template>
   <view class="custom-tabbar">
-    <view 
-      v-for="(item, index) in tabbarList" 
-      :key="index" 
-      class="tabbar-item" 
-      @click="switchTab(item.pagePath)"
-    >
-      <image :src="currentPath === item.pagePath ? item.selectedIconPath : item.iconPath" class="tabbar-icon"></image>
-      <text :class="['tabbar-text', currentPath === item.pagePath ? 'active-text' : '']">{{ item.text }}</text>
-    </view>
+    <uv-tabbar :value="current" @change="onChange">
+      <uv-tabbar-item text="首页">
+        <template v-slot:active-icon>
+          <uv-icon name="home" color="#4893FF" size="48rpx"></uv-icon>
+        </template>
+        <template v-slot:inactive-icon>
+          <uv-icon name="home" color="#999999" size="48rpx"></uv-icon>
+        </template>
+      </uv-tabbar-item>
+      <uv-tabbar-item text="消息">
+        <template v-slot:active-icon>
+          <uv-icon name="chat" color="#4893FF" size="48rpx"></uv-icon>
+        </template>
+        <template v-slot:inactive-icon>
+          <uv-icon name="chat" color="#999999" size="48rpx"></uv-icon>
+        </template>
+      </uv-tabbar-item>
+      <uv-tabbar-item text="我的">
+        <template v-slot:active-icon>
+          <uv-icon name="account" color="#4893FF" size="48rpx"></uv-icon>
+        </template>
+        <template v-slot:inactive-icon>
+          <uv-icon name="account" color="#999999" size="48rpx"></uv-icon>
+        </template>
+      </uv-tabbar-item>
+    </uv-tabbar>
   </view>
 </template>
 
@@ -17,42 +34,47 @@ export default {
   name: 'LawyerTabbar',
   data() {
     return {
-      currentPath: '',
-      tabbarList: [
-        {
-          pagePath: '/pages/lawyer/index/dashboard/index',
-          text: '首页',
-          iconPath: '/static/tabbar/lawyer-home.png',
-          selectedIconPath: '/static/tabbar/lawyer-home-active.png'
-        },
-        {
-          pagePath: '/pages/lawyer/index/consultation-info/index',
-          text: '消息',
-          iconPath: '/static/tabbar/cases.png',
-          selectedIconPath: '/static/tabbar/cases-active.png'
-        },
-        {
-          pagePath: '/pages/lawyer/index/profile/index',
-          text: '我的',
-          iconPath: '/static/tabbar/consultation.png',
-          selectedIconPath: '/static/tabbar/consultation-active.png'
-        }
-      ]
+      current: 0
     }
   },
   created() {
-    // 获取当前页面路径
-    const pages = getCurrentPages();
-    const currentPage = pages[pages.length - 1];
-    this.currentPath = '/' + currentPage.route;
+    // 根据当前路由设置 current 值
+    const routes = [
+      '/pages/lawyer/index/dashboard/index',
+      '/pages/lawyer/index/consultation-message/index', 
+      '/pages/lawyer/index/profile/index'
+    ]
+    
+    // 获取当前页面完整路径
+    const pages = getCurrentPages()
+    const currentPage = pages[pages.length - 1]
+    const currentRoute = '/' + currentPage.route
+    
+    console.log('当前路由:', currentRoute)
+    console.log('路由数组:', routes)
+    
+    // 使用精确匹配
+    this.current = routes.findIndex(route => route === currentRoute)
+    console.log('匹配结果索引:', this.current)
+    
+    if (this.current === -1) {
+      this.current = 0 // 默认选中首页
+      console.log('未找到匹配路由，默认选中首页')
+    }
   },
   methods: {
-    switchTab(path) {
-      if (this.currentPath === path) return;
-      uni.navigateTo({
-        url: path
-      });
-      this.currentPath = path;
+    onChange(index) {
+      this.current = index
+      console.log(index);
+      
+      const routes = [
+        '/pages/lawyer/index/dashboard/index',
+        '/pages/lawyer/index/consultation-message/index',
+        '/pages/lawyer/index/profile/index'
+      ]
+      uni.reLaunch({
+        url: routes[index]
+      })
     }
   }
 }
@@ -60,36 +82,6 @@ export default {
 
 <style scoped>
 .custom-tabbar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100rpx;
-  background-color: #FFFFFF;
-  display: flex;
-  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
-}
-
-.tabbar-item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.tabbar-icon {
-  width: 48rpx;
-  height: 48rpx;
-  margin-bottom: 6rpx;
-}
-
-.tabbar-text {
-  font-size: 24rpx;
-  color: #999999;
-}
-
-.active-text {
-  color: #4893FF;
+  width: 100%;
 }
 </style>
