@@ -6,7 +6,7 @@
 		<!-- 导航栏 -->
 		<view class="nav-bar">
 			<view class="nav-back" @click="goBack">
-				<text class="back-icon">‹</text>
+				<image class="back-icon" src="http://localhost:3000/static/icons/back.png" mode="aspectFit"></image>
 				<text class="back-text">返回</text>
 			</view>
 		</view>
@@ -20,13 +20,13 @@
 		>
 			<!-- 邀请码信息卡片 -->
 			<view class="invitation-card">
-				<text class="card-title">我的邀请码</text>
 				<view class="invitation-code-row">
+					<text class="card-title">我的邀请码</text>
 					<view class="code-box">
 						<text class="code-text">{{ invitationCode }}</text>
 					</view>
 					<view class="copy-icon" @click="copyInvitationCode">
-						<text class="copy-symbol">📋</text>
+						<image class="copy-symbol" src="http://localhost:3000/static/icons/copy.png" mode="aspectFit"></image>
 					</view>
 				</view>
 				<view class="stats-row">
@@ -38,7 +38,7 @@
 			<!-- 邀请海报入口 -->
 			<view class="poster-entry" @click="goToPoster" hover-class="poster-entry-hover">
 				<text class="poster-text">邀请海报</text>
-				<text class="arrow-icon">›</text>
+				<image class="arrow-icon" src="http://localhost:3000/static/icons/back.png" mode="aspectFit"></image>
 			</view>
 			
 			<!-- 用户列表卡片 -->
@@ -228,7 +228,7 @@ export default {
 .invitation-page {
 	width: 100%;
 	height: 100vh;
-	background: linear-gradient(180deg, #E0E8FF 0%, #F0F8FF 100%);
+	background: url('http://localhost:3000/static/bg10.png') no-repeat center center / cover;
 	position: relative;
 }
 
@@ -253,10 +253,9 @@ export default {
 }
 
 .back-icon {
-	font-size: 36rpx;
-	color: #4A90E2;
+	width: 40rpx;
+	height: 40rpx;
 	margin-right: 8rpx;
-	font-weight: bold;
 }
 
 .back-text {
@@ -283,8 +282,9 @@ export default {
 	display: block;
 	font-size: 32rpx;
 	color: #333333;
-	margin-bottom: 30rpx;
+	margin-right: 30rpx;
 	font-weight: 500;
+	flex-shrink: 0;
 }
 
 .invitation-code-row {
@@ -296,7 +296,7 @@ export default {
 .code-box {
 	background: #E0E0E0;
 	border-radius: 12rpx;
-	padding: 20rpx 30rpx;
+	padding: 10rpx 30rpx;
 	margin-right: 20rpx;
 }
 
@@ -313,8 +313,8 @@ export default {
 }
 
 .copy-symbol {
-	font-size: 32rpx;
-	color: #666666;
+	width: 32rpx;
+	height: 32rpx;
 }
 
 .stats-row {
@@ -335,7 +335,7 @@ export default {
 
 /* 邀请海报入口 */
 .poster-entry {
-	background: #E8EAF6;
+	background: #dce6ff;
 	border-radius: 24rpx;
 	padding: 30rpx 40rpx;
 	margin-bottom: 30rpx;
@@ -353,13 +353,13 @@ export default {
 .poster-text {
 	font-size: 32rpx;
 	color: #303F9F;
-	font-weight: 500;
+	font-weight: bold;
 }
 
 .arrow-icon {
-	font-size: 32rpx;
-	color: #5C6BC0;
-	font-weight: bold;
+	width: 40rpx;
+	height: 40rpx;
+	transform: rotate(180deg);
 }
 
 /* 用户列表卡片 */
@@ -409,9 +409,10 @@ export default {
 .user-level-tag {
 	background: #E3F2FD;
 	border-radius: 8rpx;
-	padding: 8rpx 16rpx;
+	padding: 0rpx 12rpx;
 	margin-bottom: 12rpx;
-	align-self: flex-start;
+	display: inline-block;
+	width: fit-content;
 }
 
 .level-1 {
@@ -419,7 +420,7 @@ export default {
 }
 
 .level-2 {
-	background: #EDE7F6;
+	background: #E3F2FD;
 }
 
 .level-text {
@@ -428,7 +429,7 @@ export default {
 }
 
 .level-2 .level-text {
-	color: #7E57C2;
+	color: #42A5F5;
 }
 
 .user-name {
@@ -442,4 +443,4 @@ export default {
 	color: #9E9E9E;
 	text-align: right;
 }
-</style> 
+</style>

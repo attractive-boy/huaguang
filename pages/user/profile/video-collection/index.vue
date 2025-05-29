@@ -7,7 +7,7 @@
     <view class="nav-section">
       <!-- 返回按钮 -->
       <view class="back-button" @click="goBack">
-        <uv-icon name="arrow-left" color="#4A90E2" size="16"></uv-icon>
+        <uv-icon name="arrow-left" color="#2979FF" size="32"></uv-icon>
         <text class="back-text">返回</text>
       </view>
     </view>
@@ -149,7 +149,7 @@ export default {
 .video-collection-page {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(180deg, #B0E0E6 0%, #F0F8FF 100%);
+  background: url('http://localhost:3000/static/bg10.png') no-repeat center center / cover;
   position: relative;
 }
 
@@ -159,7 +159,7 @@ export default {
 }
 
 .nav-section {
-  padding: 15rpx 30rpx 20rpx 30rpx;
+  padding: 55rpx 30rpx 40rpx 30rpx;
   
   .back-button {
     display: flex;
@@ -187,8 +187,8 @@ export default {
 .video-card {
   background: #FFFFFF;
   border-radius: 24rpx;
-  margin-bottom: 30rpx;
-  padding: 20rpx;
+  margin-bottom: 40rpx;
+  padding: 30rpx;
   box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
@@ -201,10 +201,10 @@ export default {
 }
 
 .thumbnail-container {
-  width: 120rpx;
-  height: 90rpx;
+  width: 160rpx;
+  height: 120rpx;
   position: relative;
-  margin-right: 30rpx;
+  margin-right: 40rpx;
   flex-shrink: 0;
 }
 
@@ -247,17 +247,17 @@ export default {
 }
 
 .video-title {
-  font-size: 30rpx;
+  font-size: 34rpx;
   color: #333333;
   font-weight: 500;
-  margin-bottom: 12rpx;
+  margin-bottom: 16rpx;
   line-height: 1.4;
   font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
 }
 
 .play-count {
-  font-size: 24rpx;
+  font-size: 25rpx;
   color: #888888;
   font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
 }
-</style> 
+</style>

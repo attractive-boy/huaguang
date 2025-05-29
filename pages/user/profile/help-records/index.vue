@@ -7,7 +7,7 @@
     <view class="nav-section">
       <!-- 返回按钮 -->
       <view class="back-button" @click="goBack">
-        <uv-icon name="arrow-left" color="#2979FF" size="16"></uv-icon>
+        <uv-icon name="arrow-left" color="#2979FF" size="32"></uv-icon>
         <text class="back-text">返回</text>
       </view>
       
@@ -47,11 +47,11 @@
             <!-- 服务图标容器 -->
             <view class="service-icon-container">
               <view class="service-icon">
-                <uv-icon 
-                  :name="record.iconName" 
-                  color="#2979FF" 
-                  size="20"
-                ></uv-icon>
+                <image
+                  :src="`http://localhost:3000/static/icons/${record.iconName}.png`"
+                  mode="aspectFit"
+                  style="width: 40rpx; height: 40rpx;"
+                />
               </view>
             </view>
             
@@ -78,7 +78,7 @@ export default {
           status: 'reviewing',
           statusText: '审核中',
           date: '2025年3月18日 14:22',
-          iconName: 'credit-card'
+          iconName: 'huifu'
         },
         {
           id: 2,
@@ -87,7 +87,7 @@ export default {
           status: 'completed',
           statusText: '已完成',
           date: '2025年3月18日 14:22',
-          iconName: 'account'
+          iconName: 'legal2'
         },
         {
           id: 3,
@@ -96,7 +96,7 @@ export default {
           status: 'completed',
           statusText: '已完成',
           date: '2025年3月18日 14:22',
-          iconName: 'heart'
+          iconName: 'xinli'
         }
       ]
     }
@@ -134,7 +134,7 @@ export default {
 .help-records-page {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(to bottom, #F0F8FF 0%, #E0F0FF 100%);
+  background: url('http://localhost:3000/static/bg10.png') no-repeat center center / cover;
 }
 
 .status-bar {
@@ -143,7 +143,7 @@ export default {
 }
 
 .nav-section {
-  padding: 15rpx 40rpx 20rpx 40rpx;
+  padding: 75rpx 40rpx 20rpx 40rpx;
   
   .back-button {
     display: flex;
@@ -160,7 +160,7 @@ export default {
   
   .page-title {
     font-size: 44rpx;
-    font-weight: bold;
+    // font-weight: bold;
     color: #333333;
     font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
     margin-left: 10rpx;

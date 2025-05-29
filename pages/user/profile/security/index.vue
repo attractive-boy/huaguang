@@ -6,7 +6,7 @@
 		<!-- 导航栏 -->
 		<view class="nav-bar">
 			<view class="nav-back" @click="goBack">
-				<text class="nav-back-icon">‹</text>
+				<uv-icon name="http://localhost:3000/static/icons/back.png" color="#2979FF" size="32"></uv-icon>
 				<text class="nav-back-text">返回</text>
 			</view>
 		</view>
@@ -130,7 +130,7 @@ export default {
 .security-page {
 	width: 100%;
 	height: 100vh;
-	background: linear-gradient(135deg, #F0F8FF 0%, #E6F3FF 50%, #D6EFFF 100%);
+	background: url('http://localhost:3000/static/bg10.png') no-repeat center center / cover;
 }
 
 .status-bar {

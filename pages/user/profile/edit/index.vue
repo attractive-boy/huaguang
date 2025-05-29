@@ -6,7 +6,7 @@
 		<!-- 导航栏 -->
 		<view class="nav-bar">
 			<view class="nav-back" @click="goBack">
-				<text class="nav-back-icon">‹</text>
+				<uv-icon size="40" name="http://localhost:3000/static/icons/back.png"></uv-icon>
 				<text class="nav-back-text">返回</text>
 			</view>
 		</view>
@@ -73,18 +73,20 @@
 				<view class="form-section">
 					<view class="form-row">
 						<text class="form-label">联系方式</text>
+					</view>
+					<view class="form-placeholder-container">
 						<text class="form-placeholder">微信号/邮箱号/手机号</text>
 					</view>
 				</view>
 			</view>
-		</scroll-view>
-		
-		<!-- 保存按钮 -->
-		<view class="save-button-container">
-			<view class="save-button" @click="saveProfile">
-				<text class="save-button-text">点击保存</text>
+			
+			<!-- 保存按钮 -->
+			<view class="save-button-container">
+				<view class="save-button" @click="saveProfile">
+					<text class="save-button-text">点击保存</text>
+				</view>
 			</view>
-		</view>
+		</scroll-view>
 	</view>
 </template>
 
@@ -108,8 +110,8 @@ export default {
 		initPage() {
 			const systemInfo = uni.getSystemInfoSync();
 			this.statusBarHeight = systemInfo.statusBarHeight || 0;
-			// 计算滚动区域高度：屏幕高度 - 状态栏 - 导航栏 - 保存按钮区域
-			this.scrollHeight = systemInfo.windowHeight - this.statusBarHeight - 60 - 80;
+			// 计算滚动区域高度：屏幕高度 - 状态栏 - 导航栏
+			this.scrollHeight = systemInfo.windowHeight - this.statusBarHeight - 60;
 		},
 		
 		// 返回上一页
@@ -151,7 +153,8 @@ export default {
 .profile-edit-page {
 	width: 100%;
 	height: 100vh;
-	background: linear-gradient(135deg, #F0F4F8 0%, #DCE9F9 100%);
+	background: url('http://localhost:3000/static/bg10.png') no-repeat center center fixed;
+	background-size: cover;
 }
 
 .status-bar {
@@ -195,7 +198,7 @@ export default {
 	background: #FFFFFF;
 	border-radius: 40rpx 40rpx 20rpx 20rpx;
 	padding: 40rpx 48rpx;
-	margin-bottom: 40rpx;
+	margin-bottom: 60rpx;
 	box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.06);
 }
 
@@ -281,9 +284,11 @@ export default {
 	font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
 }
 
+.form-placeholder-container {
+	margin-top: 12rpx;
+}
+
 .form-placeholder {
-	flex: 1;
-	margin-left: 40rpx;
 	font-size: 30rpx;
 	color: #AAAAAA;
 	font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
@@ -337,10 +342,8 @@ export default {
 }
 
 .save-button-container {
-	position: fixed;
-	bottom: 40rpx;
-	left: 30rpx;
-	right: 30rpx;
+	padding: 0 30rpx;
+	margin-bottom: 40rpx;
 	display: flex;
 	justify-content: center;
 }
@@ -348,7 +351,7 @@ export default {
 .save-button {
 	width: 100%;
 	height: 88rpx;
-	background-color: #4A90E2;
+	background-color: #5291ff;
 	border-radius: 44rpx;
 	display: flex;
 	align-items: center;
@@ -363,4 +366,4 @@ export default {
 	font-weight: 500;
 	font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
 }
-</style> 
+</style>

@@ -2,27 +2,22 @@
 	<view class="about-page">
 		<!-- 自定义状态栏 -->
 		<view class="status-bar" :style="{ height: statusBarHeight + 'px' }"></view>
-		
+
 		<!-- 导航栏 -->
 		<view class="nav-bar">
-			<view class="back-button" @click="goBack" hover-class="back-button-hover">
-				<text class="back-icon">‹</text>
+			<view class="back-button" @click="goBack">
+				<uv-icon name="arrow-left" color="#2979FF" size="32"></uv-icon>
 				<text class="back-text">返回</text>
 			</view>
 		</view>
-		
+
 		<!-- 滚动容器 -->
-		<scroll-view 
-			class="scroll-container" 
-			scroll-y 
-			:style="{ height: scrollHeight + 'px' }"
-			enable-flex
-		>
+		<scroll-view class="scroll-container" scroll-y :style="{ height: scrollHeight + 'px' }" enable-flex>
 			<!-- 平台描述卡片 -->
 			<view class="description-card">
 				<text class="description-text">本平台致力于为用户提供法律咨询、心理支持、职业帮扶等一体化服务，构建一个温暖、有保障的互助网络。</text>
 			</view>
-			
+
 			<!-- 版本信息与协议卡片 -->
 			<view class="info-card">
 				<view class="info-item">
@@ -43,7 +38,7 @@
 					<text class="arrow-icon">›</text>
 				</view>
 			</view>
-			
+
 			<!-- 联系我们卡片 -->
 			<view class="contact-card">
 				<text class="card-title">联系我们</text>
@@ -54,7 +49,7 @@
 					<text class="contact-text">客服电话: 400-000-0000 (工作时间: 9:00-18:00)</text>
 				</view>
 			</view>
-			
+
 			<!-- 公司信息卡片 -->
 			<view class="company-card">
 				<text class="card-title">公司信息</text>
@@ -65,7 +60,7 @@
 					<text class="company-text">公司地址: 北京市海淀区XX路XX号</text>
 				</view>
 			</view>
-			
+
 			<!-- 页脚版权信息 -->
 			<view class="footer">
 				<text class="copyright-text">© 2024 XX平台版权所有 保留所有权利。</text>
@@ -93,14 +88,14 @@ export default {
 			// 计算滚动容器高度：屏幕高度 - 状态栏高度 - 导航栏高度(约44px)
 			this.scrollHeight = systemInfo.windowHeight - this.statusBarHeight - 44;
 		},
-		
+
 		// 返回上一页
 		goBack() {
 			uni.navigateBack({
 				delta: 1
 			});
 		},
-		
+
 		// 打开用户协议
 		openUserAgreement() {
 			console.log('打开用户协议');
@@ -110,7 +105,7 @@ export default {
 				icon: 'none'
 			});
 		},
-		
+
 		// 打开隐私协议
 		openPrivacyPolicy() {
 			console.log('打开隐私协议');
@@ -128,7 +123,7 @@ export default {
 .about-page {
 	width: 100%;
 	height: 100vh;
-	background: linear-gradient(180deg, #D6EEFF 0%, #EFF7FF 100%);
+	background: url('http://localhost:3000/static/bg10.png') no-repeat center center / cover;
 }
 
 .status-bar {
@@ -171,7 +166,7 @@ export default {
 
 .scroll-container {
 	width: 100%;
-	padding: 0 5%;
+	padding: 52rpx 5% 12rpx 5%;
 	box-sizing: border-box;
 }
 
@@ -246,7 +241,6 @@ export default {
 	display: block;
 	font-size: 16px;
 	color: #333333;
-	font-weight: 600;
 	margin-bottom: 8px;
 }
 
@@ -299,4 +293,4 @@ export default {
 	color: #888888;
 	text-align: center;
 }
-</style> 
+</style>

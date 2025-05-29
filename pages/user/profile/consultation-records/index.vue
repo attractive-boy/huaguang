@@ -6,7 +6,7 @@
     <!-- 导航栏 -->
     <view class="navbar">
       <view class="nav-left" @click="goBack">
-        <uv-icon name="arrow-left" color="#007AFF" size="16"></uv-icon>
+        <uv-icon name="arrow-left" color="#007AFF" size="32"></uv-icon>
         <text class="back-text">返回</text>
       </view>
     </view>
@@ -147,7 +147,7 @@ export default {
 <style lang="scss" scoped>
 .consultation-records-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #E0F2FE 0%, #F0F8FF 100%);
+  background: url('http://localhost:3000/static/bg10.png') no-repeat center center / cover;
   position: relative;
 }
 
@@ -162,7 +162,7 @@ export default {
   height: 44px;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding: 32rpx 0rpx 0rpx 32rpx;
   background: transparent;
 }
 
@@ -186,7 +186,7 @@ export default {
 
 /* 记录列表样式 */
 .records-list {
-  padding: 0 16px;
+  padding: 32rpx 32rpx 32rpx 32rpx;
 }
 
 /* 记录卡片样式 */
@@ -198,32 +198,32 @@ export default {
 }
 
 .card-content {
-  padding: 16px;
+  padding: 12px;
 }
 
 /* 文本样式 */
 .record-title {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   color: #333333;
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .company-name {
-  font-size: 15px;
+  font-size: 13px;
   color: #555555;
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .timestamp {
-  font-size: 13px;
+  font-size: 12px;
   color: #888888;
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -231,13 +231,13 @@ export default {
 .button-row {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
 }
 
 .action-button {
   flex: 1;
-  height: 40px;
-  border-radius: 8px;
+  height: 32px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -253,7 +253,7 @@ export default {
 }
 
 .button-text {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -271,4 +271,4 @@ export default {
   opacity: 0.8;
   transform: scale(0.98);
 }
-</style> 
+</style>
