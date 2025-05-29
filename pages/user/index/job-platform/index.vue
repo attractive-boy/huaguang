@@ -1,58 +1,41 @@
 <template>
   <view class="job-platform-page">
-    <!-- 自定义导航栏 -->
-    <view class="custom-navbar">
-      <view class="navbar-content">
-        <view class="navbar-left" @click="goBack">
-          <uv-icon name="arrow-left" size="20" color="#333"></uv-icon>
-        </view>
-      </view>
-    </view>
+   
 
     <!-- 主内容区域 -->
     <view class="main-content">
       <!-- Banner区域 -->
       <view class="banner-section">
-        <view class="banner-content">
-          <view class="banner-text">
-            <text class="banner-title">为你的生活保驾护航</text>
-            <text class="banner-subtitle">找工作，招人才</text>
-          </view>
-          <view class="banner-image">
-            <!-- Banner背景图片区域 -->
-            <view class="handshake-illustration">
-              <!-- 使用CSS绘制简单的握手插画效果 -->
-              <view class="person-left"></view>
-              <view class="person-right"></view>
-              <view class="handshake"></view>
-            </view>
-          </view>
-        </view>
+        <image class="banner-full-img" src="http://localhost:3000/static/jobs_banner.png" mode="aspectFill"></image>
       </view>
 
       <!-- 推荐企业模块 -->
       <view class="section-card">
         <view class="section-header" @click="handleMoreCompanies">
           <text class="section-title">推荐企业</text>
-          <uv-icon name="arrow-right" size="16" color="#87CEFA"></uv-icon>
+          <uv-icon name="arrow-right" size="24" color="#87CEFA"></uv-icon>
         </view>
-        <uv-scroll-list :indicator="false">
+        <view class="companies-container">
           <view v-for="(company, index) in companies" :key="company.id" class="company-card"
             @click="handleCompanyClick(company)">
-            <view class="company-logo">
-              <!-- 圆形企业logo占位符 -->
+            <view class="company-header">
+              <view class="company-logo">
+                <!-- 圆形企业logo占位符 -->
+              </view>
+              <view class="company-info">
+                <text class="company-name">{{ company.name }}</text>
+              </view>
             </view>
-            <text class="company-name">{{ company.name }}</text>
             <text class="company-jobs">招聘职位 {{ company.jobCount }}</text>
           </view>
-        </uv-scroll-list>
+        </view>
       </view>
 
       <!-- 推荐职业模块 -->
       <view class="section-card">
         <view class="section-header" @click="handleMoreJobs">
           <text class="section-title">推荐职业</text>
-          <uv-icon name="arrow-right" size="16" color="#87CEFA"></uv-icon>
+          <uv-icon name="arrow-right" size="24" color="#87CEFA"></uv-icon>
         </view>
         <view class="jobs-list">
           <view v-for="(job, index) in jobs" :key="job.id" class="job-item-wrapper">
@@ -113,6 +96,7 @@ export default {
           name: 'ZZ公司',
           jobCount: 12
         }
+        
       ],
       // 推荐职业数据
       jobs: [
@@ -260,7 +244,7 @@ export default {
 <style lang="scss" scoped>
 .job-platform-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #B0E0E6 0%, #F0F8FF 100%);
+  background: url('http://localhost:3000/static/bg3.png')
 }
 
 /* 自定义导航栏 */
@@ -301,92 +285,20 @@ export default {
 .banner-section {
   height: 300rpx;
   border-radius: 16rpx;
-  background: linear-gradient(135deg, #4A90E2 0%, #7BB3F0 50%, #A8D0F0 100%);
   margin-bottom: 30rpx;
   position: relative;
   overflow: hidden;
 
-  .banner-content {
+  .banner-full-img {
+    width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 30rpx;
-
-    .banner-text {
-      flex: 1;
-
-      .banner-title {
-        display: block;
-        font-size: 44rpx;
-        font-weight: bold;
-        color: #FFFFFF;
-        line-height: 1.2;
-        margin-bottom: 8rpx;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      .banner-subtitle {
-        display: block;
-        font-size: 40rpx;
-        font-weight: bold;
-        color: #FFFFFF;
-        line-height: 1.2;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-    }
-
-    .banner-image {
-      width: 200rpx;
-      height: 200rpx;
-      position: relative;
-
-      .handshake-illustration {
-        width: 100%;
-        height: 100%;
-        position: relative;
-
-        .person-left {
-          position: absolute;
-          left: 20rpx;
-          top: 50rpx;
-          width: 60rpx;
-          height: 80rpx;
-          background: #FFFFFF;
-          border-radius: 30rpx 30rpx 10rpx 10rpx;
-          opacity: 0.9;
-        }
-
-        .person-right {
-          position: absolute;
-          right: 20rpx;
-          top: 50rpx;
-          width: 60rpx;
-          height: 80rpx;
-          background: #FFFFFF;
-          border-radius: 30rpx 30rpx 10rpx 10rpx;
-          opacity: 0.9;
-        }
-
-        .handshake {
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          width: 40rpx;
-          height: 40rpx;
-          background: #FFD700;
-          border-radius: 50%;
-          opacity: 0.8;
-        }
-      }
-    }
+    border-radius: 16rpx;
   }
 }
 
 /* 模块卡片 */
 .section-card {
-  background: #FFFFFF;
+  background: #f7f9ff;
   border-radius: 16rpx;
   padding: 30rpx;
   margin-bottom: 30rpx;
@@ -421,42 +333,70 @@ export default {
     height: 500rpx;
 
     .jobs-list {
-      height: 400rpx;
+      height: 430rpx;
       overflow-y: auto;
       overflow-x: hidden;
     }
   }
 }
 
+/* 企业容器 */
+.companies-container {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 10rpx;
+}
+
 /* 企业卡片 */
 .company-card {
   width: 200rpx;
+  min-width: 200rpx;
+  flex-shrink: 0;
   background: #F8FBFF;
   border-radius: 16rpx;
   padding: 20rpx;
   margin-right: 20rpx;
   display: flex;
   flex-direction: column;
-  align-items: center;
+
+  .company-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15rpx;
+  }
 
   .company-logo {
     width: 70rpx;
     height: 70rpx;
     background: #D0E8FF;
     border-radius: 50%;
-    margin-bottom: 15rpx;
+    margin-right: 15rpx;
+    flex-shrink: 0;
   }
 
-  .company-name {
-    font-size: 26rpx;
-    color: #555555;
-    margin-bottom: 8rpx;
-    text-align: center;
+  .company-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .company-name {
+      font-size: 26rpx;
+      color: #555555;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   .company-jobs {
     font-size: 22rpx;
     color: #888888;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     text-align: center;
   }
 }
@@ -465,6 +405,11 @@ export default {
 .jobs-list {
   .job-item-wrapper {
     position: relative;
+    background: #ffffff;
+    border-radius: 12rpx;
+    box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+    margin: 16rpx 0;
+    padding: 0 20rpx;
 
     .job-item {
       display: flex;
@@ -500,16 +445,19 @@ export default {
           .job-info {
             font-size: 24rpx;
             color: #888888;
-            margin-right: 20rpx;
+            margin-right: 60rpx; /* 增加间距从20rpx到40rpx */
           }
         }
       }
 
       .job-action {
         .apply-btn {
-          background: #1E90FF;
-          border-radius: 8rpx;
-          padding: 12rpx 24rpx;
+          background: #47b2fb;
+          border-radius: 12rpx;
+          padding: 6rpx 24rpx;
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
           .apply-text {
             font-size: 26rpx;

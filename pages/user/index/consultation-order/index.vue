@@ -41,19 +41,7 @@
           </view>
         </view>
         
-        <view 
-          class="type-option" 
-          :class="{ 'option-selected': selectedConsultationType === 'voice' }"
-          @click="selectConsultationType('voice')"
-        >
-          <view class="option-icon voice-icon">
-            <image src="http://localhost:3000/static/icons/call_big.png" class="icon-image"></image>
-          </view>
-          <view class="option-text">
-            <text class="option-title">语言咨询</text>
-            <text class="option-desc">网络语言或视频形式咨询</text>
-          </view>
-        </view>
+
       </view>
     </view>
     
@@ -81,7 +69,7 @@ export default {
   name: 'ConsultationOrder',
   data() {
     return {
-      selectedConsultationType: 'voice', // 默认选中语言咨询
+      selectedConsultationType: 'text', // 默认选中图文咨询
       lawyerInfo: {
         name: '李律师',
         specialty: '劳动法专长'
@@ -223,25 +211,7 @@ export default {
   height: 72rpx;
 }
 
-/* 语言咨询图标 */
-.phone-icon {
-  width: 32rpx;
-  height: 32rpx;
-  background: #FFFFFF;
-  border-radius: 6rpx 6rpx 6rpx 16rpx;
-  position: relative;
-}
 
-.phone-icon::before {
-  content: '';
-  position: absolute;
-  top: 6rpx;
-  left: 6rpx;
-  width: 20rpx;
-  height: 20rpx;
-  border: 2rpx solid #87B8FF;
-  border-radius: 2rpx;
-}
 
 .option-text {
   flex: 1;

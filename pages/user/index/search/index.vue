@@ -15,6 +15,7 @@
         :placeholderColor="'#BDBDBD'"
         :height="36"
         :showAction="true"
+        :searchIconSize="36"
         :animation="true"
         @search="onSearch"
         @custom="onCancel"
@@ -103,7 +104,8 @@ export default {
 <style lang="scss" scoped>
 .search-container {
   min-height: 100vh;
-  background: linear-gradient(180deg, #DCEBFF 0%, #F0F8FF 100%);
+  background: url('http://localhost:3000/static/bg9.png') no-repeat center center fixed;
+  background-size: cover;
 }
 
 .status-bar {
@@ -111,7 +113,7 @@ export default {
 }
 
 .search-section {
-  padding: 20rpx 0;
+  padding: 80rpx 0 0 0 ;
 }
 
 .hot-search-section {
@@ -133,10 +135,10 @@ export default {
 }
 
 .hot-tag {
-  background-color: #E8F0FE;
-  color: #6A9EFF;
+  background-color: #D2E6FF;
+  color: #162F73;
   font-size: 28rpx;
-  padding: 12rpx 24rpx;
+  padding: 1rpx 24rpx;
   border-radius: 50rpx;
   white-space: nowrap;
 }

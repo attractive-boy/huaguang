@@ -65,7 +65,7 @@
               class="benefit-item"
             >
               <view class="benefit-icon">
-                <uv-icon :name="benefit.icon" size="32" color="#1890FF"></uv-icon>
+                <image :src="`http://localhost:3000/static/icons/${benefit.icon}.png`" style="width: 51rpx; height: 48rpx;"></image>
               </view>
               <text class="benefit-text">{{ benefit.text }}</text>
             </view>
@@ -114,7 +114,7 @@
 export default {
   data() {
     return {
-      navbarBgColor: '#F0F7FF',
+      navbarBgColor: 'transparent',
       navbarTextColor: '#333333',
       quickApplyButtonStyle: {
         backgroundColor: '#40A9FF',
@@ -139,9 +139,9 @@ export default {
           ]
         },
         benefits: [
-          { icon: 'home', text: '五险一金' },
-          { icon: 'clock', text: '弹性工作' },
-          { icon: 'gift', text: '年终奖金' }
+          { icon: 'wuxian', text: '五险一金' },
+          { icon: 'tanxing', text: '弹性工作' },
+          { icon: 'nian', text: '年终奖金' }
         ],
         jobs: [
           {
@@ -208,12 +208,13 @@ export default {
 <style lang="scss" scoped>
 .company-detail-container {
   min-height: 100vh;
-  background-color: #F0F7FF;
+  background: url('http://localhost:3000/static/bg9.png') no-repeat center center / cover;
+  
 }
 
 .scroll-container {
   height: calc(100vh - 44px);
-  background-color: #F0F7FF;
+  // background-color: #F0F7FF;
 }
 
 .page-content {
@@ -225,7 +226,7 @@ export default {
   display: flex;
   align-items: center;
   padding: 15px 20px;
-  background-color: #F0F7FF;
+  // background-color: #F0F7FF;
   
   .company-logo {
     margin-right: 15px;
@@ -257,16 +258,19 @@ export default {
         font-size: 12px;
         color: #666666;
         margin-right: 10px;
+        background-color: #fbffff;
       }
       
       .scale-tag {
-        background-color: #F0F0F0;
+        background-color: #fbffff;
         border-radius: 3px;
-        padding: 2px 8px;
+        display: inline-block; // 使用inline-block让元素宽高包裹内容
         
         .scale-text {
           font-size: 12px;
           color: #666666;
+          padding: 2px 8px; // 通过padding控制文字周围的间距
+          display: block; // 确保文字能够正确撑开容器
         }
       }
     }
@@ -275,7 +279,7 @@ export default {
 
 /* 白色卡片容器样式 */
 .content-card {
-  background-color: #FFFFFF;
+  // background-color: #FFFFFF;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 0 20px;
@@ -284,8 +288,8 @@ export default {
 
 /* 公司简介区块样式 */
 .company-intro {
-  padding-top: 20px;
-  padding-bottom: 25px;
+  padding-top: 20rpx;
+  padding-bottom: 25rpx;
   
   .section-title {
     font-size: 16px;
@@ -335,7 +339,7 @@ export default {
   display: flex;
   justify-content: space-around;
   padding: 20px 0;
-  border-bottom: 1px solid #F0F0F0;
+  // border-bottom: 1px solid #F0F0F0;
   
   .benefit-item {
     display: flex;
@@ -357,7 +361,7 @@ export default {
 
 /* 招聘职位列表区块样式 */
 .jobs-section {
-  padding-top: 25px;
+  padding-top: 5px;
   
   .section-title {
     font-size: 16px;
@@ -372,11 +376,14 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 15px 0;
-      border-bottom: 1px solid #F0F0F0;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      background-color: #FFFFFF;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       
       &.no-border {
-        border-bottom: none;
+        // 移除no-border类的样式，因为不再需要分割线
       }
       
       .job-info {
@@ -403,10 +410,10 @@ export default {
         .job-details-row {
           display: flex;
           align-items: center;
-          
+          gap: 25rpx;
           .job-salary {
             font-size: 13px;
-            color: #FA541C;
+            // color: #FA541C;
             margin-right: 15px;
           }
           
@@ -429,4 +436,4 @@ export default {
     }
   }
 }
-</style> 
+</style>

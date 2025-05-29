@@ -7,19 +7,20 @@
     <view class="nav-bar">
       <!-- 返回按钮 -->
       <view class="nav-back" @click="goBack">
-        <uv-icon name="arrow-left" size="18" color="#333333"></uv-icon>
+        <uv-icon name="arrow-left" size="32" color="#333333"></uv-icon>
         <text class="back-text">返回</text>
       </view>
       
-      <!-- 排序选项 - 位于返回按钮下方偏右 -->
-      <view class="sort-option" @click="showSortMenu">
-        <text class="sort-text">{{ currentSort.label }}</text>
-        <view class="sort-arrow">▼</view>
-      </view>
-      
-      <!-- 搜索图标 - 位于导航栏右侧 -->
-      <view class="search-icon" @click="handleSearch">
-        <uv-icon name="search" size="22" color="#87CEFA"></uv-icon>
+      <!-- 排序选项和搜索图标 - 位于同一行 -->
+      <view class="nav-controls">
+        <view class="sort-option" @click="showSortMenu">
+          <text class="sort-text">{{ currentSort.label }}</text>
+          <view class="sort-arrow">▼</view>
+        </view>
+        
+        <view class="search-icon" @click="handleSearch">
+          <uv-icon name="search" size="32" color="#46D7FF"></uv-icon>
+        </view>
       </view>
     </view>
     
@@ -315,7 +316,10 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to bottom, #E0F2FF 0%, #F5FAFF 100%);
+  background-image: url('http://localhost:3000/static/bg9.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
 
@@ -329,14 +333,14 @@ export default {
 // 重构后的导航栏
 .nav-bar {
   height: 80px;
-  background-color: #F0F8FF;
+  // background-color: rgba(240, 248, 255, 0.9);
   position: relative;
   padding: 0 16px;
   flex-shrink: 0;
   
   .nav-back {
     position: absolute;
-    top: 8px;
+    top: 20px;
     left: 16px;
     display: flex;
     align-items: center;
@@ -349,43 +353,49 @@ export default {
     }
   }
   
-  .sort-option {
+  .nav-controls {
     position: absolute;
-    top: 30px;
-    left: 50px;
+    top: 50px;
+    left: 10px;
+    right: 16px;
     display: flex;
     align-items: center;
-    gap: 4px;
-    padding: 5px 10px;
-    min-width: 80px;
-    min-height: 30px;
-    cursor: pointer;
+    justify-content: space-between;
     
-    .sort-text {
-      font-size: 13px;
-      color: #666666;
-      font-weight: 400;
+    .sort-option {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 10px;
+      min-width: 80px;
+      min-height: 30px;
+      cursor: pointer;
+      
+      .sort-text {
+        font-size: 13px;
+        color: #666666;
+        font-weight: 400;
+      }
+      
+      .sort-arrow {
+        font-size: 10px;
+        color: #666666;
+        transform: scale(0.8);
+      }
     }
     
-    .sort-arrow {
-      font-size: 10px;
-      color: #666666;
-      transform: scale(0.8);
+    .search-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-  }
-  
-  .search-icon {
-    position: absolute;
-    top: 50%;
-    right: 16px;
-    transform: translateY(-50%);
   }
 }
 
 // 简化后的筛选栏
 .filter-bar {
   height: 50px;
-  background-color: #F0F8FF;
+  // background-color: rgba(240, 248, 255, 0.9);
   padding: 0 16px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   flex-shrink: 0;
@@ -403,12 +413,12 @@ export default {
       padding-right: 20px;
       
       .filter-tag {
-        height: 30px;
+        height: 40rpx; 
         padding: 0 12px;
         border-radius: 6px;
         display: flex;
         align-items: center;
-        background-color: #EAF4FF;
+        background-color: #e2f6ff;
         white-space: nowrap;
         flex-shrink: 0;
         
@@ -571,4 +581,4 @@ export default {
     }
   }
 }
-</style> 
+</style>

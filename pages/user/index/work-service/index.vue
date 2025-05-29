@@ -1,42 +1,17 @@
 <template>
   <view class="work-service-page">
-    <!-- 自定义导航栏 -->
-    <view class="custom-navbar">
-      <view class="navbar-content">
-        <view class="navbar-left" @click="goBack">
-          <uv-icon name="arrow-left" size="20" color="#333"></uv-icon>
-        </view>
-        <!-- <view class="navbar-title">工作服务</view> -->
-        <!-- <view class="navbar-right"></view> -->
-      </view>
-    </view>
+
 
     <!-- 主内容区域 -->
     <view class="main-content">
       <!-- 我要找工作卡片 -->
       <view class="service-card job-search-card" @click="handleJobSearch">
-        <view class="card-content">
-          <view class="card-text">
-            <view class="card-title">我要</view>
-            <view class="card-subtitle">找工作</view>
-          </view>
-          <view class="card-image">
-            <image src="/static/images/find_jobs.png" mode="aspectFit"></image>
-          </view>
-        </view>
+        <image src="http://localhost:3000/static/find_jobs.png" mode="aspectFit" class="card-replacement-image"></image>
       </view>
 
       <!-- 我要招人卡片 -->
       <view class="service-card recruitment-card" @click="handleRecruitment">
-        <view class="card-content">
-          <view class="card-text">
-            <view class="card-title">我要</view>
-            <view class="card-subtitle">招人</view>
-          </view>
-          <view class="card-image">
-            <image src="/static/images/find_peop.png" mode="aspectFit"></image>
-          </view>
-        </view>
+        <image src="http://localhost:3000/static/find_peop.png" mode="aspectFit" class="card-replacement-image"></image>
       </view>
     </view>
 
@@ -97,7 +72,11 @@ export default {
 <style lang="scss" scoped>
 .work-service-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #E6F3FF 0%, #F0F8FF 100%);
+  background: url('http://localhost:3000/static/bg3.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /* 自定义导航栏 */
@@ -107,7 +86,6 @@ export default {
   left: 0;
   right: 0;
   z-index: 999;
-  background: rgba(255, 255, 255, 0.8);
   padding-top: var(--status-bar-height);
   
   .navbar-content {
@@ -139,9 +117,7 @@ export default {
 
 /* 主内容区域 */
 .main-content {
-  padding-top: calc(var(--status-bar-height) + 44px + 20px);
-  padding: calc(var(--status-bar-height) + 44px + 20px) 16px 20px;
-  padding-bottom: calc(100rpx + 20px); /* 为底部导航栏留出空间 */
+  padding: 200rpx 32rpx ;
   display: flex;
   flex-direction: column;
   gap: 100rpx;
@@ -151,7 +127,6 @@ export default {
 .service-card {
   background: #fff;
   border-radius: 16px;
-  padding: 24px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   
   .card-content {
@@ -191,4 +166,4 @@ export default {
 }
 
 
-</style> 
+</style>
