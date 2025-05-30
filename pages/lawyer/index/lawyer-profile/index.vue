@@ -93,30 +93,19 @@
       <view class="bottom-safe-area"></view>
     </scroll-view>
     
-    <!-- 底部导航栏 -->
-    <view class="bottom-tabbar">
-      <view class="tab-item">
-        <uv-icon name="home" size="48" color="#8E8E93"></uv-icon>
-        <text class="tab-text">首页</text>
-      </view>
-      <view class="tab-item">
-        <uv-icon name="chat" size="48" color="#8E8E93"></uv-icon>
-        <text class="tab-text">信息</text>
-      </view>
-      <view class="tab-item active">
-        <uv-icon name="account" size="48" color="#007AFF"></uv-icon>
-        <text class="tab-text active">我的</text>
-      </view>
-    </view>
-    
-    <!-- 系统导航指示器 -->
-    <view class="home-indicator"></view>
+    <!-- 律师底部导航栏 -->
+    <lawyer-tabbar></lawyer-tabbar>
   </view>
 </template>
 
 <script>
+import LawyerTabbar from '@/components/tabbar/lawyer-tabbar/lawyer-tabbar.vue'
+
 export default {
   name: 'LawyerProfile',
+  components: {
+    LawyerTabbar
+  },
   data() {
     return {
       statusBarHeight: 0,
@@ -131,8 +120,8 @@ export default {
     initPage() {
       const systemInfo = uni.getSystemInfoSync()
       this.statusBarHeight = systemInfo.statusBarHeight || 0
-      // 计算滚动区域高度：总高度 - 状态栏 - 导航栏 - 底部导航栏 - Home Indicator
-      this.scrollHeight = systemInfo.windowHeight - this.statusBarHeight - 44 - 60 - 34
+      // 计算滚动区域高度：总高度 - 状态栏 - 导航栏 - 底部导航栏
+      this.scrollHeight = systemInfo.windowHeight - this.statusBarHeight - 44 - 50
     },
     
     // 返回上一页
@@ -162,7 +151,10 @@ export default {
 .lawyer-profile-page {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(to bottom, #E0F2FF 0%, #FFFFFF 100%);
+  background-image: url('http://localhost:3000/static/bg10.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
 }
 
@@ -200,7 +192,7 @@ export default {
 // 滚动容器
 .scroll-container {
   width: 100%;
-  padding: 0 5%;
+  box-sizing: border-box;
 }
 
 // 用户信息卡片
@@ -208,7 +200,7 @@ export default {
   background-color: #FFFFFF;
   border-radius: 12px;
   padding: 20px 18px;
-  margin: 15px 0;
+  margin: 15px 5%;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
   
   .avatar-placeholder {
@@ -220,6 +212,7 @@ export default {
   }
   
   .info-list {
+    padding: 0 10rpx;
     .info-row {
       display: flex;
       justify-content: space-between;
@@ -234,13 +227,13 @@ export default {
         font-size: 14px;
         color: #666666;
         width: 30%;
-        text-align: right;
+        text-align: left;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       }
       
       .info-content {
         font-size: 14px;
-        color: #333333;
+        color: #000;
         flex: 1;
         margin-left: 12px;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -254,7 +247,7 @@ export default {
   background-color: #FFFFFF;
   border-radius: 12px;
   padding: 20px 18px;
-  margin: 15px 0;
+  margin: 15px 5%;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
   
   .detail-row {
@@ -282,7 +275,7 @@ export default {
       .detail-text {
         display: block;
         font-size: 14px;
-        color: #333333;
+        color: #000;
         line-height: 1.5;
         margin-bottom: 2px;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -297,7 +290,7 @@ export default {
 
 // 操作按钮
 .action-button {
-  width: 88%;
+  width: 60%;
   height: 44px;
   background-color: #5896FD;
   border-radius: 22px;
@@ -316,49 +309,5 @@ export default {
 // 底部安全区域
 .bottom-safe-area {
   height: 20px;
-}
-
-// 底部导航栏
-.bottom-tabbar {
-  position: fixed;
-  bottom: 34px;
-  left: 0;
-  right: 0;
-  height: 60px;
-  background-color: #F8F8F8;
-  border-top: 1px solid #E0E0E0;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  
-  .tab-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    .tab-text {
-      font-size: 10px;
-      color: #8E8E93;
-      margin-top: 3px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      
-      &.active {
-        color: #007AFF;
-      }
-    }
-  }
-}
-
-// 系统导航指示器
-.home-indicator {
-  position: fixed;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 134px;
-  height: 5px;
-  background-color: #000000;
-  border-radius: 2.5px;
 }
 </style> 

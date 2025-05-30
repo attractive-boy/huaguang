@@ -30,7 +30,7 @@
       <scroll-view 
         class="records-scroll-view" 
         scroll-y="true"
-        :style="{ height: scrollViewHeight + 'px' }"
+        :style="{ height: 770 + 'rpx' }"
         @scrolltolower="onScrollToLower"
       >
         <view 
@@ -139,7 +139,10 @@ export default {
 <style scoped>
 .container {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #F0F8FF 0%, #D6EFFF 100%);
+  background: url('http://localhost:3000/static/bg10.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 /* 自定义导航栏 */
@@ -173,7 +176,7 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 30px 0;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 .total-amount {
@@ -185,7 +188,7 @@ export default {
 }
 
 .amount-label {
-  font-size: 14px;
+  font-size: 32rpx;
   color: #666666;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
@@ -193,7 +196,7 @@ export default {
 /* 本日收入卡片 */
 .today-income-card {
   margin: 0 20px 30px;
-  background: linear-gradient(135deg, #25A0FF 0%, #1E90FF 100%);
+  background: radial-gradient(circle, #0a82ff, #42adff);
   border-radius: 20px;
   padding: 25px 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
@@ -229,7 +232,7 @@ export default {
 
 .withdraw-text {
   font-size: 16px;
-  color: #1E90FF;
+  color: #000;
   font-weight: 600;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
@@ -242,6 +245,7 @@ export default {
 
 .records-scroll-view {
   width: 100%;
+
 }
 
 .record-item {

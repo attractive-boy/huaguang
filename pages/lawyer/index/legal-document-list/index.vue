@@ -36,7 +36,10 @@
           <!-- 左侧内容 -->
           <view class="card-content">
             <text class="document-title">{{ document.title }}</text>
-            <text class="document-date">{{ document.createTime }}</text>
+            <view class="document-date">
+              <text class="date-text">{{ document.createTime }}</text>
+              <text class="date-arrow">></text>
+            </view>
           </view>
           
           <!-- 右侧箭头 -->
@@ -47,37 +50,18 @@
       </scroll-view>
     </view>
     
-    <!-- 底部标签栏 -->
-    <view class="bottom-tab-bar">
-      <view class="tab-divider"></view>
-      <view class="tab-content">
-        <!-- 首页标签 -->
-        <view class="tab-item active">
-          <uv-icon name="home" :size="20" color="#007AFF" class="tab-icon"></uv-icon>
-          <text class="tab-text active">首页</text>
-        </view>
-        
-        <!-- 信息标签 -->
-        <view class="tab-item">
-          <uv-icon name="chat" :size="20" color="#888888" class="tab-icon"></uv-icon>
-          <text class="tab-text">信息</text>
-        </view>
-        
-        <!-- 我的标签 -->
-        <view class="tab-item">
-          <uv-icon name="account" :size="20" color="#888888" class="tab-icon"></uv-icon>
-          <text class="tab-text">我的</text>
-        </view>
-      </view>
-    </view>
-    
-    <!-- 系统主屏幕指示器 -->
-    <view class="home-indicator"></view>
+    <!-- 律师标签栏 -->
+    <lawyer-tabbar></lawyer-tabbar>
   </view>
 </template>
 
 <script>
+import LawyerTabbar from '@/components/tabbar/lawyer-tabbar/lawyer-tabbar.vue'
+
 export default {
+  components: {
+    LawyerTabbar
+  },
   data() {
     return {
       scrollViewHeight: 400, // 滚动容器高度，单位px
@@ -114,10 +98,9 @@ export default {
       const systemInfo = uni.getSystemInfoSync()
       this.statusBarHeight = systemInfo.statusBarHeight || 44
       const navbarHeight = 88 // 自定义导航栏高度
-      const tabBarHeight = 100 // 底部标签栏高度
-      const homeIndicatorHeight = 20 // 主屏幕指示器高度
+      const tabBarHeight = 80 // uv-tabbar标签栏高度
       
-      this.scrollViewHeight = systemInfo.windowHeight - this.statusBarHeight - navbarHeight - tabBarHeight - homeIndicatorHeight
+      this.scrollViewHeight = systemInfo.windowHeight - this.statusBarHeight - navbarHeight - tabBarHeight
     },
     
     // 返回上一页
@@ -138,7 +121,10 @@ export default {
 .container {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(135deg, #DDEEFF 0%, #BBDDFF 100%);
+  background-image: url('http://localhost:3000/static/bg10.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
 }
@@ -177,6 +163,8 @@ export default {
       color: #333333;
       font-weight: bold;
       line-height: 1.2;
+      margin: 40rpx 0;
+      display: flex;
     }
   }
 }
@@ -190,10 +178,10 @@ export default {
     width: 100%;
     
     .document-card {
-      background: #FFFFFF;
+      background: rgb(255, 255, 255);
       border-radius: 20rpx;
-      margin-bottom: 20rpx;
-      padding: 24rpx 30rpx;
+      margin-bottom: 35rpx;
+      padding: 40rpx 40rpx;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -203,8 +191,8 @@ export default {
         flex: 1;
         
         .document-title {
-          font-size: 32rpx;
-          color: #333333;
+          font-size: 28rpx;
+          color: #000;
           font-weight: 400;
           line-height: 1.4;
           margin-bottom: 8rpx;
@@ -216,7 +204,17 @@ export default {
           color: #888888;
           font-weight: 400;
           line-height: 1.2;
-          display: block;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          
+          .date-text {
+            // 移除margin-right，由space-between自动处理间距
+          }
+          
+          .date-arrow {
+            opacity: 0.6;
+          }
         }
       }
       
@@ -229,65 +227,5 @@ export default {
       }
     }
   }
-}
-
-/* 底部标签栏 */
-.bottom-tab-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #FFFFFF;
-  z-index: 1000;
-  
-  .tab-divider {
-    height: 1rpx;
-    background: #E0E0E0;
-    width: 100%;
-  }
-  
-  .tab-content {
-    display: flex;
-    height: 100rpx;
-    align-items: center;
-    justify-content: space-around;
-    padding: 0 40rpx;
-    
-    .tab-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex: 1;
-      
-      .tab-icon {
-        margin-bottom: 4rpx;
-      }
-      
-      .tab-text {
-        font-size: 20rpx;
-        color: #888888;
-        font-weight: 400;
-        line-height: 1.2;
-        
-        &.active {
-          color: #007AFF;
-        }
-      }
-    }
-  }
-}
-
-/* 系统主屏幕指示器 */
-.home-indicator {
-  position: fixed;
-  bottom: 8rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 268rpx;
-  height: 8rpx;
-  background: #000000;
-  border-radius: 4rpx;
-  z-index: 1001;
 }
 </style> 

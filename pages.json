@@ -384,6 +384,20 @@
 						"navigationBarTitleText": "我的",
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "index/legal-document-list/index",
+					"style": {
+						"navigationBarTitleText": "法律文书详情页",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/lawyer-profile/index",
+					"style": {
+						"navigationBarTitleText": "收入管理",
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},

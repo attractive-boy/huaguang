@@ -3,10 +3,10 @@
     <!-- 顶部插画区域 -->
     <view class="header-illustration">
       <uv-image 
-        :src="`${config.staticBaseUrl}/illustrations/lawyer-dashboard.png`" 
+        :src="`http://localhost:3000/static/lawyer_banner.png`" 
         width="100%" 
-        height="300rpx" 
-        mode="aspectFit"
+        height="500rpx" 
+        mode="aspectFill"
       ></uv-image>
     </view>
     
@@ -38,19 +38,19 @@
         <view class="action-buttons">
           <view class="action-button" @click="handleViewDocuments">
             <view class="button-icon view-icon">
-              <uv-icon name="folder-open" color="#FFFFFF" size="32"></uv-icon>
+              <uv-icon name="http://localhost:3000/static/icons/check.png" color="#FFFFFF" size="64"></uv-icon>
             </view>
             <text class="button-text">查看</text>
           </view>
           <view class="action-button" @click="handleReviewDocuments">
             <view class="button-icon review-icon">
-              <uv-icon name="account" color="#FFFFFF" size="32"></uv-icon>
+              <uv-icon name="http://localhost:3000/static/icons/shenhe.png" color="#FFFFFF" size="64"></uv-icon>
             </view>
             <text class="button-text">审核</text>
           </view>
           <view class="action-button" @click="handleDownloadDocuments">
             <view class="button-icon download-icon">
-              <uv-icon name="cloud-download" color="#FFFFFF" size="32"></uv-icon>
+              <uv-icon name="http://localhost:3000/static/icons/download.png" color="#FFFFFF" size="64"></uv-icon>
             </view>
             <text class="button-text">下载</text>
           </view>
@@ -131,19 +131,26 @@ export default {
 <style scoped>
 .container {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #E0F2FF 0%, #C0E0FF 100%);
-  padding-bottom: 120rpx; /* 为底部导航栏留出空间 */
+  background-image: url('http://localhost:3000/static/bg10.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .header-illustration {
   width: 100%;
-  padding: 20rpx;
-  margin-top: 20rpx;
+  height: 700rpx;
+  position: absolute;
+  z-index: 0;
+  top: 10rpx;
+  /* padding: 20rpx; */
 }
 
 .content-area {
-  padding: 0 30rpx;
-  margin-top: 20rpx;
+  padding: 360rpx 30rpx;
+  margin-top: 0rpx;
+  z-index: 1;
+  position: relative;
 }
 
 .info-card, .document-card {
@@ -193,7 +200,7 @@ export default {
 
 .time-stamp {
   font-size: 24rpx;
-  color: #999999;
+  color: #000;
   min-width: 120rpx;
   text-align: right;
 }
@@ -206,7 +213,7 @@ export default {
 
 .action-button {
   flex: 1;
-  background-color: #F0F2F5;
+  background-color: #f5f8ff;
   border-radius: 16rpx;
   padding: 30rpx 20rpx;
   display: flex;
@@ -234,6 +241,6 @@ export default {
 
 /* 状态栏适配 */
 .container {
-  padding-top: var(--status-bar-height);
+  /* padding-top: var(--status-bar-height); */
 }
 </style> 

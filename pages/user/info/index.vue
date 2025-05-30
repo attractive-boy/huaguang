@@ -3,12 +3,18 @@
     <view class="content">
       信息
     </view>
+    <user-tabbar></user-tabbar>
   </view>
 </template>
 
 <script>
+import UserTabbar from '@/components/tabbar/user-tabbar/user-tabbar.vue'
+
 export default {
-  name: 'InfoPage'
+  name: 'InfoPage',
+  components: {
+    UserTabbar
+  }
 }
 </script>
 
@@ -19,6 +25,7 @@ export default {
   
   .content {
     padding: 20rpx;
+    padding-bottom: 120rpx;
   }
 }
 </style> 

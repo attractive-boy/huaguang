@@ -19,7 +19,7 @@
       </uv-tabbar-item>
       <uv-tabbar-item text="信息">
         <template v-slot:active-icon>
-          <image class="icon" :src="`${staticBaseUrl}/info-active.png`"></image>
+          <image class="icon" :src="`${staticBaseUrl}/icons/info-active.png`"></image>
         </template>
         <template v-slot:inactive-icon>
           <image class="icon" :src="`${staticBaseUrl}/info.png`"></image>
@@ -27,7 +27,7 @@
       </uv-tabbar-item>
       <uv-tabbar-item text="我的">
         <template v-slot:active-icon>
-          <image class="icon" :src="`${staticBaseUrl}/profile-active.png`"></image>
+          <image class="icon" :src="`${staticBaseUrl}/icons/profile-active.png`"></image>
         </template>
         <template v-slot:inactive-icon>
           <image class="icon" :src="`${staticBaseUrl}/profile.png`"></image>

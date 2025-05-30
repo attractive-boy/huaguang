@@ -50,16 +50,16 @@ export default {
     const currentPage = pages[pages.length - 1]
     const currentRoute = '/' + currentPage.route
     
-    console.log('当前路由:', currentRoute)
-    console.log('路由数组:', routes)
-    
     // 使用精确匹配
     this.current = routes.findIndex(route => route === currentRoute)
-    console.log('匹配结果索引:', this.current)
+    
+    // 如果是律师个人资料页面，归类到"我的"标签页
+    if (currentRoute === '/pages/lawyer/index/lawyer-profile/index') {
+      this.current = 2
+    }
     
     if (this.current === -1) {
       this.current = 0 // 默认选中首页
-      console.log('未找到匹配路由，默认选中首页')
     }
   },
   methods: {
