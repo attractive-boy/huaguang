@@ -449,6 +449,27 @@
 						"navigationBarTitleText": "收入管理",
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "profile/notification-settings/index",
+					"style": {
+						"navigationBarTitleText": "消息通知设置",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/online-status/index",
+					"style": {
+						"navigationBarTitleText": "在线状态设置",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/psychology-info-settings/index",
+					"style": {
+						"navigationBarTitleText": "心理信息编辑",
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		}
