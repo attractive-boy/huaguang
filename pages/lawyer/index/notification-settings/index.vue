@@ -1,14 +1,6 @@
 <template>
   <view class="container">
-    <!-- iOS状态栏 -->
-    <view class="status-bar">
-      <text class="status-time">9:41</text>
-      <view class="status-icons">
-        <view class="signal-icon"></view>
-        <view class="wifi-icon"></view>
-        <view class="battery-icon"></view>
-      </view>
-    </view>
+   
     
     <!-- 导航栏 -->
     <view class="navigation-bar">
@@ -74,8 +66,6 @@
       </view>
     </view>
     
-    <!-- iOS Home Indicator -->
-    <view class="home-indicator"></view>
   </view>
 </template>
 
@@ -94,7 +84,7 @@ export default {
       // 开关样式配置
       switchActiveColor: '#007AFF',
       switchInactiveColor: '#E0E0E0',
-      switchSize: 25
+      switchSize: 36
     }
   },
   methods: {
@@ -145,7 +135,10 @@ export default {
 <style scoped>
 .container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #E0F2FF 0%, #D0E8FF 25%, #F8FBFF 50%, #B0D7FF 75%, #E0F2FF 100%);
+  background-image: url('http://localhost:3000/static/bg10.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
 }
 
@@ -247,7 +240,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  padding: 16rpx 30rpx;
   min-height: 44px;
 }
 
@@ -260,7 +253,7 @@ export default {
 /* 分割线样式 */
 .divider {
   height: 1px;
-  background: #E0E0E0;
+  background: #F0F0F0;
   margin: 0 20px;
 }
 
@@ -287,7 +280,7 @@ export default {
   }
   
   .setting-item {
-    padding: 12px 15px;
+    padding: 10px 12px;
   }
   
   .setting-label {

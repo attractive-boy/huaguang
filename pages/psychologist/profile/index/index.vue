@@ -1,199 +1,168 @@
 <template>
-	<view class="container">
-		<!-- iOS状态栏 -->
-		<view class="status-bar">
-			<text class="time">9:41</text>
-			<view class="status-icons">
-				<text class="signal">●●●○</text>
-				<text class="wifi">📶</text>
-				<text class="battery">🔋</text>
-			</view>
-		</view>
+	<view class="lawyer-profile-page">
+		<!-- 自定义状态栏 -->
+		<view class="status-bar" :style="{ height: statusBarHeight + 'px' }"></view>
 		
-		<!-- 可滚动内容区域 -->
-		<scroll-view class="scroll-content" scroll-y="true" :show-scrollbar="false">
+		<!-- 滚动容器 -->
+		<scroll-view 
+			class="scroll-container" 
+			scroll-y 
+			:style="{ height: scrollHeight + 'px' }"
+			enable-flex
+		>
 			<!-- 用户信息卡片 -->
 			<view class="user-info-card">
 				<view class="user-header">
-					<!-- 头像占位符 -->
 					<view class="avatar-placeholder"></view>
 					<view class="user-details">
 						<text class="user-name">李律师</text>
-						<text class="practitioner-id">执业编号: 9842108</text>
+						<text class="practice-number">执业编号: 9842108</text>
 					</view>
 				</view>
 			</view>
 			
 			<!-- 服务状态卡片 -->
 			<view class="service-status-card">
-				<text class="status-title">我的服务状态:</text>
-				<view class="status-row">
-					<view class="status-indicator"></view>
-					<text class="status-text">在线</text>
-					<text class="nav-arrow">›</text>
+				<view class="status-content">
+					<text class="status-label">我的服务状态:</text>
+					<view class="status-bottom">
+						<view class="status-indicator">
+							<view class="online-dot"></view>
+							<text class="status-text">在线</text>
+						</view>
+						<text class="arrow-icon">></text>
+					</view>
 				</view>
 			</view>
 			
-			<!-- 服务单数与收入卡片 -->
+			<!-- 服务统计卡片 -->
 			<view class="service-stats-card">
-				<text class="service-count">我的服务单数: 累计咨询23次</text>
-				<text class="today-income">今日收入: ¥128.00</text>
+				<text class="stats-line">我的服务单数: 累计咨询23次</text>
+				<text class="stats-line">今日收入: ¥128.00</text>
 			</view>
 			
 			<!-- 设置卡片 -->
 			<view class="settings-card">
-				<text class="settings-title">设置</text>
+				<text class="card-title">设置</text>
 				<view class="settings-list">
-					<!-- 修改密码 -->
-					<view class="setting-item" @click="handleChangePassword" hover-class="setting-item-hover">
+					<view 
+						class="setting-item" 
+						v-for="(item, index) in settingsItems" 
+						:key="index"
+						@click="handleSettingClick(item.type)"
+						hover-class="setting-item-hover"
+					>
 						<view class="item-left">
-							<text class="setting-icon">🛡️</text>
-							<text class="setting-text">修改密码</text>
+							<uv-icon :name="'http://localhost:3000/static/icons/' + item.icon + '.png'" size="40" color="#888888"></uv-icon>
+							<text class="item-text">{{ item.text }}</text>
 						</view>
-						<text class="nav-arrow">›</text>
-					</view>
-					
-					<!-- 修改用户信息 -->
-					<view class="setting-item" @click="handleEditUserInfo" hover-class="setting-item-hover">
-						<view class="item-left">
-							<text class="setting-icon">👤</text>
-							<text class="setting-text">修改用户信息</text>
-						</view>
-						<text class="nav-arrow">›</text>
-					</view>
-					
-					<!-- 消息通知设置 -->
-					<view class="setting-item" @click="handleNotificationSettings" hover-class="setting-item-hover">
-						<view class="item-left">
-							<text class="setting-icon">🗑️</text>
-							<text class="setting-text">消息通知设置</text>
-						</view>
-						<text class="nav-arrow">›</text>
+						<text class="arrow-icon">></text>
 					</view>
 				</view>
 			</view>
 		</scroll-view>
 		
-		<!-- 底部标签栏 -->
-		<view class="bottom-navigation">
-			<view class="nav-divider"></view>
-			<view class="nav-items">
-				<view class="nav-item">
-					<text class="nav-icon">🏠</text>
-					<text class="nav-text">首页</text>
-				</view>
-				<view class="nav-item">
-					<text class="nav-icon">💬</text>
-					<text class="nav-text">信息</text>
-				</view>
-				<view class="nav-item active">
-					<text class="nav-icon active">👤</text>
-					<text class="nav-text active">我的</text>
-				</view>
-			</view>
-		</view>
-		
-		<!-- iOS Home Indicator -->
-		<view class="home-indicator"></view>
+		<!-- 底部导航栏 -->
+		<psychologist-tabbar></psychologist-tabbar>
 	</view>
 </template>
 
 <script>
+import PsychologistTabbar from '@/components/tabbar/psychologist-tabbar/psychologist-tabbar.vue'
+
 export default {
+	components: {
+		PsychologistTabbar
+	},
 	data() {
 		return {
-			userInfo: {
-				name: '李律师',
-				practitionerId: '9842108',
-				isOnline: true,
-				serviceCount: 23,
-				todayIncome: 128.00
-			}
+			statusBarHeight: 0,
+			scrollHeight: 0,
+			settingsItems: [
+				{
+					type: 'password',
+					icon: 'anquan',
+					text: '修改密码'
+				},
+				{
+					type: 'userinfo',
+					icon: 'user',
+					text: '修改用户信息'
+				},
+				{
+					type: 'notification',
+					icon: 'delete',
+					text: '消息通知设置'
+				}
+			]
 		}
 	},
+	onLoad() {
+		this.initPage();
+	},
 	methods: {
-		// 修改密码
-		handleChangePassword() {
-			console.log('修改密码');
-			uni.showToast({
-				title: '跳转到修改密码页面',
-				icon: 'none'
-			});
+		// 初始化页面
+		initPage() {
+			const systemInfo = uni.getSystemInfoSync();
+			this.statusBarHeight = systemInfo.statusBarHeight || 0;
+			// 减去底部导航栏高度（uv-tabbar会自动处理）
+			this.scrollHeight = systemInfo.windowHeight - this.statusBarHeight - 80;
 		},
 		
-		// 修改用户信息
-		handleEditUserInfo() {
-			console.log('修改用户信息');
-			uni.showToast({
-				title: '跳转到用户信息编辑页面',
-				icon: 'none'
-			});
-		},
-		
-		// 消息通知设置
-		handleNotificationSettings() {
-			console.log('消息通知设置');
-			uni.showToast({
-				title: '跳转到通知设置页面',
-				icon: 'none'
-			});
+		// 处理设置项点击
+		handleSettingClick(type) {
+			console.log('设置项点击:', type);
+			switch(type) {
+				case 'password':
+					// 跳转到修改密码页面
+					break;
+				case 'userinfo':
+					// 跳转到修改用户信息页面
+					break;
+				case 'notification':
+					// 跳转到消息通知设置页面
+					break;
+			}
 		}
 	}
 }
 </script>
 
-<style scoped>
-.container {
+<style lang="scss" scoped>
+.lawyer-profile-page {
 	width: 100%;
 	height: 100vh;
-	background: linear-gradient(to bottom, #FFF0F0, #FFDDE0);
-	display: flex;
-	flex-direction: column;
+	background-image: url('http://localhost:3000/static/bg11.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	position: relative;
 }
 
-/* iOS状态栏 */
 .status-bar {
-	height: 44px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 0 20px;
+	width: 100%;
 	background: transparent;
 }
 
-.time {
-	color: #000000;
-	font-size: 17px;
-	font-weight: 600;
+.scroll-container {
+	width: 100%;
+	padding: 0 30rpx;
+	box-sizing: border-box;
 }
-
-.status-icons {
-	display: flex;
-	align-items: center;
-	gap: 5px;
+.user-info-card{
+	margin-top: 120rpx;
 }
-
-.signal, .wifi, .battery {
-	color: #000000;
-	font-size: 14px;
-}
-
-/* 可滚动内容区域 */
-.scroll-content {
-	flex: 1;
-	padding: 0 15px 20px 15px;
-}
-
 /* 卡片通用样式 */
 .user-info-card,
 .service-status-card,
 .service-stats-card,
 .settings-card {
-	background: #FFFFFF;
-	border-radius: 16px;
-	padding: 20px;
-	margin-bottom: 20px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	background: rgba(255, 255, 255, 0.9);
+	backdrop-filter: blur(10px);
+	border-radius: 24rpx;
+	margin-bottom: 20rpx;
+	padding: 40rpx;
+	box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
 }
 
 /* 用户信息卡片 */
@@ -203,84 +172,91 @@ export default {
 }
 
 .avatar-placeholder {
-	width: 65px;
-	height: 65px;
-	border-radius: 50%;
+	width: 120rpx;
+	height: 120rpx;
 	background-color: #D9D9D9;
-	margin-right: 15px;
+	border-radius: 50%;
+	margin-right: 30rpx;
 }
 
 .user-details {
 	flex: 1;
+	display: flex;
+	flex-direction: column;
 }
 
 .user-name {
-	display: block;
-	font-size: 20px;
-	font-weight: bold;
+	font-size: 36rpx;
+	font-weight: 600;
 	color: #333333;
-	margin-bottom: 6px;
+	margin-bottom: 10rpx;
 }
 
-.practitioner-id {
-	display: block;
-	font-size: 14px;
-	color: #666666;
+.practice-number {
+	font-size: 26rpx;
+	color: #888888;
 }
 
 /* 服务状态卡片 */
-.status-title {
-	display: block;
-	font-size: 16px;
-	color: #333333;
-	margin-bottom: 15px;
+.status-content {
+	display: flex;
+	flex-direction: column;
 }
 
-.status-row {
+.status-label {
+	font-size: 30rpx;
+	color: #333333;
+	margin-bottom: 16rpx;
+}
+
+.status-bottom {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.status-indicator {
 	display: flex;
 	align-items: center;
 }
 
-.status-indicator {
-	width: 18px;
-	height: 18px;
+.online-dot {
+	width: 20rpx;
+	height: 20rpx;
+	background-color: #52C41A;
 	border-radius: 50%;
-	background-color: #5CB85C;
-	margin-right: 10px;
+	margin-right: 10rpx;
 }
 
 .status-text {
-	flex: 1;
-	font-size: 16px;
-	color: #333333;
+	font-size: 30rpx;
+	color: #52C41A;
 }
 
-.nav-arrow {
-	font-size: 14px;
+.arrow-icon {
+	font-size: 32rpx;
 	color: #CCCCCC;
 }
 
 /* 服务统计卡片 */
-.service-count {
+.stats-line {
 	display: block;
-	font-size: 16px;
+	font-size: 30rpx;
 	color: #333333;
-	margin-bottom: 10px;
-}
-
-.today-income {
-	display: block;
-	font-size: 16px;
-	color: #333333;
+	margin-bottom: 16rpx;
+	
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 /* 设置卡片 */
-.settings-title {
-	display: block;
-	font-size: 18px;
-	font-weight: bold;
+.card-title {
+	font-size: 36rpx;
+	font-weight: 600;
 	color: #333333;
-	margin-bottom: 15px;
+	margin-bottom: 30rpx;
+	display: block;
 }
 
 .settings-list {
@@ -292,81 +268,26 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 15px 0;
-	transition: all 0.3s ease;
+	padding: 24rpx 0;
+	
+	&:not(:last-child) {
+		border-bottom: 1rpx solid #F0F0F0;
+	}
 }
 
 .setting-item-hover {
-	background-color: #F8F8F8;
-	margin: 0 -20px;
-	padding-left: 20px;
-	padding-right: 20px;
-	border-radius: 12px;
+	background-color: rgba(0, 0, 0, 0.05);
+	border-radius: 12rpx;
 }
 
 .item-left {
 	display: flex;
 	align-items: center;
-	flex: 1;
 }
 
-.setting-icon {
-	font-size: 20px;
-	color: #888888;
-	margin-right: 12px;
-}
-
-.setting-text {
-	font-size: 16px;
+.item-text {
+	font-size: 30rpx;
 	color: #333333;
-}
-
-/* 底部导航栏 */
-.bottom-navigation {
-	background: #F9F9F9;
-	border-top: 1px solid #E0E0E0;
-}
-
-.nav-divider {
-	height: 1px;
-	background: #E0E0E0;
-}
-
-.nav-items {
-	display: flex;
-	height: 55px;
-	align-items: center;
-}
-
-.nav-item {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 2px;
-}
-
-.nav-icon {
-	font-size: 24px;
-	color: #888888;
-}
-
-.nav-text {
-	font-size: 11px;
-	color: #888888;
-}
-
-.nav-item.active .nav-icon,
-.nav-text.active {
-	color: #FF4D4F;
-}
-
-/* iOS Home Indicator */
-.home-indicator {
-	height: 5px;
-	width: 134px;
-	background: #000000;
-	border-radius: 3px;
-	margin: 8px auto;
+	margin-left: 20rpx;
 }
 </style> 

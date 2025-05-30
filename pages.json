@@ -435,6 +435,20 @@
 						"navigationBarTitleText": "心理师个人资料",
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "profile/changepwd/index",
+					"style": {
+						"navigationBarTitleText": "修改密码",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/income-management/index",
+					"style": {
+						"navigationBarTitleText": "收入管理",
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		}
