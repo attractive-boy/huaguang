@@ -209,11 +209,11 @@ export default {
           justify-content: space-between;
           
           .date-text {
-            // 移除margin-right，由space-between自动处理间距
+            color: #000;
           }
           
           .date-arrow {
-            opacity: 0.6;
+            opacity: 1;
           }
         }
       }

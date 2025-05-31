@@ -302,6 +302,38 @@
 						"navigationBarTitleText": "邀请海报",
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "profile/promotion-commission/index",
+					"style": {
+						"navigationBarTitleText": "推广佣金",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/assistance/index",
+					"style": {
+						"navigationBarTitleText": "帮扶记录",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/job-hunting/index",
+					"style": {
+						"navigationBarTitleText": "求职记录"
+					}
+				},
+				{
+					"path": "profile/clear-cache/index",
+					"style": {
+						"navigationBarTitleText": "清除缓存"
+					}
+				},
+				{
+					"path": "profile/video-collection-null/index",
+					"style": {
+						"navigationBarTitleText": "我的收藏视频"
+					}
 				}
 			]
 		},
@@ -411,7 +443,14 @@
 					"style": {
 						"navigationBarTitleText": "文书详情"
 					}
+				},
+				{
+					"path": "index/profile/binding/index",
+					"style": {
+						"navigationBarTitleText": "绑定手机号"
+					}
 				}
+				
 			]
 		},
 		{

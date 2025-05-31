@@ -3,26 +3,26 @@
     <uv-tabbar :value="current" @change="onChange">
       <uv-tabbar-item text="首页">
         <template v-slot:active-icon>
-          <uv-icon name="home" color="#4893FF" size="48rpx"></uv-icon>
+          <image src="http://localhost:3000/static/icons/home-active.png" style="width: 48rpx; height: 48rpx;"></image>
         </template>
         <template v-slot:inactive-icon>
-          <uv-icon name="home" color="#999999" size="48rpx"></uv-icon>
+          <image src="http://localhost:3000/static/icons/home.png" style="width: 48rpx; height: 48rpx;"></image>
         </template>
       </uv-tabbar-item>
       <uv-tabbar-item text="消息">
         <template v-slot:active-icon>
-          <uv-icon name="chat" color="#4893FF" size="48rpx"></uv-icon>
+          <image src="http://localhost:3000/static/icons/info-active.png" style="width: 48rpx; height: 48rpx;"></image>
         </template>
         <template v-slot:inactive-icon>
-          <uv-icon name="chat" color="#999999" size="48rpx"></uv-icon>
+          <image src="http://localhost:3000/static/icons/info.png" style="width: 48rpx; height: 48rpx;"></image>
         </template>
       </uv-tabbar-item>
       <uv-tabbar-item text="我的">
         <template v-slot:active-icon>
-          <uv-icon name="account" color="#4893FF" size="48rpx"></uv-icon>
+          <image src="http://localhost:3000/static/icons/profile-active.png" style="width: 48rpx; height: 48rpx;"></image>
         </template>
         <template v-slot:inactive-icon>
-          <uv-icon name="account" color="#999999" size="48rpx"></uv-icon>
+          <image src="http://localhost:3000/static/icons/profile.png" style="width: 48rpx; height: 48rpx;"></image>
         </template>
       </uv-tabbar-item>
     </uv-tabbar>

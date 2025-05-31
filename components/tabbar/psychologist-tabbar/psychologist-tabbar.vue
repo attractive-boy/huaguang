@@ -22,20 +22,20 @@ export default {
         {
           pagePath: '/pages/psychologist/index/dashboard/index',
           text: '首页',
-          iconPath: '/static/tabbar/psychologist-home.png',
-          selectedIconPath: '/static/tabbar/psychologist-home-active.png'
+          iconPath: 'http://localhost:3000/static/icons/home.png',
+          selectedIconPath: 'http://localhost:3000/static/icons/home-acitve-red.png'
         },
         {
           pagePath: '/pages/psychologist/consultation/consultation',
           text: '信息',
-          iconPath: '/static/tabbar/consultation.png',
-          selectedIconPath: '/static/tabbar/consultation-active.png'
+          iconPath: 'http://localhost:3000/static/icons/info.png',
+          selectedIconPath: 'http://localhost:3000/static/icons/chat-active-red.png'
         },
         {
           pagePath: '/pages/psychologist/profile/index/index',
           text: '我的',
-          iconPath: '/static/tabbar/reports.png',
-          selectedIconPath: '/static/tabbar/reports-active.png'
+          iconPath: 'http://localhost:3000/static/icons/profile.png',
+          selectedIconPath: 'http://localhost:3000/static/icons/profile-acitve-red.png'
         }
       ]
     }

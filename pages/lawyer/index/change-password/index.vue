@@ -24,13 +24,15 @@
 						placeholder="当前密码"
 						placeholderStyle="color: #8A8A8E"
 						:suffixIcon="showCurrentPassword ? 'eye' : 'eye-off'"
-						suffixIconStyle="color: #8A8A8E"
+						suffixIconStyle="color: #8A8A8E; fontSize: 20px"
 						border="none"
 						shape="square"
 						:customStyle="{
 							backgroundColor: '#F2F2F7',
 							borderRadius: '8px',
-							height: '44px'
+							height: '44px',
+							flex: '1',
+							padding: '0 12px'
 						}"
 						@click-suffix-icon="toggleCurrentPassword"
 					/>
@@ -45,13 +47,15 @@
 						placeholder="新密码"
 						placeholderStyle="color: #8A8A8E"
 						:suffixIcon="showNewPassword ? 'eye' : 'eye-off'"
-						suffixIconStyle="color: #8A8A8E"
+						suffixIconStyle="color: #8A8A8E; fontSize: 20px"
 						border="none"
 						shape="square"
 						:customStyle="{
 							backgroundColor: '#F2F2F7',
 							borderRadius: '8px',
-							height: '44px'
+							height: '44px',
+							flex: '1',
+							padding: '0 12px'
 						}"
 						@click-suffix-icon="toggleNewPassword"
 					/>
@@ -66,13 +70,15 @@
 						placeholder="确认新密码"
 						placeholderStyle="color: #8A8A8E"
 						:suffixIcon="showConfirmPassword ? 'eye' : 'eye-off'"
-						suffixIconStyle="color: #8A8A8E"
+						suffixIconStyle="color: #8A8A8E; fontSize: 20px"
 						border="none"
 						shape="square"
 						:customStyle="{
 							backgroundColor: '#F2F2F7',
 							borderRadius: '8px',
-							height: '44px'
+							height: '44px',
+							flex: '1',
+							padding: '0 12px'
 						}"
 						@click-suffix-icon="toggleConfirmPassword"
 					/>
@@ -197,7 +203,8 @@ export default {
 <style lang="scss" scoped>
 .change-password-page {
 	min-height: 100vh;
-	background: linear-gradient(135deg, #E0F2FF 0%, #F0F8FF 50%, #FFFFFF 100%);
+	background: url('http://localhost:3000/static/bg10.png') no-repeat center center;
+	background-size: 100% 100%;
 }
 
 .status-bar {

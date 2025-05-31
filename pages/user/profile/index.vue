@@ -188,13 +188,13 @@ export default {
 			// 根据type进行相应的跳转或操作
 			switch(type) {
 				case 'help':
-					uni.navigateTo({ url: '/pages/user/profile/help-records/index' });
+					uni.navigateTo({ url: '/pages/user/profile/assistance/index' });
 					break;
 				case 'video':
 					uni.navigateTo({ url: '/pages/user/profile/video-collection/index' });
 					break;
 				case 'job':
-					uni.navigateTo({ url: '/pages/user/profile/consultation-records/index' });
+					uni.navigateTo({ url: '/pages/user/profile/job-hunting/index' });
 					break;
 			}
 		},
@@ -211,7 +211,7 @@ export default {
 					uni.navigateTo({ url: '/pages/user/profile/edit/index' });
 					break;
 				case 'cache':
-					this.clearCache();
+					uni.navigateTo({ url: '/pages/user/profile/clear-cache/index' });
 					break;
 				case 'about':
 					uni.navigateTo({ url: '/pages/user/profile/about/index' });
@@ -231,7 +231,26 @@ export default {
 					uni.navigateTo({ url: '/pages/user/profile/invitation-poster/index' });
 					break;
 				case 'commission':
-					uni.navigateTo({ url: '/pages/user/commission/index' });
+					// 显示加载提示
+					uni.showLoading({
+						title: '加载中...'
+					});
+					
+					// 跳转到我的佣金页面
+					uni.navigateTo({
+						url: '/pages/user/profile/promotion-commission/index',
+						success: () => {
+							uni.hideLoading();
+						},
+						fail: (err) => {
+							uni.hideLoading();
+							console.error('跳转失败:', err);
+							uni.showToast({
+								title: '页面跳转失败',
+								icon: 'none'
+							});
+						}
+					});
 					break;
 			}
 		},
