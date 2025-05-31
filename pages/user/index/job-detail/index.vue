@@ -1,18 +1,9 @@
 <template>
   <view class="job-detail-container">
     <!-- 自定义导航栏 -->
-    <uv-navbar 
-      title="职位详情" 
-      :autoBack="true"
-      leftText="返回"
-      leftIcon="arrow-left"
-      :bgColor="navbarBgColor"
-      :leftIconColor="navbarTextColor"
-      :safeAreaInsetTop="true"
-      :fixed="true"
-      :placeholder="true"
-      @leftClick="goBack"
-    ></uv-navbar>
+    <uv-navbar title="职位详情" :autoBack="true" leftText="返回" leftIcon="arrow-left" :bgColor="navbarBgColor"
+      :leftIconColor="navbarTextColor" :safeAreaInsetTop="true" :fixed="true" :placeholder="true"
+      @leftClick="goBack"></uv-navbar>
 
     <!-- 可滚动的页面内容 -->
     <scroll-view class="scroll-container" scroll-y="true">
@@ -25,15 +16,15 @@
           </view>
           <view class="job-tags">
             <view class="tag-item">
-              <uv-icon name="map-pin" size="12" color="#888888"></uv-icon>
+              <uv-icon name="http://localhost:3000/static/icons/location.png" size="24" color="#888888"></uv-icon>
               <text class="tag-text">{{ jobInfo.location }}</text>
             </view>
             <view class="tag-item">
-              <uv-icon name="briefcase" size="12" color="#888888"></uv-icon>
+              <uv-icon name="http://localhost:3000/static/icons/experience.png" size="24" color="#888888"></uv-icon>
               <text class="tag-text">{{ jobInfo.experience }}</text>
             </view>
             <view class="tag-item">
-              <uv-icon name="graduation-cap" size="12" color="#888888"></uv-icon>
+              <uv-icon name="http://localhost:3000/static/icons/graduation.png" size="24" color="#888888"></uv-icon>
               <text class="tag-text">{{ jobInfo.education }}</text>
             </view>
           </view>
@@ -47,10 +38,11 @@
             </view>
             <view class="company-details">
               <text class="company-name">{{ jobInfo.companyName }}</text>
-              <text class="company-desc">{{ jobInfo.companyDesc }}</text>
+              <text class="company-desc">{{ jobInfo.companyDesc }} </text>
+              <text class="company-size">{{ jobInfo.companySize }}</text>
             </view>
             <view class="company-arrow">
-              <uv-icon name="arrow-right" size="16" color="#AAAAAA"></uv-icon>
+              <uv-icon name="arrow-right" size="0" color="#AAAAAA"></uv-icon>
             </view>
           </view>
         </view>
@@ -71,17 +63,17 @@
         <!-- 职业要求区域 -->
         <view class="job-requirements">
           <text class="section-title">职业要求</text>
-          
+
           <view class="requirement-item">
             <text class="requirement-label">学历要求: </text>
             <text class="requirement-value">{{ jobInfo.requirements.education }}</text>
           </view>
-          
+
           <view class="requirement-item">
             <text class="requirement-label">工作经验: </text>
             <text class="requirement-value">{{ jobInfo.requirements.experience }}</text>
           </view>
-          
+
           <view class="requirement-section">
             <text class="requirement-label">专业技能:</text>
             <view class="requirement-list">
@@ -91,7 +83,7 @@
               </view>
             </view>
           </view>
-          
+
           <view class="requirement-section">
             <text class="requirement-label">其他要求:</text>
             <view class="requirement-list">
@@ -107,12 +99,9 @@
 
     <!-- 底部固定按钮 -->
     <view class="bottom-action" :style="{ paddingBottom: safeAreaBottom + 'px' }">
-      <uv-button 
-        text="投递简历"
-        type="primary"
-        :customStyle="submitButtonStyle"
-        @click="submitResume"
-      ></uv-button>
+      <view class="custom-button" @click="submitResume">
+        投递简历
+      </view>
     </view>
   </view>
 </template>
@@ -122,14 +111,8 @@ export default {
   data() {
     return {
       safeAreaBottom: 0,
-      navbarBgColor: '#EBF4FA',
-      navbarTextColor: '#333333',
-      submitButtonStyle: {
-        backgroundColor: '#89CFF0',
-        borderRadius: '8px',
-        height: '45px',
-        margin: '0 15px'
-      },
+      navbarBgColor: 'transparent',
+      navbarTextColor: '#3F3F3F',
       jobInfo: {
         title: '法务专员',
         salary: '6k-9k',
@@ -137,7 +120,8 @@ export default {
         experience: '1-3年',
         education: '本科',
         companyName: 'XX科技有限公司',
-        companyDesc: '互联网 · 软件开发 500-999人',
+        companyDesc: '互联网 · 软件开发 ',
+        companySize: '500-999人',
         description: '本岗位主要负责公司合同审核、法律咨询支持、风险防控管理及法律文书处理等相关事务，确保公司经营活动合法合规。',
         responsibilities: [
           '负责各类合同、协议的起草与审核；',
@@ -175,7 +159,7 @@ export default {
       const systemInfo = uni.getSystemInfoSync()
       this.safeAreaBottom = systemInfo.safeAreaInsets?.bottom || 0
     },
-    
+
     // 返回上一页
     goBack() {
       uni.navigateBack({
@@ -187,7 +171,7 @@ export default {
         }
       })
     },
-    
+
     // 投递简历
     submitResume() {
       uni.showToast({
@@ -195,7 +179,7 @@ export default {
         icon: 'success'
       })
     },
-    
+
     // 根据职位ID加载职位详情
     loadJobDetail(jobId) {
       // 模拟不同职位的数据
@@ -291,7 +275,7 @@ export default {
           }
         }
       }
-      
+
       // 根据ID获取对应的职位数据，如果没有找到则使用默认数据
       const selectedJob = jobData[jobId] || jobData[1]
       this.jobInfo = selectedJob
@@ -305,7 +289,11 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #F7F8FA;
+  // background-color: #F7F8FA;
+  background-image: url('http://localhost:3000/static/bg9.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .scroll-container {
@@ -320,36 +308,37 @@ export default {
 // 职位标题与薪资区域
 .job-header {
   padding: 15px 20px;
-  background-color: #F7F8FA;
-  
+  // background-color: #F7F8FA;
+
   .job-title-salary {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    
+
     .job-title {
       font-size: 24px;
       font-weight: bold;
       color: #000000;
     }
-    
+
     .job-salary {
       font-size: 18px;
-      color: #50C2C9;
+      color: #9ADBDA;
       font-weight: 500;
+      margin-right: 90rpx;
     }
   }
-  
+
   .job-tags {
     display: flex;
     align-items: center;
-    
+
     .tag-item {
       display: flex;
       align-items: center;
-      margin-right: 15px;
-      
+      margin-right: 70rpx;
+
       .tag-text {
         font-size: 12px;
         color: #888888;
@@ -361,15 +350,15 @@ export default {
 
 // 公司信息区域
 .company-info {
-  background-color: #F7F8FA;
-  border-top: 1px solid #EEEEEE;
-  border-bottom: 1px solid #EEEEEE;
-  
+  // background-color: #F7F8FA;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
   .company-content {
     display: flex;
     align-items: center;
     padding: 12px 20px;
-    
+
     .company-logo {
       width: 50px;
       height: 50px;
@@ -377,10 +366,10 @@ export default {
       background-color: #DCDCDC;
       margin-right: 12px;
     }
-    
+
     .company-details {
       flex: 1;
-      
+
       .company-name {
         display: block;
         font-size: 16px;
@@ -388,13 +377,22 @@ export default {
         color: #000000;
         margin-bottom: 4px;
       }
-      
+
       .company-desc {
         font-size: 12px;
         color: #666666;
+        background-color: #fbffff;
+
+      }
+
+      .company-size {
+        font-size: 12px;
+        color: #666666;
+        background-color: #fbffff;
+        margin-left: 10rpx;
       }
     }
-    
+
     .company-arrow {
       margin-left: 10px;
     }
@@ -403,9 +401,9 @@ export default {
 
 // 职位详情区域
 .job-details {
-  padding: 20px;
-  background-color: #F7F8FA;
-  
+  padding: 10px 20px 20px 20px;
+  // background-color: #F7F8FA;
+
   .section-title {
     display: block;
     font-size: 18px;
@@ -413,14 +411,14 @@ export default {
     color: #000000;
     margin-bottom: 15px;
   }
-  
+
   .subsection-title {
     display: block;
     font-size: 15px;
     color: #333333;
     margin-bottom: 10px;
   }
-  
+
   .job-description {
     display: block;
     font-size: 14px;
@@ -428,18 +426,18 @@ export default {
     line-height: 1.6;
     margin-bottom: 10px;
   }
-  
+
   .job-responsibilities {
     .responsibility-item {
       display: flex;
       margin-bottom: 6px;
-      
+
       .bullet-point {
         color: #333333;
         margin-right: 8px;
         font-size: 14px;
       }
-      
+
       .responsibility-text {
         flex: 1;
         font-size: 14px;
@@ -452,9 +450,9 @@ export default {
 
 // 职业要求区域
 .job-requirements {
-  padding: 20px;
-  background-color: #F7F8FA;
-  
+  padding: 0rpx 20rpx 20rpx 50rpx;
+  // background-color: #F7F8FA;
+
   .section-title {
     display: block;
     font-size: 18px;
@@ -462,42 +460,42 @@ export default {
     color: #000000;
     margin-bottom: 15px;
   }
-  
+
   .requirement-item {
     margin-bottom: 8px;
-    
+
     .requirement-label {
       font-size: 14px;
       color: #333333;
     }
-    
+
     .requirement-value {
       font-size: 14px;
       color: #333333;
     }
   }
-  
+
   .requirement-section {
     margin-bottom: 8px;
-    
+
     .requirement-label {
       display: block;
       font-size: 14px;
       color: #333333;
       margin-bottom: 6px;
     }
-    
+
     .requirement-list {
       .requirement-list-item {
         display: flex;
         margin-bottom: 6px;
-        
+
         .bullet-point {
           color: #333333;
           margin-right: 8px;
           font-size: 14px;
         }
-        
+
         .requirement-text {
           flex: 1;
           font-size: 14px;
@@ -513,11 +511,30 @@ export default {
 .bottom-action {
   position: fixed;
   bottom: 0;
-  left: 0rpx;
-  right: 50rpx;
-  background-color: #F7F8FA;
+  left: 12rpx;
+  right: 35rpx;
   padding: 10px 0;
-  border-top: 1px solid #EEEEEE;
+  // border-top: 1px solid #EEEEEE;
   z-index: 10;
+
+  .custom-button {
+    background-color: #88c5ff;
+    border-radius: 30rpx;
+    height: 45px;
+    color: #000000;
+    font-size: 32rpx;
+    letter-spacing: 12rpx;
+    margin: 0 35rpx 52rpx 65rpx;
+    border: 1px solid #88c5ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+
+    &:active {
+      background-color: #6bb3ff;
+      transform: scale(0.98);
+    }
+  }
 }
 </style>

@@ -398,6 +398,19 @@
 						"navigationBarTitleText": "收入管理",
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "index/change-password/index",
+					"style": {
+						"navigationBarTitleText": "修改密码",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/arbitration-download/index",
+					"style": {
+						"navigationBarTitleText": "文书详情"
+					}
 				}
 			]
 		},
