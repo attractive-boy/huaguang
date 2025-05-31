@@ -191,10 +191,10 @@ export default {
 					uni.navigateTo({ url: '/pages/user/profile/help-records/index' });
 					break;
 				case 'video':
-					// uni.navigateTo({ url: '/pages/user/video/index' });
+					uni.navigateTo({ url: '/pages/user/profile/video-collection/index' });
 					break;
 				case 'job':
-					// uni.navigateTo({ url: '/pages/user/job/index' });
+					uni.navigateTo({ url: '/pages/user/profile/consultation-records/index' });
 					break;
 			}
 		},
@@ -205,16 +205,16 @@ export default {
 			// 根据type进行相应的跳转或操作
 			switch(type) {
 				case 'security':
-					// uni.navigateTo({ url: '/pages/user/security/index' });
+					uni.navigateTo({ url: '/pages/user/profile/security/index' });
 					break;
 				case 'profile':
-					// uni.navigateTo({ url: '/pages/user/profile/edit' });
+					uni.navigateTo({ url: '/pages/user/profile/edit/index' });
 					break;
 				case 'cache':
 					this.clearCache();
 					break;
 				case 'about':
-					// uni.navigateTo({ url: '/pages/user/about/index' });
+					uni.navigateTo({ url: '/pages/user/profile/about/index' });
 					break;
 			}
 		},
@@ -225,13 +225,13 @@ export default {
 			// 根据type进行相应的跳转或操作
 			switch(type) {
 				case 'team':
-					// uni.navigateTo({ url: '/pages/user/team/index' });
+					uni.navigateTo({ url: '/pages/user/profile/invitation/index' });
 					break;
 				case 'poster':
-					// uni.navigateTo({ url: '/pages/user/poster/index' });
+					uni.navigateTo({ url: '/pages/user/profile/invitation-poster/index' });
 					break;
 				case 'commission':
-					// uni.navigateTo({ url: '/pages/user/commission/index' });
+					uni.navigateTo({ url: '/pages/user/commission/index' });
 					break;
 			}
 		},

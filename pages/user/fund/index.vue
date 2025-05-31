@@ -169,7 +169,19 @@ export default {
         uni.navigateTo({
           url: '/pages/user/fund/apply/index'
         })
-      } else {
+      }
+      else if (item.title === '法律咨询') {
+        // pages\user\index\legal-help\index.vue
+        uni.navigateTo({
+          url: '/pages/user/index/legal-help/index'
+        })
+      }
+      else if (item.title === '就业帮扶') {
+        uni.navigateTo({
+          url: '/pages/user/index/job-platform/index'
+        })
+      }
+      else {
         uni.showToast({
           icon: 'none',
           title: `点击了${item.title}`

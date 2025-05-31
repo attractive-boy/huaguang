@@ -94,9 +94,8 @@ export default {
 		// 处理密码点击
 		handlePasswordClick() {
 			// 跳转到密码修改页面
-			uni.showToast({
-				title: '跳转到密码修改',
-				icon: 'none'
+			uni.navigateTo({
+				url: '/pages/lawyer/index/change-password/index'
 			});
 		},
 		

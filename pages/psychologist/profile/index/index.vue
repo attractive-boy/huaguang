@@ -36,7 +36,7 @@
 			</view>
 			
 			<!-- 服务统计卡片 -->
-			<view class="service-stats-card">
+			<view class="service-stats-card" @click="handleServiceStatsClick">
 				<text class="stats-line">我的服务单数: 累计咨询23次</text>
 				<text class="stats-line">今日收入: ¥128.00</text>
 			</view>
@@ -115,14 +115,28 @@ export default {
 			switch(type) {
 				case 'password':
 					// 跳转到修改密码页面
+					uni.navigateTo({
+						url: '/pages/psychologist/profile/changepwd/index'
+					});
 					break;
 				case 'userinfo':
 					// 跳转到修改用户信息页面
+					uni.navigateTo({
+						url: '/pages/psychologist/profile/psychology-info-settings/index'
+					});
 					break;
 				case 'notification':
 					// 跳转到消息通知设置页面
+					uni.navigateTo({
+						url: '/pages/psychologist/profile/notification-settings/index'
+					});
 					break;
 			}
+		},
+		handleServiceStatsClick() {
+			uni.navigateTo({
+				url: '/pages/psychologist/profile/income-management/index'
+			});
 		}
 	}
 }

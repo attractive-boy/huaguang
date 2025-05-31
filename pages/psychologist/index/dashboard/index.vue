@@ -4,7 +4,7 @@
 	  <view class="header-illustration">
 		<uv-image 
 		  :src="`http://localhost:3000/static/xinli_banner.png`" 
-		  width="100%" 
+		  width="90%" 
 		  height="500rpx" 
 		  mode="aspectFill"
 		></uv-image>
@@ -13,7 +13,7 @@
 	  <!-- 内容区域 -->
 	  <view class="content-area">
 		<!-- 咨询信息卡片 -->
-		<view class="info-card">
+		<view class="info-card" @click="handleInfoCardClick">
 		  <view class="card-title">咨询信息</view>
 		  <scroll-view 
 			class="consultation-list" 
@@ -122,6 +122,12 @@
 		  title: '下载文书功能',
 		  icon: 'none'
 		})
+	  },
+	  handleInfoCardClick() {
+		// 跳转到收入管理页面
+		uni.navigateTo({
+		  url: '/pages/psychologist/consultation/consultation'
+		})
 	  }
 	}
   }
@@ -142,6 +148,7 @@
 	position: absolute;
 	z-index: 0;
 	top: 10rpx;
+	left: 10%;
 	/* padding: 20rpx; */
   }
   

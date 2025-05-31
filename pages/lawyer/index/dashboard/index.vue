@@ -2,36 +2,24 @@
   <view class="container">
     <!-- 顶部插画区域 -->
     <view class="header-illustration">
-      <uv-image 
-        :src="`http://localhost:3000/static/lawyer_banner.png`" 
-        width="100%" 
-        height="500rpx" 
-        mode="aspectFill"
-      ></uv-image>
+      <uv-image :src="`http://localhost:3000/static/lawyer_banner.png`" width="100%" height="500rpx"
+        mode="aspectFill"></uv-image>
     </view>
-    
+
     <!-- 内容区域 -->
     <view class="content-area">
       <!-- 咨询信息卡片 -->
       <view class="info-card">
         <view class="card-title">咨询信息</view>
-        <scroll-view 
-          class="consultation-list" 
-          scroll-y="true" 
-          :style="{ height: consultationListHeight }"
-        >
-          <view 
-            v-for="(item, index) in consultationList" 
-            :key="index" 
-            class="consultation-item"
-          >
+        <scroll-view class="consultation-list" scroll-y="true" :style="{ height: consultationListHeight }">
+          <view v-for="(item, index) in consultationList" :key="index" class="consultation-item">
             <text class="client-name">{{ item.clientName }}</text>
             <text class="consultation-summary">{{ item.summary }}</text>
             <text class="time-stamp">{{ item.timeAgo }}</text>
           </view>
         </scroll-view>
       </view>
-      
+
       <!-- 法律文书审核列表卡片 -->
       <view class="document-card">
         <view class="card-title">法律文书审核列表</view>
@@ -57,7 +45,7 @@
         </view>
       </view>
     </view>
-    
+
     <!-- 律师底部导航栏 -->
     <lawyer-tabbar></lawyer-tabbar>
   </view>
@@ -107,21 +95,18 @@ export default {
   },
   methods: {
     handleViewDocuments() {
-      uni.showToast({
-        title: '查看文书功能',
-        icon: 'none'
+      uni.navigateTo({
+        url: '/pages/lawyer/index/legal-document-list/index'
       })
     },
     handleReviewDocuments() {
-      uni.showToast({
-        title: '审核文书功能',
-        icon: 'none'
+      uni.navigateTo({
+        url: '/pages/lawyer/index/document-review/index'
       })
     },
     handleDownloadDocuments() {
-      uni.showToast({
-        title: '下载文书功能',
-        icon: 'none'
+      uni.navigateTo({
+        url: '/pages/lawyer/index/arbitration-download/index'
       })
     }
   }
@@ -153,7 +138,8 @@ export default {
   position: relative;
 }
 
-.info-card, .document-card {
+.info-card,
+.document-card {
   background-color: #FFFFFF;
   border-radius: 30rpx;
   padding: 30rpx;
@@ -243,4 +229,4 @@ export default {
 .container {
   /* padding-top: var(--status-bar-height); */
 }
-</style> 
+</style>
