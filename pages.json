@@ -205,6 +205,13 @@
 					}
 				},
 				{
+					"path": "index/chat/upload-resume/index",
+					"style": {
+						"navigationBarTitleText": "上传简历",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "index/skill-training/index",
 					"style": {
 						"navigationBarTitleText": "技能培训",
