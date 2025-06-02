@@ -35,18 +35,18 @@
           <text class="header-title">帮扶案例</text>
         </view>
         <view class="header-right">
-          <view class="more-btn">
+          <view class="more-btn" @click="navigateToCase">
             <text class="more-text">了解更多</text>
             <view class="triangle"></view>
           </view>
         </view>
       </view>
-      
+
       <view class="case-content">
         <view class="case-item" v-for="(item, index) in caseList" :key="index">
           <view class="case-info">
-            <text>{{item.maskedName}} 获得帮扶金额 {{item.loanAmount}}元</text>
-            <text class="case-time">{{item.createTime}}</text>
+            <text>{{ item.maskedName }} 获得帮扶金额 {{ item.loanAmount }}元</text>
+            <text class="case-time">{{ item.createTime }}</text>
           </view>
         </view>
       </view>
@@ -55,18 +55,14 @@
     <!-- 功能模块 -->
     <view class="feature-section">
       <view class="feature-left">
-        <view class="feature-item" style="background-color: #A8C8FF;">
-          <view class="feature-header">
-            <text class="feature-title" style="color: #3c5d9f;">帮扶类型</text>
-            <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/help-type.png`" width="120rpx"
-              height="120rpx" mode="aspectFit"></uv-image>
-          </view>
-          <view class="feature-desc">
-            <text style="color: #3c5d9f;">选择帮扶项目</text>
-            <text style="color: #3c5d9f;">填写遇到的问题困境</text>
-          </view>
+        <view class="feature-item" style="background-color: #A8C8FF;" @click="navigateToHelpTypes">
+          <view class="feature-header"> <text class="feature-title" style="color: #3c5d9f;">帮扶类型</text> <uv-image
+              class="feature-icon" :src="`${config.staticBaseUrl}/icons/help-type.png`" width="120rpx" height="120rpx"
+              mode="aspectFit"></uv-image> </view>
+          <view class="feature-desc"> <text style="color: #3c5d9f;">选择帮扶项目</text> <text
+              style="color: #3c5d9f;">填写遇到的问题困境</text> </view>
         </view>
-        <view class="feature-item" style="background-color: #A8E3FF;">
+        <view class="feature-item" style="background-color: #A8E3FF;" @click="navigateToApply">
           <view class="feature-header">
             <text class="feature-title" style="color: #4c3d9f;">帮扶申请</text>
             <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/help-apply.png`" width="120rpx"
@@ -78,26 +74,25 @@
           </view>
         </view>
       </view>
-      <view class="feature-item" style="background-color: #FFB217;">
+      <view class="feature-item" style="background-color: #FFB217;" @click="navigateToCreditRecovery">
         <view class="feature-header"
           style="display: flex; flex-direction: column; justify-content: center; height: 200rpx;">
-          <view class="title-group" style="position: absolute; top: 50%;">
-            <text class="feature-title" style="color: #9f5f3c; font-size: 40rpx; z-index: 1;">在线申请</text>
-            <text class="feature-subtitle" style="color: #9f5f3c; z-index: 1; font-size: 36rpx;">信用记录修复</text>
-          </view>
-          <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/credit-repair.png`" width="200rpx"
-            height="200rpx" mode="aspectFit"></uv-image>
+          <view class="title-group" style="position: absolute; top: 50%;"> <text class="feature-title"
+              style="color: #9f5f3c; font-size: 40rpx; z-index: 1;">在线申请</text> <text class="feature-subtitle"
+              style="color: #9f5f3c; z-index: 1; font-size: 36rpx;">信用记录修复</text> </view> <uv-image class="feature-icon"
+            :src="`${config.staticBaseUrl}/icons/credit-repair.png`" width="200rpx" height="200rpx"
+            mode="aspectFit"></uv-image>
         </view>
-        <view class="feature-desc" style="position: absolute; bottom: 12%;">
-          <text style="color: #9f5f3c;">信用教育知识普及</text>
-          <text style="color: #9f5f3c;">修复逾期记录 提升信用积分</text>
-        </view>
+        <view class="feature-desc" style="position: absolute; bottom: 12%;"> <text
+            style="color: #9f5f3c;">信用教育知识普及</text> <text style="color: #9f5f3c;">修复逾期记录 提升信用积分</text> </view>
       </view>
     </view>
 
     <!-- 心理咨询模块 -->
     <view class="counseling-section" style="margin: 20rpx 30rpx;">
-      <view class="feature-item" style="background: linear-gradient(to right, #FF7F7F, #FDDCDC); position: relative; height: 400rpx; border-radius: 20rpx; overflow: hidden;">
+      <view class="feature-item"
+        style="background: linear-gradient(to right, #FF7F7F, #FDDCDC); position: relative; height: 300rpx; border-radius: 20rpx; overflow: visible;"
+        @click="navigateToCounseling">
         <view class="counseling-header" style="display: flex; align-items: center; padding: 20rpx 30rpx;">
           <uv-image :src="`${config.staticBaseUrl}/icons/counseling.png`" width="60rpx" height="60rpx"
             mode="aspectFit"></uv-image>
@@ -105,7 +100,8 @@
         </view>
         <view class="counseling-content" style="padding: 0 30rpx;">
           <view style="display: flex; align-items: baseline;">
-            <text style="color: #A83333; font-size: 56rpx; font-weight: bold; margin: 10rpx 0; text-wrap: nowrap;">1,188,777</text>
+            <text
+              style="color: #A83333; font-size: 56rpx; font-weight: bold; margin: 10rpx 0; text-wrap: nowrap;">1,188,777</text>
             <text style="color: #A83333; font-size: 36rpx; margin-left: 4rpx;">人</text>
           </view>
           <text style="color: #A83333; font-size: 28rpx; display: block; margin-bottom: 20rpx;">在这里选择了咨询师</text>
@@ -113,8 +109,9 @@
         <view class="counseling-footer" style="position: absolute; bottom: 30rpx; left: 30rpx;">
           <text style="color: #A83333; font-size: 32rpx;">勇敢迈出第一步 ></text>
         </view>
-        <uv-image class="counseling-bg" :src="`${config.staticBaseUrl}/icons/counseling-bg.png`" width="280rpx"
-          height="280rpx" mode="aspectFit" style="position: absolute; right: -10%; bottom: 0;"></uv-image>
+        <uv-image class="counseling-bg" :src="`${config.staticBaseUrl}/icons/counseling-bg.png`" width="240rpx"
+          height="240rpx" mode="aspectFit" style="position: absolute; right: 20rpx; bottom: 0; z-index: 1;">
+        </uv-image>
       </view>
     </view>
 
@@ -153,8 +150,8 @@ export default {
         }
       ],
       statistics: {
-        helpingCount: 0,
-        helpedCount: 0,
+        helpingCount: 7680,
+        helpedCount: 1680,
         totalAmount: 0,
         monthlyNewCount: 0
       },
@@ -171,14 +168,35 @@ export default {
       const item = this.gridList[index]
       if (item.title === '填写申请表') {
         uni.navigateTo({
-          url: '/pages/user/apply/index'
+          url: '/pages/user/fund/apply/index'
         })
-      } else {
+      }
+      else if (item.title === '法律咨询') {
+        // pages\user\index\legal-help\index.vue
+        uni.navigateTo({
+          url: '/pages/user/index/legal-help/index'
+        })
+      }
+      else if (item.title === '就业帮扶') {
+        uni.navigateTo({
+          url: '/pages/user/index/job-platform/index'
+        })
+      }
+      else {
         uni.showToast({
           icon: 'none',
           title: `点击了${item.title}`
         })
       }
+    },
+    navigateToApply() { uni.navigateTo({ url: '/pages/user/fund/apply/index' }) }, 
+    navigateToHelpTypes() { uni.navigateTo({ url: '/pages/user/fund/help-types/index' }) }, 
+    navigateToCounseling() { uni.navigateTo({ url: '/pages/user/fund/counseling/index' }) }, 
+    navigateToCreditRecovery() { uni.navigateTo({ url: '/pages/user/fund/credit-recovery/index' }) },
+    navigateToCase() { 
+      uni.navigateTo({ 
+        url: '/pages/user/fund/case/index' 
+      }) 
     },
     async getStatistics() {
       try {
@@ -264,7 +282,7 @@ export default {
 @import '@/styles/variables.scss';
 
 .fund-page {
-  min-height: 100vh;
+  min-height: 100%;
   padding-bottom: 100rpx;
   /* 为 TabBar 预留空间 */
   background-image: $fund-bg-image;
@@ -412,7 +430,7 @@ export default {
       display: flex;
       flex-direction: column;
       gap: 12rpx;
-      
+
       .case-item {
         font-size: 28rpx;
         color: #3C5D9F;

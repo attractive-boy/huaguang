@@ -1,16 +1,10 @@
 <template>
-  <view class="container">
+  <scroll-view class="container" scroll-y="true">
     <!-- 轮播图 -->
     <view class="swiper-section">
-      <uv-swiper 
-        :list="swiperList" 
-        indicator 
-        indicatorMode="line" 
-        circular
-        height="300"
-      ></uv-swiper>
+      <uv-swiper :list="swiperList" indicator indicatorMode="line" circular height="300"></uv-swiper>
     </view>
-    
+
     <!-- 宫格导航 -->
     <view class="grid-section">
       <uv-grid :col="5" @click="handleGridClick">
@@ -18,11 +12,11 @@
           <view class="icon-wrapper" :style="{ backgroundColor: item.bgColor }">
             <uv-image :src="item.icon" width="60rpx" height="60rpx" mode="aspectFit"></uv-image>
           </view>
-          <text class="grid-text">{{item.title}}</text>
+          <text class="grid-text">{{ item.title }}</text>
         </uv-grid-item>
       </uv-grid>
     </view>
-    
+
     <!-- 通知栏 -->
     <view class="notice-section">
       <view class="notice-bar">
@@ -31,37 +25,33 @@
           <text class="headline-news">快讯</text>
         </view>
         <view class="notice-content">
-          <uv-notice-bar 
-            :text="noticeList" 
-            direction="column"
-            :fontSize="28"
-            :icon="false"
-            :style="{
-              backgroundColor: 'transparent',
-              padding: '0',
-              fontSize: '62rpx' 
-            }"
-          ></uv-notice-bar>
+          <uv-notice-bar :text="noticeList" direction="column" :fontSize="28" :icon="false" :style="{
+            backgroundColor: 'transparent',
+            padding: '0',
+            fontSize: '62rpx'
+          }"></uv-notice-bar>
         </view>
       </view>
     </view>
 
     <!-- 功能模块 -->
     <view class="feature-section">
-      <view class="feature-item" style="background-color: #A8C8FF;">
+      <view class="feature-item" style="background-color: #A8C8FF;" @click="handleResumeClick">
         <view class="feature-header">
           <text class="feature-title">投递简历</text>
-          <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/resume.png`" width="120rpx" height="120rpx" mode="aspectFit"></uv-image>
+          <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/resume.png`" width="120rpx"
+            height="120rpx" mode="aspectFit"></uv-image>
         </view>
         <view class="feature-desc">
           <text>快速投递</text>
           <text>高效求职</text>
         </view>
       </view>
-      <view class="feature-item" style="background-color: #A8E3FF;">
+      <view class="feature-item" style="background-color: #A8E3FF;" @click="handleSkillTrainingClick">
         <view class="feature-header">
           <text class="feature-title">技能网课</text>
-          <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/course.png`" width="120rpx" height="120rpx" mode="aspectFit"></uv-image>
+          <uv-image class="feature-icon" :src="`${config.staticBaseUrl}/icons/course.png`" width="120rpx"
+            height="120rpx" mode="aspectFit"></uv-image>
         </view>
         <view class="feature-desc">
           <text>专业课程</text>
@@ -72,25 +62,16 @@
 
     <!-- Banner图 -->
     <view class="banner-section">
-      <uv-image 
-        :src="`${config.staticBaseUrl}/banner/bottom-banner.png`" 
-        width="100%" 
-        height="200rpx" 
-        mode="aspectFill"
-        radius="16rpx"
-      ></uv-image>
+      <uv-image :src="`${config.staticBaseUrl}/banner/bottom-banner.png`" width="100%" height="200rpx" mode="aspectFill"
+        radius="16rpx"></uv-image>
     </view>
 
     <!-- 律师推荐 -->
     <view class="lawyer-section">
       <view class="section-header">
         <view class="header-left">
-          <uv-image 
-            :src="`${config.staticBaseUrl}/icons/lawyer.png`" 
-            width="40rpx" 
-            height="40rpx" 
-            mode="aspectFit"
-          ></uv-image>
+          <uv-image :src="`${config.staticBaseUrl}/icons/lawyer.png`" width="40rpx" height="40rpx"
+            mode="aspectFit"></uv-image>
           <text class="header-title">热门律师推荐</text>
         </view>
         <view class="header-right">
@@ -100,7 +81,7 @@
           </view>
         </view>
       </view>
-      
+
       <uv-scroll-list :indicator="false" indicatorColor="#fff0f0" indicatorActiveColor="#f56c6c">
         <view v-for="(item, index) in lawyerList" :key="index" class="lawyer-item">
           <uv-image :src="item.image" mode="aspectFill" width="200rpx" height="200rpx" radius="16rpx"></uv-image>
@@ -112,12 +93,8 @@
     <view class="job-section">
       <view class="section-header">
         <view class="header-left">
-          <uv-image 
-            :src="`${config.staticBaseUrl}/icons/career.png`" 
-            width="40rpx" 
-            height="40rpx" 
-            mode="aspectFit"
-          ></uv-image>
+          <uv-image :src="`${config.staticBaseUrl}/icons/career.png`" width="40rpx" height="40rpx"
+            mode="aspectFit"></uv-image>
           <text class="header-title">热门职业推荐</text>
         </view>
         <view class="header-right">
@@ -127,17 +104,17 @@
           </view>
         </view>
       </view>
-      
+
       <uv-scroll-list :indicator="false" indicatorColor="#fff0f0" indicatorActiveColor="#f56c6c">
         <view v-for="(item, index) in jobList" :key="index" class="job-item">
           <uv-image :src="item.image" mode="aspectFill" width="200rpx" height="200rpx" radius="16rpx"></uv-image>
         </view>
       </uv-scroll-list>
     </view>
-    
-    <!-- 引入用户 TabBar -->  
+
+    <!-- 引入用户 TabBar -->
     <user-tabbar></user-tabbar>
-  </view>
+  </scroll-view>
 </template>
 
 <script>
@@ -184,15 +161,15 @@ export default {
         }
       ],
       lawyerList: [{
-        image: "https://via.placeholder.com/200x200.png/3c9cff/fff"
+        image: "http://localhost:3000/static/lawyer1.png"
       }, {
-        image: "https://via.placeholder.com/200x200.png/f9ae3d/fff"
+        image: "http://localhost:3000/static/lawyer2.png"
       }, {
-        image: "https://via.placeholder.com/200x200.png/5ac725/fff"
+        image: "http://localhost:3000/static/lawyer3.png"
       }, {
-        image: "https://via.placeholder.com/200x200.png/f56c6c/fff"
+        image: "http://localhost:3000/static/lawyer1.png"
       }, {
-        image: "https://via.placeholder.com/200x200.png/909399/fff"
+        image: "http://localhost:3000/static/lawyer3.png"
       }],
       jobList: [{
         image: "https://via.placeholder.com/200x200.png/3c9cff/fff"
@@ -217,7 +194,7 @@ export default {
         console.log('获取图片')
         // 使用Picsum Photos API获取随机图片
         const images = []
-        for(let i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i++) {
           const width = 750 // 适配屏幕宽度
           const height = 300 // 适配轮播图高度
           const randomId = Math.floor(Math.random() * 1000) // 添加随机ID
@@ -233,9 +210,74 @@ export default {
     },
     handleGridClick(index) {
       const item = this.gridList[index]
+
+      // 如果点击的是法律咨询，跳转到法律帮助页面
+      if (item.title === '法律咨询') {
+        uni.navigateTo({
+          url: '/pages/user/index/legal-help/index',
+          fail: (err) => {
+            console.error('跳转失败：', err)
+            uni.showToast({
+              icon: 'none',
+              title: '页面跳转失败'
+            })
+          }
+        })
+        return
+      }
+
+      // 如果点击的是就业求职，跳转到职位搜索结果页面
+      if (item.title === '就业求职') {
+        uni.navigateTo({
+          url: '/pages/user/index/work-service/index',
+          fail: (err) => {
+            console.error('跳转失败：', err)
+            uni.showToast({
+              icon: 'none',
+              title: '页面跳转失败'
+            })
+          }
+        })
+        return
+      } else if (item.title === '帮扶基金') {
+        uni.navigateTo({
+          url: '/pages/user/fund/index',
+          fail: (err) => {
+            console.error('跳转失败：', err)
+          }
+        })
+        return
+      }
+      else if (item.title === '心理咨询') {
+        uni.navigateTo({
+          url: '/pages/user/fund/counseling/index',
+        })
+        return
+      }
+
+      // 其他项目显示toast提示
       uni.showToast({
         icon: 'none',
         title: `点击了${item.title}`
+      })
+    },
+    handleSkillTrainingClick() {
+      // 跳转到技能培训页面
+      uni.navigateTo({
+        url: '/pages/user/index/skill-training/index',
+        fail: (err) => {
+          console.error('跳转失败：', err)
+          uni.showToast({
+            icon: 'none',
+            title: '页面跳转失败'
+          })
+        }
+      })
+    },
+    handleResumeClick() {
+      // 跳转到投递简历页面
+      uni.navigateTo({
+        url: '/pages/user/index/job-platform/index',
       })
     }
   }
@@ -247,7 +289,9 @@ export default {
 
 .container {
   min-height: 100vh;
-  padding-bottom: 100rpx; /* 为 TabBar 预留空间 */
+  height: 100vh;
+  padding-bottom: 100rpx;
+  /* 为 TabBar 预留空间 */
   background-image: $bg-image;
   background-size: cover;
   background-position: center;
@@ -257,7 +301,7 @@ export default {
 .swiper-section {
   padding: 20rpx;
   margin-bottom: 20rpx;
-  
+
   :deep(.uv-swiper) {
     border-radius: 16rpx;
     overflow: hidden;
@@ -267,7 +311,7 @@ export default {
 .grid-section {
   padding: 20rpx;
   margin: 0 20rpx;
-  
+
   .icon-wrapper {
     width: 100rpx;
     height: 100rpx;
@@ -277,7 +321,7 @@ export default {
     justify-content: center;
     margin-bottom: 10rpx;
   }
-  
+
   .grid-text {
     font-size: 28rpx;
     color: #333;
@@ -286,7 +330,7 @@ export default {
 
 .notice-section {
   margin: 20rpx;
-  
+
   .notice-bar {
     display: flex;
     align-items: center;
@@ -305,7 +349,7 @@ export default {
   line-height: 1.1;
   min-width: 80rpx;
   position: relative;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -334,12 +378,12 @@ export default {
 .notice-content {
   flex: 1;
   margin-left: 20rpx;
-  
+
   :deep(.uv-notice-bar) {
     background-color: transparent !important;
     box-shadow: none !important;
     padding: 0 !important;
-    
+
     .uv-notice-bar__content {
       font-size: 32rpx !important;
     }
@@ -351,7 +395,7 @@ export default {
   justify-content: space-between;
   margin: 20rpx 30rpx;
   gap: 20rpx;
-  
+
   .feature-item {
     width: calc(50% - 10rpx);
     height: 200rpx;
@@ -361,7 +405,7 @@ export default {
     justify-content: space-between;
     position: relative;
     overflow: hidden;
-    
+
     .feature-header {
       display: flex;
       justify-content: space-between;
@@ -369,13 +413,13 @@ export default {
       width: calc(100% - 40rpx);
       padding: 20rpx 30rpx;
     }
-    
+
     .feature-title {
       font-size: 40rpx;
       color: #3C5D9F;
       font-weight: 500;
     }
-    
+
     .feature-icon {
       width: 120rpx;
       height: 120rpx;
@@ -385,7 +429,7 @@ export default {
       width: 100%;
       background-color: rgba(255, 255, 255, 0.4);
       margin-top: 20rpx;
-      
+
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -393,6 +437,7 @@ export default {
       position: absolute;
       bottom: 0;
       left: 0;
+
       text {
         font-size: 22rpx;
         color: #3C5D9F;
@@ -404,7 +449,7 @@ export default {
 
 .banner-section {
   margin: 20rpx 30rpx;
-  
+
   :deep(.uv-image) {
     width: 100%;
     height: 200rpx;
@@ -417,18 +462,18 @@ export default {
   background: linear-gradient(to bottom, #FAFCFF, #DCECFF);
   padding: 20rpx;
   position: relative;
-  
+
   .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20rpx;
-    
+
     .header-left {
       display: flex;
       align-items: center;
       gap: 10rpx;
-      
+
       .header-title {
         font-family: $font-family-youshe;
         font-size: 32rpx;
@@ -436,14 +481,14 @@ export default {
         font-weight: 500;
       }
     }
-    
+
     .header-right {
       display: flex;
       align-items: center;
       position: absolute;
       right: 0;
       top: 0;
-      
+
       .more-btn {
         position: relative;
         padding: 8rpx 40rpx 8rpx 60rpx;
@@ -453,7 +498,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        
+
         .more-text {
           font-size: 28rpx;
           color: #3C5D9F;
@@ -470,10 +515,10 @@ export default {
       }
     }
   }
-  
+
   .lawyer-item {
     margin-right: 20rpx;
-    
+
     &:last-child {
       margin-right: 0;
     }
@@ -485,18 +530,18 @@ export default {
   background: linear-gradient(to bottom, #FAFCFF, #DCECFF);
   padding: 20rpx;
   position: relative;
-  
+
   .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20rpx;
-    
+
     .header-left {
       display: flex;
       align-items: center;
       gap: 10rpx;
-      
+
       .header-title {
         font-family: $font-family-youshe;
         font-size: 32rpx;
@@ -504,14 +549,14 @@ export default {
         font-weight: 500;
       }
     }
-    
+
     .header-right {
       display: flex;
       align-items: center;
       position: absolute;
       right: 0;
       top: 0;
-      
+
       .more-btn {
         position: relative;
         padding: 8rpx 40rpx 8rpx 60rpx;
@@ -521,7 +566,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        
+
         .more-text {
           font-size: 28rpx;
           color: #3C5D9F;
@@ -538,10 +583,10 @@ export default {
       }
     }
   }
-  
+
   .job-item {
     margin-right: 20rpx;
-    
+
     &:last-child {
       margin-right: 0;
     }

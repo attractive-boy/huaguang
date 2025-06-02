@@ -1,522 +1,415 @@
 <template>
 	<view class="container">
-		<!-- 搜索栏 -->
-		<view class="search-box">
-			<view class="search-input">
-				<uni-icons type="search" size="18" color="#999"></uni-icons>
-				<input type="text" v-model="searchKey" placeholder="搜索咨询" @confirm="handleSearch" />
-			</view>
-		</view>
-		
-		<!-- 状态标签 -->
-		<scroll-view class="status-scroll" scroll-x>
-			<view class="status-list">
-				<view 
-					class="status-item" 
-					:class="{ active: currentStatus === item.value }"
-					v-for="(item, index) in statusList" 
-					:key="index"
-					@click="handleStatusChange(item.value)"
-				>
-					{{item.label}}
-				</view>
-			</view>
-		</scroll-view>
-		
-		<!-- 咨询列表 -->
-		<scroll-view 
-			class="consultation-list" 
-			scroll-y 
-			@scrolltolower="loadMore"
-			:style="{ height: scrollHeight + 'px' }"
+	  <!-- 状态栏占位 -->
+	  <view class="status-bar"></view>
+	  
+	  <!-- 页面标题区域 -->
+	  <view class="header">
+		<text class="title">咨询信息</text>
+	  </view>
+	  
+	  <!-- 标签页导航栏 -->
+	  <view class="tab-navigation">
+		<view 
+		  v-for="(tab, index) in tabsList" 
+		  :key="index"
+		  class="tab-item" 
+		  :class="{ 'tab-active': currentTab === index }"
+		  @click="handleTabChange(index)"
 		>
-			<view class="consultation-item" v-for="(item, index) in consultationList" :key="index" @click="goToDetail(item.id)">
-				<view class="consultation-info">
-					<view class="header">
-						<text class="title">{{item.title}}</text>
-						<text :class="['status', item.status]">{{item.statusText}}</text>
-					</view>
-					<view class="desc">{{item.description}}</view>
-					<view class="meta">
-						<view class="user">
-							<text class="label">咨询人：</text>
-							<text class="value">{{item.userName}}</text>
-						</view>
-						<view class="time">
-							<text class="label">咨询时间：</text>
-							<text class="value">{{item.createTime}}</text>
-						</view>
-					</view>
-					<view class="category">
-						<text class="label">咨询类型：</text>
-						<text class="value">{{item.category}}</text>
-					</view>
+		  <text class="tab-text" :class="{ 'tab-text-active': currentTab === index }">
+			{{ tab.name }}
+		  </text>
+		</view>
+	  </view>
+	  
+	  <!-- 内容列表区域 -->
+	  <view class="content-area">
+		<scroll-view 
+		  class="scroll-container" 
+		  scroll-y="true" 
+		  :style="{ height: scrollViewHeight + 'px' }"
+		  enable-back-to-top="true"
+		  show-scrollbar="false"
+		  @scrolltolower="loadMore"
+		>
+		  <view class="consultation-list">
+			<view 
+			  v-for="(item, index) in filteredConsultationList" 
+			  :key="index"
+			  class="consultation-card"
+			  @click="handleCardClick(item)"
+			>
+			  <!-- 左侧头像占位符 -->
+			  <view class="avatar-placeholder"></view>
+			  
+			  <!-- 右侧信息区域 -->
+			  <view class="info-area">
+				<!-- 第一行：用户名和案件类型 -->
+				<view class="first-line">
+				  <text class="user-name">{{ item.userName }}</text>
+				  <text class="case-type">{{ item.caseType }}</text>
 				</view>
-				<view class="actions">
-					<button class="action-btn" @click.stop="handleReply(item)" v-if="item.status === 'pending'">
-						<uni-icons type="chat" size="16" color="#007AFF"></uni-icons>
-						<text>回复</text>
-					</button>
+				
+				<!-- 第二行：描述文本 -->
+				<view class="second-line">
+				  <text class="description">{{ item.description }}</text>
 				</view>
+			  </view>
+			  
+			  <!-- 右上角时间戳和右下角查看按钮 -->
+			  <view class="action-area">
+				<text class="time-stamp">{{ item.timeStamp }}</text>
+				<view class="view-button" @click.stop="handleViewClick(item)">
+				  <text class="button-text">查看</text>
+				</view>
+			  </view>
 			</view>
-			
-			<!-- 加载更多 -->
-			<view class="loading" v-if="loading">加载中...</view>
-			<view class="no-more" v-if="noMore">没有更多数据了</view>
+		  </view>
+		  
+		  <!-- 加载更多提示 -->
+		  <view v-if="loading" class="loading-tip">
+			<text class="loading-text">加载中...</text>
+		  </view>
+		  
+		  <!-- 没有更多数据提示 -->
+		  <view v-if="!hasMore && filteredConsultationList.length > 0" class="no-more-tip">
+			<text class="no-more-text">没有更多数据了</text>
+		  </view>
+		  
+		  <!-- 空状态 -->
+		  <view v-if="filteredConsultationList.length === 0 && !loading" class="empty-state">
+			<text class="empty-text">暂无咨询信息</text>
+		  </view>
 		</scroll-view>
-		
-		<!-- 回复弹窗 -->
-		<uni-popup ref="replyPopup" type="bottom">
-			<view class="reply-popup">
-				<view class="popup-header">
-					<text class="title">回复咨询</text>
-					<text class="close" @click="closeReplyPopup">关闭</text>
-				</view>
-				<view class="popup-content">
-					<view class="form-item">
-						<text class="label">回复内容</text>
-						<textarea v-model="replyForm.content" placeholder="请输入回复内容" />
-					</view>
-					<view class="form-item">
-						<text class="label">上传图片</text>
-						<view class="upload-list">
-							<view 
-								class="upload-item" 
-								v-for="(item, index) in replyForm.images" 
-								:key="index"
-							>
-								<image :src="item" mode="aspectFill"></image>
-								<view class="delete-btn" @click="deleteImage(index)">
-									<uni-icons type="close" size="20" color="#fff"></uni-icons>
-								</view>
-							</view>
-							<view class="upload-btn" @click="chooseImage" v-if="replyForm.images.length < 9">
-								<uni-icons type="camera" size="30" color="#999"></uni-icons>
-								<text>上传图片</text>
-							</view>
-						</view>
-					</view>
-					<button class="submit-btn" @click="submitReply">提交回复</button>
-				</view>
-			</view>
-		</uni-popup>
+	  </view>
+	  
+	  <!-- 底部标签栏 -->
+	  <psychologist-tabbar />
 	</view>
-</template>
-
-<script>
-	export default {
-		data() {
-			return {
-				searchKey: '',
-				currentStatus: 'all',
-				statusList: [
-					{ label: '全部', value: 'all' },
-					{ label: '待回复', value: 'pending' },
-					{ label: '已回复', value: 'replied' },
-					{ label: '已关闭', value: 'closed' }
-				],
-				consultationList: [],
-				page: 1,
-				pageSize: 10,
-				loading: false,
-				noMore: false,
-				scrollHeight: 0,
-				currentConsultation: null,
-				replyForm: {
-					content: '',
-					images: []
-				}
-			}
-		},
-		onLoad() {
-			// 获取屏幕高度
-			const systemInfo = uni.getSystemInfoSync()
-			// 减去搜索栏和状态标签的高度
-			this.scrollHeight = systemInfo.windowHeight - uni.upx2px(180)
-			
-			this.loadData()
-		},
-		methods: {
-			handleSearch() {
-				this.page = 1
-				this.consultationList = []
-				this.noMore = false
-				this.loadData()
-			},
-			handleStatusChange(status) {
-				this.currentStatus = status
-				this.page = 1
-				this.consultationList = []
-				this.noMore = false
-				this.loadData()
-			},
-			loadData() {
-				if (this.loading || this.noMore) return
-				
-				this.loading = true
-				// 模拟接口请求
-				setTimeout(() => {
-					const mockData = Array(this.pageSize).fill(0).map((_, index) => ({
-						id: this.page * this.pageSize + index,
-						title: '情绪管理问题咨询',
-						description: '最近工作压力很大，经常感到焦虑和失眠，不知道该如何调节自己的情绪状态。',
-						status: ['pending', 'replied', 'closed'][Math.floor(Math.random() * 3)],
-						statusText: {
-							pending: '待回复',
-							replied: '已回复',
-							closed: '已关闭'
-						}[this.status],
-						userName: '李先生',
-						createTime: '2024-05-09 14:30',
-						category: '情绪管理'
-					}))
-					
-					this.consultationList = [...this.consultationList, ...mockData]
-					this.loading = false
-					
-					if (this.page >= 3) {
-						this.noMore = true
-					}
-					this.page++
-				}, 1000)
-			},
-			loadMore() {
-				this.loadData()
-			},
-			goToDetail(id) {
-				uni.navigateTo({
-					url: `/pages/psychologist/consultation/detail?id=${id}`
-				})
-			},
-			handleReply(consultation) {
-				this.currentConsultation = consultation
-				this.replyForm.content = ''
-				this.replyForm.images = []
-				this.$refs.replyPopup.open()
-			},
-			closeReplyPopup() {
-				this.$refs.replyPopup.close()
-			},
-			chooseImage() {
-				uni.chooseImage({
-					count: 9 - this.replyForm.images.length,
-					success: (res) => {
-						this.replyForm.images = [...this.replyForm.images, ...res.tempFilePaths]
-					}
-				})
-			},
-			deleteImage(index) {
-				this.replyForm.images.splice(index, 1)
-			},
-			submitReply() {
-				if (!this.replyForm.content.trim()) {
-					uni.showToast({
-						title: '请输入回复内容',
-						icon: 'none'
-					})
-					return
-				}
-				
-				// 模拟提交回复
-				uni.showLoading({
-					title: '提交中...'
-				})
-				
-				setTimeout(() => {
-					uni.hideLoading()
-					uni.showToast({
-						title: '回复成功',
-						icon: 'success'
-					})
-					
-					// 更新列表数据
-					const index = this.consultationList.findIndex(item => item.id === this.currentConsultation.id)
-					if (index !== -1) {
-						this.consultationList[index].status = 'replied'
-						this.consultationList[index].statusText = '已回复'
-					}
-					
-					this.closeReplyPopup()
-				}, 1500)
-			}
-		}
-	}
-</script>
-
-<style lang="scss">
-.container {
-	min-height: 100vh;
-	background-color: #f5f5f5;
-}
-
-.search-box {
-	padding: 20rpx 30rpx;
-	background-color: #fff;
+  </template>
+  
+  <script>
+  import PsychologistTabbar from '@/components/tabbar/psychologist-tabbar/psychologist-tabbar.vue'
+  
+  export default {
+	components: {
+	  PsychologistTabbar
+	},
+	data() {
+	  return {
+		// 标签列表
+		tabsList: [
+		  { name: '待回复' },
+		  { name: '咨询中' },
+		  { name: '已完成' }
+		],
+		currentTab: 0,
+		
+		// 咨询信息列表
+		consultationList: [
+		  {
+			id: 1,
+			userName: '李先生',
+			caseType: '就业压力',
+			description: '公司拖欠工资三个月，当时...',
+			timeStamp: '10分钟前',
+			status: 0 // 0-待回复, 1-咨询中, 2-已完成
+		  },
+		  {
+			id: 2,
+			userName: '王女士',
+			caseType: '合同纠纷',
+			description: '租房合同违约问题，房东...',
+			timeStamp: '30分钟前',
+			status: 0
+		  },
+		  {
+			id: 3,
+			userName: '张先生',
+			caseType: '交通事故',
+			description: '发生交通事故，对方全责但...',
+			timeStamp: '1小时前',
+			status: 0
+		  },
+		  {
+			id: 4,
+			userName: '刘女士',
+			caseType: '婚姻家庭',
+			description: '离婚财产分割问题，需要...',
+			timeStamp: '2小时前',
+			status: 1
+		  },
+		  {
+			id: 5,
+			userName: '陈先生',
+			caseType: '债权债务',
+			description: '朋友借钱不还，有借条但...',
+			timeStamp: '昨天',
+			status: 2
+		  }
+		],
+		
+		// 滚动相关
+		scrollViewHeight: 0,
+		loading: false,
+		hasMore: true
+	  }
+	},
 	
-	.search-input {
+	computed: {
+	  // 根据当前标签筛选咨询列表
+	  filteredConsultationList() {
+		return this.consultationList.filter(item => item.status === this.currentTab)
+	  }
+	},
+	
+	mounted() {
+	  this.calculateScrollHeight()
+	},
+	
+	methods: {
+	  // 计算滚动区域高度
+	  calculateScrollHeight() {
+		const systemInfo = uni.getSystemInfoSync()
+		const statusBarHeight = systemInfo.statusBarHeight || 0
+		const headerHeight = 60 // 页面标题高度
+		const tabHeight = 50 // 标签导航高度
+		const tabbarHeight = 50 // uv-tabbar 的高度
+		
+		this.scrollViewHeight = systemInfo.windowHeight - statusBarHeight - headerHeight - tabHeight - tabbarHeight
+	  },
+	  
+	  // 处理标签切换
+	  handleTabChange(index) {
+		this.currentTab = index
+	  },
+	  
+	  // 处理卡片点击
+	  handleCardClick(item) {
+		console.log('点击咨询卡片:', item)
+		// 这里可以跳转到详情页面
+	  },
+	  
+	  // 处理查看按钮点击
+	  handleViewClick(item) {
+		console.log('点击查看按钮:', item)
+		// 这里可以跳转到咨询详情或聊天页面
+	  },
+	  
+	  // 加载更多数据
+	  loadMore() {
+		if (this.loading || !this.hasMore) return
+		
+		this.loading = true
+		
+		// 模拟加载更多数据
+		setTimeout(() => {
+		  // 这里可以调用API加载更多数据
+		  this.loading = false
+		  // 如果没有更多数据，设置hasMore为false
+		  // this.hasMore = false
+		}, 1000)
+	  }
+	}
+  }
+  </script>
+  
+  <style lang="scss" scoped>
+  .container {
+	width: 100%;
+	height: 100vh;
+	background-image: url('http://localhost:3000/static/bg11.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	display: flex;
+	flex-direction: column;
+  }
+  
+  // 状态栏占位
+  .status-bar {
+	height: var(--status-bar-height);
+	background: transparent;
+  }
+  
+  // 页面标题区域
+  .header {
+	padding: 16px 20px 12px;
+	
+	.title {
+	  font-size: 24px;
+	  font-weight: bold;
+	  color: #333333;
+	  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+	}
+  }
+  
+  // 标签页导航栏
+  .tab-navigation {
+	padding: 0 20px 16px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	
+	.tab-item {
+	  height: 32px;
+	  padding: 0 12px;
+	  border-radius: 6px;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  background: #ffecec;
+	  
+	  &.tab-active {
+		background-color: #ff7d7d;
+	  }
+	}
+	
+	.tab-text {
+	  font-size: 15px;
+	  color: #ff7d7d;
+	  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+	  
+	  &.tab-text-active {
+		color: #FFFFFF;
+	  }
+	}
+  }
+  
+  // 内容列表区域
+  .content-area {
+	flex: 1;
+	padding: 0 12px;
+  }
+  
+  .scroll-container {
+	width: 100%;
+  }
+  
+  .consultation-list {
+	padding-bottom: 20px;
+  }
+  
+  // 咨询卡片样式
+  .consultation-card {
+	background-color: #FFFFFF;
+	border-radius: 12px;
+	padding: 12px 16px;
+	margin-bottom: 10px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+	display: flex;
+	align-items: flex-start;
+	position: relative;
+	
+	// 左侧头像占位符
+	.avatar-placeholder {
+	  width: 50px;
+	  height: 50px;
+	  border-radius: 25px;
+	  background-color: #D9D9D9;
+	  margin-right: 12px;
+	  flex-shrink: 0;
+	}
+	
+	// 右侧信息区域
+	.info-area {
+	  flex: 1;
+	  margin-right: 80px; // 为右侧操作区域留出空间
+	  
+	  .first-line {
 		display: flex;
 		align-items: center;
-		background-color: #f5f5f5;
-		border-radius: 30rpx;
-		padding: 10rpx 20rpx;
+		margin-bottom: 4px;
 		
-		input {
-			flex: 1;
-			height: 60rpx;
-			margin-left: 10rpx;
-			font-size: 28rpx;
+		.user-name {
+		  font-size: 16px;
+		  font-weight: 500;
+		  color: #333333;
+		  margin-right: 8px;
+		  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
 		}
+		
+		.case-type {
+		  font-size: 16px;
+		  color: #333333;
+		  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+		}
+	  }
+	  
+	  .second-line {
+		.description {
+		  font-size: 13px;
+		  color: #666666;
+		  line-height: 1.3;
+		  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+		  overflow: hidden;
+		  text-overflow: ellipsis;
+		  white-space: nowrap;
+		}
+	  }
 	}
-}
-
-.status-scroll {
-	background-color: #fff;
-	padding: 20rpx 0;
-	white-space: nowrap;
 	
-	.status-list {
-		display: inline-block;
-		padding: 0 20rpx;
+	// 右上角时间戳和右下角查看按钮
+	.action-area {
+	  position: absolute;
+	  right: 16px;
+	  top: 12px;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: flex-end;
+	  height: calc(100% - 24px);
+	  justify-content: space-between;
+	  
+	  .time-stamp {
+		font-size: 12px;
+		color: #999999;
+		font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+	  }
+	  
+	  .view-button {
+		background-color: #ff9595;
+		border-radius: 5px;
+		padding: 2px 6px;
 		
-		.status-item {
-			display: inline-block;
-			padding: 10rpx 30rpx;
-			margin-right: 20rpx;
-			font-size: 28rpx;
-			color: #666;
-			background-color: #f5f5f5;
-			border-radius: 30rpx;
-			
-			&.active {
-				color: #fff;
-				background-color: #007AFF;
-			}
+		.button-text {
+		  font-size: 13px;
+		  color: #FFFFFF;
+		  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
 		}
+	  }
 	}
-}
-
-.consultation-list {
-	background-color: #fff;
-	
-	.consultation-item {
-		padding: 30rpx;
-		border-bottom: 1rpx solid #eee;
-		
-		.consultation-info {
-			margin-bottom: 20rpx;
-			
-			.header {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				margin-bottom: 10rpx;
-				
-				.title {
-					font-size: 32rpx;
-					color: #333;
-					font-weight: bold;
-				}
-				
-				.status {
-					font-size: 24rpx;
-					padding: 4rpx 12rpx;
-					border-radius: 4rpx;
-					
-					&.pending {
-						color: #ff9500;
-						background-color: rgba(255, 149, 0, 0.1);
-					}
-					
-					&.replied {
-						color: #4cd964;
-						background-color: rgba(76, 217, 100, 0.1);
-					}
-					
-					&.closed {
-						color: #999;
-						background-color: rgba(153, 153, 153, 0.1);
-					}
-				}
-			}
-			
-			.desc {
-				font-size: 28rpx;
-				color: #666;
-				margin-bottom: 20rpx;
-				line-height: 1.6;
-			}
-			
-			.meta {
-				display: flex;
-				flex-wrap: wrap;
-				margin-bottom: 10rpx;
-				
-				.user, .time {
-					font-size: 26rpx;
-					color: #666;
-					margin-right: 30rpx;
-					
-					.label {
-						color: #999;
-					}
-				}
-			}
-			
-			.category {
-				font-size: 26rpx;
-				color: #666;
-				
-				.label {
-					color: #999;
-				}
-			}
-		}
-		
-		.actions {
-			display: flex;
-			justify-content: flex-end;
-			
-			.action-btn {
-				display: flex;
-				align-items: center;
-				background: none;
-				border: 1rpx solid #007AFF;
-				border-radius: 30rpx;
-				padding: 10rpx 20rpx;
-				margin: 0;
-				line-height: 1;
-				
-				&::after {
-					display: none;
-				}
-				
-				text {
-					font-size: 24rpx;
-					color: #007AFF;
-					margin-left: 6rpx;
-				}
-			}
-		}
-	}
-}
-
-.loading, .no-more {
+  }
+  
+  // 加载提示
+  .loading-tip {
 	text-align: center;
-	padding: 30rpx;
-	color: #999;
-	font-size: 24rpx;
-}
-
-.reply-popup {
-	background-color: #fff;
-	border-radius: 20rpx 20rpx 0 0;
+	padding: 20px;
 	
-	.popup-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 30rpx;
-		border-bottom: 1rpx solid #eee;
-		
-		.title {
-			font-size: 32rpx;
-			color: #333;
-			font-weight: bold;
-		}
-		
-		.close {
-			font-size: 28rpx;
-			color: #999;
-		}
+	.loading-text {
+	  font-size: 14px;
+	  color: #888888;
 	}
+  }
+  
+  .no-more-tip {
+	text-align: center;
+	padding: 20px;
 	
-	.popup-content {
-		padding: 30rpx;
-		
-		.form-item {
-			margin-bottom: 30rpx;
-			
-			.label {
-				display: block;
-				font-size: 28rpx;
-				color: #333;
-				margin-bottom: 10rpx;
-			}
-			
-			textarea {
-				width: 100%;
-				height: 200rpx;
-				background-color: #f5f5f5;
-				border-radius: 8rpx;
-				padding: 20rpx;
-				font-size: 28rpx;
-			}
-			
-			.upload-list {
-				display: flex;
-				flex-wrap: wrap;
-				
-				.upload-item {
-					width: 200rpx;
-					height: 200rpx;
-					margin-right: 20rpx;
-					margin-bottom: 20rpx;
-					position: relative;
-					
-					image {
-						width: 100%;
-						height: 100%;
-						border-radius: 8rpx;
-					}
-					
-					.delete-btn {
-						position: absolute;
-						right: -10rpx;
-						top: -10rpx;
-						width: 40rpx;
-						height: 40rpx;
-						background-color: rgba(0, 0, 0, 0.5);
-						border-radius: 50%;
-						display: flex;
-						align-items: center;
-						justify-content: center;
-					}
-				}
-				
-				.upload-btn {
-					width: 200rpx;
-					height: 200rpx;
-					background-color: #f5f5f5;
-					border-radius: 8rpx;
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					justify-content: center;
-					
-					text {
-						font-size: 24rpx;
-						color: #999;
-						margin-top: 10rpx;
-					}
-				}
-			}
-		}
-		
-		.submit-btn {
-			width: 100%;
-			height: 80rpx;
-			background-color: #007AFF;
-			color: #fff;
-			font-size: 32rpx;
-			border-radius: 40rpx;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			
-			&::after {
-				display: none;
-			}
-		}
+	.no-more-text {
+	  font-size: 14px;
+	  color: #AAAAAA;
 	}
-}
-</style> 
+  }
+  
+  // 空状态
+  .empty-state {
+	text-align: center;
+	padding: 60px 20px;
+	
+	.empty-text {
+	  font-size: 16px;
+	  color: #999999;
+	}
+  }
+  </style>

@@ -20,22 +20,22 @@ export default {
       currentPath: '',
       tabbarList: [
         {
-          pagePath: '/pages/psychologist/index/index',
-          text: '工作台',
-          iconPath: '/static/tabbar/psychologist-home.png',
-          selectedIconPath: '/static/tabbar/psychologist-home-active.png'
+          pagePath: '/pages/psychologist/index/dashboard/index',
+          text: '首页',
+          iconPath: 'http://localhost:3000/static/icons/home.png',
+          selectedIconPath: 'http://localhost:3000/static/icons/home-acitve-red.png'
         },
         {
           pagePath: '/pages/psychologist/consultation/consultation',
-          text: '咨询管理',
-          iconPath: '/static/tabbar/consultation.png',
-          selectedIconPath: '/static/tabbar/consultation-active.png'
+          text: '信息',
+          iconPath: 'http://localhost:3000/static/icons/info.png',
+          selectedIconPath: 'http://localhost:3000/static/icons/chat-active-red.png'
         },
         {
-          pagePath: '/pages/psychologist/reports/reports',
-          text: '评估报告',
-          iconPath: '/static/tabbar/reports.png',
-          selectedIconPath: '/static/tabbar/reports-active.png'
+          pagePath: '/pages/psychologist/profile/index/index',
+          text: '我的',
+          iconPath: 'http://localhost:3000/static/icons/profile.png',
+          selectedIconPath: 'http://localhost:3000/static/icons/profile-acitve-red.png'
         }
       ]
     }
@@ -90,6 +90,6 @@ export default {
 }
 
 .active-text {
-  color: #4893FF;
+  color: #FF5555;
 }
 </style>

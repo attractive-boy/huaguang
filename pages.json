@@ -1,4 +1,7 @@
 {
+	"globalStyle": {
+		"navigationStyle": "custom"
+	},
 	"pages": [ 
 		{
 			"path" : "pages/login/login",
@@ -40,6 +43,119 @@
 					}
 				},
 				{
+					"path": "fund/apply/index",
+					"style": {
+						"navigationBarTitleText": "青年帮扶基金申请表",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "fund/case/index",
+					"style": {
+						"navigationBarTitleText": "帮扶案例",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "fund/counseling/index",
+					"style": {
+						"navigationBarTitleText": "心理咨询",
+						"navigationStyle": "custom",
+						"enablePullDownRefresh": true
+					}
+				},
+				{
+					"path": "fund/counseling/test",
+					"style": {
+						"navigationBarTitleText": "咨询测评",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "fund/help-types/index",
+					"style": {
+						"navigationBarTitleText": "帮扶类型",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "fund/legal/index",
+					"style": {
+						"navigationBarTitleText": "法律护航申请",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "fund/psychological-apply/index",
+					"style": {
+						"navigationBarTitleText": "心理支持申请",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "fund/debt/index",
+					"style": {
+						"navigationBarTitleText": "债务纾困申请",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "fund/unemployment-apply/index",
+					"style": {
+						"navigationBarTitleText": "失业援助申请",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "fund/credit-recovery/index",
+					"style": {
+						"navigationBarTitleText": "申请信用记录恢复",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "fund/credit-score/index",
+					"style": {
+						"navigationBarTitleText": "信用评分",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/legal-help/index",
+					"style": {
+						"navigationBarTitleText": "获取法律帮助",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/consultation/index",
+					"style": {
+						"navigationBarTitleText": "律师咨询",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/lawyer-detail/index",
+					"style": {
+						"navigationBarTitleText": "律师详情",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/consultation-order/index",
+					"style": {
+						"navigationBarTitleText": "咨询订单",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/order-detail/index",
+					"style": {
+						"navigationBarTitleText": "订单详情",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "info/index",
 					"style": {
 						"navigationBarTitleText": "信息",
@@ -47,9 +163,37 @@
 					}
 				},
 				{
-					"path": "profile/profile",
+					"path": "profile/index",
 					"style": {
 						"navigationBarTitleText": "我的",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/help-records/index",
+					"style": {
+						"navigationBarTitleText": "我的帮扶记录",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/edit/index",
+					"style": {
+						"navigationBarTitleText": "编辑个人资料",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/video-collection/index",
+					"style": {
+						"navigationBarTitleText": "我的收藏视频",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/consultation-records/index",
+					"style": {
+						"navigationBarTitleText": "咨询记录",
 						"navigationStyle": "custom"
 					}
 				},
@@ -58,6 +202,151 @@
 					"style": {
 						"navigationBarTitleText": "填写申请表",
 						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/chat/index",
+					"style": {
+						"navigationBarTitleText": "律师咨询",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/chat/upload-resume/index",
+					"style": {
+						"navigationBarTitleText": "上传简历",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/skill-training/index",
+					"style": {
+						"navigationBarTitleText": "技能培训",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/skill-training/detail/index",
+					"style": {
+						"navigationBarTitleText": "课程详情",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/search/index",
+					"style": {
+						"navigationBarTitleText": "搜索",
+						"navigationStyle": "custom",
+						"backgroundColor": "#F0F8FF"
+					}
+				},
+				{
+					"path": "index/work-service/index",
+					"style": {
+						"navigationBarTitleText": "工作服务",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/job-search-result/index",
+					"style": {
+						"navigationBarTitleText": "职位搜索",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/job-platform/index",
+					"style": {
+						"navigationBarTitleText": "招聘平台",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/company-list/index",
+					"style": {
+						"navigationBarTitleText": "公司列表",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/recommended-jobs/index",
+					"style": {
+						"navigationBarTitleText": "推荐职业",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/job-detail/index",
+					"style": {
+						"navigationBarTitleText": "职位详情",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/company-detail/index",
+					"style": {
+						"navigationBarTitleText": "公司详情",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/about/index",
+					"style": {
+						"navigationBarTitleText": "关于",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/security/index",
+					"style": {
+						"navigationBarTitleText": "账号与安全",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/invitation/index",
+					"style": {
+						"navigationBarTitleText": "邀请管理",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/invitation-poster/index",
+					"style": {
+						"navigationBarTitleText": "邀请海报",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/promotion-commission/index",
+					"style": {
+						"navigationBarTitleText": "推广佣金",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/assistance/index",
+					"style": {
+						"navigationBarTitleText": "帮扶记录",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "profile/job-hunting/index",
+					"style": {
+						"navigationBarTitleText": "求职记录"
+					}
+				},
+				{
+					"path": "profile/clear-cache/index",
+					"style": {
+						"navigationBarTitleText": "清除缓存"
+					}
+				},
+				{
+					"path": "profile/video-collection-null/index",
+					"style": {
+						"navigationBarTitleText": "我的收藏视频"
 					}
 				}
 			]
@@ -72,6 +361,52 @@
 					}
 				},
 				{
+					"path": "index/consultation-message/index"
+					
+				},
+				{
+					"path": "index/dashboard/index",
+					"style": {
+						"navigationBarTitleText": "首页",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/consultation-info/index",
+					"style": {
+						"navigationBarTitleText": "消息",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/income-management/index",
+					"style": {
+						"navigationBarTitleText": "收入管理",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/notification-settings/index",
+					"style": {
+						"navigationBarTitleText": "通知设置",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/online-status/index",
+					"style": {
+						"navigationBarTitleText": "在线状态设置",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/document-review/index",
+					"style": {
+						"navigationBarTitleText": "法律文书审核列表",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "cases/cases",
 					"style": {
 						"navigationBarTitleText": "案件管理"
@@ -81,6 +416,59 @@
 					"path": "consultation/consultation",
 					"style": {
 						"navigationBarTitleText": "咨询管理"
+					}
+				},
+				{
+					"path": "index/arbitration-review/index",
+					"style": {
+						"navigationBarTitleText": "文书详情"
+					}
+				},
+				{
+					"path": "index/profile/index",
+					"style": {
+						"navigationBarTitleText": "我的",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/legal-document-list/index",
+					"style": {
+						"navigationBarTitleText": "法律文书详情页",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/lawyer-profile/index",
+					"style": {
+						"navigationBarTitleText": "收入管理",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/change-password/index",
+					"style": {
+						"navigationBarTitleText": "修改密码",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "index/arbitration-download/index",
+					"style": {
+						"navigationBarTitleText": "文书详情"
+					}
+				},
+				{
+					"path": "index/profile/binding/index",
+					"style": {
+						"navigationBarTitleText": "绑定手机号"
+					}
+				},
+				{
+					"path": "chat/index",
+					"style": {
+						"navigationBarTitleText": "律师咨询",
+						"navigationStyle": "custom"
 					}
 				}
 			]
@@ -95,6 +483,13 @@
 					}
 				},
 				{
+					"path": "index/dashboard/index",
+					"style": {
+						"navigationBarTitleText": "心理端首页",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "consultation/consultation",
 					"style": {
 						"navigationBarTitleText": "咨询管理"
@@ -105,67 +500,47 @@
 					"style": {
 						"navigationBarTitleText": "评估报告"
 					}
-				}
-			]
-		},
-		{
-			"root": "TUIKit",
-			"pages": [
+				},
 				{
-					"path": "components/TUIConversation/index",
+					"path": "profile/index/index",
 					"style": {
-						"navigationBarTitleText": "腾讯云 IM"
+						"navigationBarTitleText": "心理师个人资料",
+						"navigationStyle": "custom"
 					}
 				},
 				{
-					"path": "components/TUIChat/index",
+					"path": "profile/changepwd/index",
 					"style": {
-						"navigationBarTitleText": "腾讯云 IM",
-						"app-plus": {
-							"softinputMode": "adjustResize",
-							"titleNView": {
-								"buttons": [
-									{
-										"type": "menu"
-									}
-								]
-							}
-						},
-						"h5": {
-							"titleNView": {
-								"buttons": []
-							}
-						}
+						"navigationBarTitleText": "修改密码",
+						"navigationStyle": "custom"
 					}
 				},
 				{
-					"path": "components/TUIChat/video-play",
+					"path": "profile/income-management/index",
 					"style": {
-						"navigationBarTitleText": "腾讯云 IM"
+						"navigationBarTitleText": "收入管理",
+						"navigationStyle": "custom"
 					}
 				},
 				{
-					"path": "components/TUIChat/web-view",
+					"path": "profile/notification-settings/index",
 					"style": {
-						"navigationBarTitleText": "腾讯云 IM"
+						"navigationBarTitleText": "消息通知设置",
+						"navigationStyle": "custom"
 					}
 				},
 				{
-					"path": "components/TUIContact/index",
+					"path": "profile/online-status/index",
 					"style": {
-						"navigationBarTitleText": "腾讯云 IM"
+						"navigationBarTitleText": "在线状态设置",
+						"navigationStyle": "custom"
 					}
 				},
 				{
-					"path": "components/TUIGroup/index",
+					"path": "profile/psychology-info-settings/index",
 					"style": {
-						"navigationBarTitleText": "腾讯云 IM"
-					}
-				},
-				{
-					"path": "components/TUISearch/index",
-					"style": {
-						"navigationBarTitleText": "聊天记录"
+						"navigationBarTitleText": "心理信息编辑",
+						"navigationStyle": "custom"
 					}
 				}
 			]
@@ -177,11 +552,6 @@
 			"packages": ["TUIKit"]
 		}
 	},
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "华光法律咨询",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
+	
 	"uniIdRouter": {}
 }
