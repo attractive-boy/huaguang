@@ -63,7 +63,6 @@
           borderRadius: '20rpx',
           height: '97rpx',
           fontSize: '36rpx',
-          fontWeight: 'bold',
           width: '85%',
           letterSpacing: '13rpx'
         }"
@@ -120,9 +119,8 @@ export default {
     
     // 处理支付按钮点击
     handlePayment() {
-      console.log('跳转到聊天页面')
       uni.navigateTo({
-        url: '/pages/user/index/chat/index'
+        url: '/pages/lawyer/chat/index'
       })
     }
   }

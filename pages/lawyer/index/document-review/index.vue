@@ -207,10 +207,10 @@ export default {
     // 跳转到文书详情页
     goToDocumentDetail(document) {
       console.log('查看文书详情:', document)
-      // TODO: 跳转到文书详情页
-      // uni.navigateTo({
-      //   url: `/pages/lawyer/document/detail?id=${document.id}`
-      // })
+      // 跳转到仲裁审核页面
+      uni.navigateTo({
+        url: '/pages/lawyer/index/arbitration-review/index'
+      })
     },
     
     // 下拉刷新
@@ -250,7 +250,10 @@ export default {
 <style lang="scss" scoped>
 .container {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #EFF7FF 0%, #F8FBFF 100%);
+  background-image: url('http://localhost:3000/static/bg10.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 // 状态栏占位
@@ -266,7 +269,9 @@ export default {
   padding: 20rpx 30rpx;
   
   .navbar-content {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20rpx;
     
     .back-button {
       display: flex;
@@ -280,9 +285,6 @@ export default {
     }
     
     .page-title {
-      position: absolute;
-      left: 0;
-      top: 60rpx;
       font-size: 44rpx;
       font-weight: bold;
       color: #333333;
@@ -299,9 +301,10 @@ export default {
   backdrop-filter: blur(10px);
   
   .tab-item {
-    padding: 12rpx 30rpx;
+    padding: 10rpx 16rpx;
     border-radius: 30rpx;
     transition: all 0.3s ease;
+    background-color: #ecf1ff;
     
     &.tab-active {
       background-color: #4A90E2;
@@ -364,8 +367,12 @@ export default {
       gap: 20rpx;
       
       .status-tag {
-        padding: 4rpx 12rpx;
-        border-radius: 6rpx;
+        padding: 8rpx 16rpx;
+        border-radius: 8rpx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: fit-content;
         
         &.status-pending {
           background-color: #4A90E2;
@@ -380,8 +387,9 @@ export default {
         }
         
         .status-text {
-          font-size: 20rpx;
+          font-size: 22rpx;
           color: #FFFFFF;
+          white-space: nowrap;
         }
       }
       

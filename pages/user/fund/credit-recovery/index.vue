@@ -187,6 +187,8 @@ export default {
   min-height: 100vh;
   background-color: #EBF4FA;
   position: relative;
+  background: url('http://localhost:3000/static/apply-bg.png') no-repeat center center;
+  background-size: 100% 100%;
   
   .status-bar {
     height: var(--status-bar-height);
@@ -195,8 +197,8 @@ export default {
   
   .page-header {
     position: relative;
-    background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
-    padding: 20rpx 30rpx 60rpx;
+ 
+    padding: 70rpx 30rpx 60rpx;
     overflow: hidden;
     
     .back-navigation {
@@ -218,7 +220,7 @@ export default {
       color: #FFFFFF;
       font-size: 40rpx;
       font-weight: 600;
-      text-align: center;
+      text-align: left;
       z-index: 10;
       position: relative;
     }
@@ -264,7 +266,7 @@ export default {
             .input-control {
               background-color: #F7F7F7;
               border-radius: 12rpx;
-              padding: 24rpx 20rpx;
+              padding: 34rpx 20rpx;
               font-size: 28rpx;
               color: #333333;
               width: 100%;
@@ -291,7 +293,7 @@ export default {
           .input-control {
             background-color: #F7F7F7;
             border-radius: 12rpx;
-            padding: 24rpx 20rpx;
+            padding: 34rpx 20rpx;
             font-size: 28rpx;
             color: #333333;
             width: 100%;
@@ -342,7 +344,11 @@ export default {
       justify-content: center;
       margin: 0 auto;
       width: 90%;
-      box-shadow: 0 4rpx 12rpx rgba(59, 130, 246, 0.3);
+      // box-shadow: 0 4rpx 12rpx rgba(59, 130, 246, 0.3);
+      position: fixed; /* 使按钮固定在底部 */
+      bottom: 90rpx; /* 距离底部的距离 */
+      left: 50%; /* 水平居中 */
+      transform: translateX(-50%); /* 使按钮居中对齐 */
       
       .submit-text {
         color: #FFFFFF;

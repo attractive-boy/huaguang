@@ -36,7 +36,7 @@
 						hover-class="action-item-hover"
 					>
 						<view class="action-icon">
-							<text class="iconfont" :class="item.icon" :style="{ color: '#4A90E2' }"></text>
+							<uv-image :src="`http://localhost:3000/static/icons/${item.icon}.png`" width="50rpx" height="50rpx" mode="aspectFit"></uv-image>
 						</view>
 						<text class="action-text">{{ item.text }}</text>
 					</view>
@@ -55,7 +55,7 @@
 						hover-class="list-item-hover"
 					>
 						<view class="item-left">
-							<text class="item-icon iconfont" :class="item.icon"></text>
+							<uv-image :src="`http://localhost:3000/static/icons/${item.icon}.png`" width="32rpx" height="32rpx"  mode="aspectFit"></uv-image>
 							<text class="item-text">{{ item.text }}</text>
 						</view>
 						<text class="arrow-icon">></text>
@@ -75,7 +75,7 @@
 						hover-class="list-item-hover"
 					>
 						<view class="item-left">
-							<text class="item-icon iconfont" :class="item.icon"></text>
+							<uv-image :src="`http://localhost:3000/static/icons/${item.icon}.png`" width="32rpx" height="32rpx"  mode="aspectFit"></uv-image>
 							<text class="item-text">{{ item.text }}</text>
 						</view>
 						<text class="arrow-icon">></text>
@@ -108,56 +108,56 @@ export default {
 			quickActions: [
 				{
 					type: 'help',
-					icon: 'icon-bangfu',
+					icon: 'huifu',
 					text: '我的帮扶'
 				},
 				{
 					type: 'video',
-					icon: 'icon-shipin',
+					icon: 'shoucangshipin',
 					text: '我的收藏视频'
 				},
 				{
 					type: 'job',
-					icon: 'icon-gongzuo',
+					icon: 'qiuzhi',
 					text: '我的求职'
 				}
 			],
 			settingsItems: [
 				{
 					type: 'security',
-					icon: 'icon-anquan',
+					icon: 'zhanghao',
 					text: '账号与安全'
 				},
 				{
 					type: 'profile',
-					icon: 'icon-yonghu',
+					icon: 'xinxixiugai',
 					text: '用户信息修改'
 				},
 				{
 					type: 'cache',
-					icon: 'icon-qingchu',
+					icon: 'qingkong',
 					text: '清空缓存'
 				},
 				{
 					type: 'about',
-					icon: 'icon-guanyu',
+					icon: 'guanyu',
 					text: '关于'
 				}
 			],
 			promotionItems: [
 				{
 					type: 'team',
-					icon: 'icon-tuandui',
+					icon: 'wodeteam',
 					text: '我的团队'
 				},
 				{
 					type: 'poster',
-					icon: 'icon-haibao',
+					icon: 'haibao',
 					text: '分享海报'
 				},
 				{
 					type: 'commission',
-					icon: 'icon-yongjin',
+					icon: 'yongjin',
 					text: '我的佣金'
 				}
 			]
@@ -298,6 +298,7 @@ export default {
 	background: #FFFFFF;
 	border-radius: 20rpx;
 	padding: 30rpx;
+	margin-top: 20rpx;
 	margin-bottom: 30rpx;
 	box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
 }
@@ -421,6 +422,7 @@ export default {
 .item-text {
 	font-size: 30rpx;
 	color: #333333;
+	margin-left: 30rpx;
 }
 
 .arrow-icon {

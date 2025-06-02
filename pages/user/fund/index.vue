@@ -35,7 +35,7 @@
           <text class="header-title">帮扶案例</text>
         </view>
         <view class="header-right">
-          <view class="more-btn">
+          <view class="more-btn" @click="navigateToCase">
             <text class="more-text">了解更多</text>
             <view class="triangle"></view>
           </view>
@@ -91,7 +91,7 @@
     <!-- 心理咨询模块 -->
     <view class="counseling-section" style="margin: 20rpx 30rpx;">
       <view class="feature-item"
-        style="background: linear-gradient(to right, #FF7F7F, #FDDCDC); position: relative; height: 400rpx; border-radius: 20rpx; overflow: hidden;"
+        style="background: linear-gradient(to right, #FF7F7F, #FDDCDC); position: relative; height: 300rpx; border-radius: 20rpx; overflow: visible;"
         @click="navigateToCounseling">
         <view class="counseling-header" style="display: flex; align-items: center; padding: 20rpx 30rpx;">
           <uv-image :src="`${config.staticBaseUrl}/icons/counseling.png`" width="60rpx" height="60rpx"
@@ -109,8 +109,9 @@
         <view class="counseling-footer" style="position: absolute; bottom: 30rpx; left: 30rpx;">
           <text style="color: #A83333; font-size: 32rpx;">勇敢迈出第一步 ></text>
         </view>
-        <uv-image class="counseling-bg" :src="`${config.staticBaseUrl}/icons/counseling-bg.png`" width="280rpx"
-          height="280rpx" mode="aspectFit" style="position: absolute; right: -10%; bottom: 0;"></uv-image>
+        <uv-image class="counseling-bg" :src="`${config.staticBaseUrl}/icons/counseling-bg.png`" width="240rpx"
+          height="240rpx" mode="aspectFit" style="position: absolute; right: 20rpx; bottom: 0; z-index: 1;">
+        </uv-image>
       </view>
     </view>
 
@@ -149,8 +150,8 @@ export default {
         }
       ],
       statistics: {
-        helpingCount: 0,
-        helpedCount: 0,
+        helpingCount: 7680,
+        helpedCount: 1680,
         totalAmount: 0,
         monthlyNewCount: 0
       },
@@ -188,7 +189,15 @@ export default {
         })
       }
     },
-    navigateToApply() { uni.navigateTo({ url: '/pages/user/fund/apply/index' }) }, navigateToHelpTypes() { uni.navigateTo({ url: '/pages/user/fund/help-types/index' }) }, navigateToCounseling() { uni.navigateTo({ url: '/pages/user/fund/counseling/index' }) }, navigateToCreditRecovery() { uni.navigateTo({ url: '/pages/user/fund/credit-recovery/index' }) },
+    navigateToApply() { uni.navigateTo({ url: '/pages/user/fund/apply/index' }) }, 
+    navigateToHelpTypes() { uni.navigateTo({ url: '/pages/user/fund/help-types/index' }) }, 
+    navigateToCounseling() { uni.navigateTo({ url: '/pages/user/fund/counseling/index' }) }, 
+    navigateToCreditRecovery() { uni.navigateTo({ url: '/pages/user/fund/credit-recovery/index' }) },
+    navigateToCase() { 
+      uni.navigateTo({ 
+        url: '/pages/user/fund/case/index' 
+      }) 
+    },
     async getStatistics() {
       try {
         const res = await request({
@@ -273,7 +282,7 @@ export default {
 @import '@/styles/variables.scss';
 
 .fund-page {
-  min-height: 100vh;
+  min-height: 100%;
   padding-bottom: 100rpx;
   /* 为 TabBar 预留空间 */
   background-image: $fund-bg-image;

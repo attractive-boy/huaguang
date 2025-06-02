@@ -50,6 +50,13 @@
 					}
 				},
 				{
+					"path": "fund/case/index",
+					"style": {
+						"navigationBarTitleText": "帮扶案例",
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "fund/counseling/index",
 					"style": {
 						"navigationBarTitleText": "心理咨询",
@@ -456,8 +463,14 @@
 					"style": {
 						"navigationBarTitleText": "绑定手机号"
 					}
+				},
+				{
+					"path": "chat/index",
+					"style": {
+						"navigationBarTitleText": "律师咨询",
+						"navigationStyle": "custom"
+					}
 				}
-				
 			]
 		},
 		{

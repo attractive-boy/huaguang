@@ -1,23 +1,12 @@
 <template>
   <view class="counseling-page">
-    <!-- 顶部导航栏 -->
-    <view class="navbar">
-      <view class="navbar-left" @click="goBack">
-        <uv-icon name="arrow-left" color="#FFFFFF" size="20"></uv-icon>
-        <text class="navbar-text">返回</text>
-      </view>
-    </view>
+   
     
     <!-- Banner区域 -->
     <view class="banner">
       <view class="banner-content">
         <view class="banner-title">Hi, 这是你的专属导师</view>
         <view class="banner-subtitle">无需预约，专属你的心理倾听老师</view>
-      </view>
-      <view class="banner-shapes">
-        <view class="shape shape-1"></view>
-        <view class="shape shape-2"></view>
-        <view class="shape shape-3"></view>
       </view>
     </view>
     
@@ -465,9 +454,17 @@ export default {
   .banner {
     position: relative;
     height: 300rpx;
-    background: linear-gradient(to right, #FFB6C1, #FFC0CB);
-    padding: 140rpx 40rpx 40rpx;
+    background-image: url('http://localhost:3000/static/bg6.png');
+    background-size: cover;
+    background-position: unset;
+    background-repeat: no-repeat;
+    padding: 120rpx 40rpx 40rpx;
     overflow: hidden;
+    .banner-content{
+      position: relative;
+      z-index: 1;
+      top:60rpx;
+    }
     
     &-content {
       position: relative;
@@ -486,47 +483,6 @@ export default {
       color: #FFFFFF;
       opacity: 0.9;
     }
-    
-    &-shapes {
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      
-      .shape {
-        position: absolute;
-        border-radius: 20rpx;
-        
-        &-1 {
-          width: 300rpx;
-          height: 300rpx;
-          background-color: rgba(255, 255, 255, 0.2);
-          right: -150rpx;
-          top: -100rpx;
-          transform: rotate(30deg);
-        }
-        
-        &-2 {
-          width: 250rpx;
-          height: 250rpx;
-          background-color: rgba(255, 255, 255, 0.15);
-          right: -50rpx;
-          top: 50rpx;
-          transform: rotate(45deg);
-        }
-        
-        &-3 {
-          width: 200rpx;
-          height: 200rpx;
-          background-color: rgba(255, 255, 255, 0.1);
-          right: 100rpx;
-          top: 150rpx;
-          transform: rotate(60deg);
-        }
-      }
-    }
   }
   
   .filter-section {
@@ -536,7 +492,7 @@ export default {
     margin-top: -40rpx;
     position: relative;
     z-index: 1;
-    padding: 30rpx 20rpx;
+    padding: 20rpx 20rpx;
     
     .filter-row-top {
       display: flex;
@@ -621,8 +577,8 @@ export default {
     
     .counselor-item {
       display: flex;
-      padding: 30rpx 20rpx;
-      border-bottom: 1px solid #EEEEEE;
+      padding: 10rpx 20rpx;
+      // border-bottom: 1px solid #EEEEEE;
       
       &:last-child {
         border-bottom: none;

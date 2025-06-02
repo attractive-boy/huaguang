@@ -1,9 +1,9 @@
 <template>
-  <view class="psychological-apply-page">
+  <view class="debt-apply-page">
     <!-- 状态栏占位 -->
     <view class="status-bar"></view>
     
-    <!-- 页面头部区域 -->
+    <!-- 页眉区域 -->
     <view class="page-header">
       <!-- 返回导航 -->
       <view class="back-navigation" @click="goBack">
@@ -11,53 +11,61 @@
         <text class="back-text">返回</text>
       </view>
       
-      <!-- 主标题 -->
-      <view class="main-title">青年帮扶基金申请</view>
-      
-      <!-- 副标题 -->
-      <view class="subtitle">心理支持</view>
-    </view>
-    
-    <!-- 主内容容器 -->
-    <view class="main-content">
-      <!-- 基本材料区域 -->
-      <view class="form-section">
-        <view class="section-title">基本材料</view>
-        <view class="upload-area" @click="uploadIdCard">
-          <uv-icon name="plus" color="#BDBDBD" size="24"></uv-icon>
-          <text class="upload-text">上传身份证正反面照片</text>
-        </view>
-      </view>
-      
-      <!-- 心理困扰区域 -->
-      <view class="form-section">
-        <view class="section-title">心理困扰</view>
-        <view class="input-area">
-          <textarea 
-            class="textarea-input"
-            placeholder="简要说明心理困扰的现状与持续时间"
-            v-model="formData.psychologicalIssue"
-            maxlength="500"
-          ></textarea>
-        </view>
-      </view>
-      
-      <!-- 问诊资料区域 -->
-      <view class="form-section">
-        <view class="section-title">
-          <text class="title-main">问诊资料</text>
-          <text class="title-optional">(选填)</text>
-        </view>
-        <view class="upload-area" @click="uploadMedicalRecord">
-          <uv-icon name="plus" color="#BDBDBD" size="24"></uv-icon>
-          <text class="upload-text">心理咨询记录或医院诊断</text>
-        </view>
+      <!-- 页面标题组 -->
+      <view class="title-group">
+        <view class="main-title">青年帮扶基金申请</view>
+        <view class="sub-title">心理支持</view>
       </view>
     </view>
     
-    <!-- 底部提交按钮 -->
-    <view class="bottom-action">
-      <view class="submit-button" @click="submitApplication">
+    <!-- 主内容区域背景 -->
+    <view class="content-background">
+      <!-- 基本材料卡片 -->
+      <view class="content-card">
+        <view class="card-section-title">基本材料</view>
+        
+        <!-- 文件上传区域 - 身份证 -->
+        <view class="file-upload-area" @click="handleIdCardUpload">
+          <view class="upload-icon">+</view>
+          <view class="upload-text">上传身份证正反面照片</view>
+        </view>
+      </view>
+      
+      <!-- 心理困扰卡片 -->
+      <view class="content-card">
+        <view class="card-section-title">心理困扰</view>
+        
+        <!-- 心理困扰文本输入区域 -->
+        <view class="psychological-input-area">
+          <uv-textarea 
+            v-model="psychologicalDistress"
+            placeholder="请简要描述您的心理困扰情况"
+            height="160"
+            maxlength="100"
+            
+            :customStyle="{
+              backgroundColor: '#F5F5F5',
+              borderRadius: '24rpx',
+              border: 'none'
+            }"
+            @input="handlePsychologicalInput"
+          ></uv-textarea>
+        </view>
+      </view>
+      
+      <!-- 问诊资料卡片 -->
+      <view class="content-card">
+        <view class="card-section-title">问诊资料（选填）</view>
+        
+        <!-- 文件上传区域 - 问诊资料 -->
+        <view class="file-upload-area" @click="handleMedicalRecordUpload">
+          <view class="upload-icon">+</view>
+          <view class="upload-text">心理咨询记录或相关证明材料</view>
+        </view>
+      </view>
+      
+      <!-- 底部提交按钮 -->
+      <view class="submit-button" @click="handleSubmit">
         <text class="submit-text">提 交 审 核</text>
       </view>
     </view>
@@ -71,15 +79,13 @@
 import config from '@/config/index.js'
 
 export default {
-  name: 'PsychologicalApplyPage',
+  name: 'DebtApplyPage',
   data() {
     return {
       config: config,
-      formData: {
-        idCardImages: [],
-        psychologicalIssue: '',
-        medicalRecords: []
-      }
+      psychologicalDistress: '',
+      idCardFiles: [],
+      medicalRecords: []
     }
   },
   methods: {
@@ -93,96 +99,55 @@ export default {
         }
       })
     },
-    
-    uploadIdCard() {
-      uni.chooseImage({
-        count: 2,
-        sizeType: ['compressed'],
-        sourceType: ['camera', 'album'],
-        success: (res) => {
-          this.formData.idCardImages = res.tempFilePaths
-          uni.showToast({
-            title: '身份证照片上传成功',
-            icon: 'success'
-          })
-        },
-        fail: () => {
-          uni.showToast({
-            title: '上传失败，请重试',
-            icon: 'none'
-          })
-        }
+    handleIdCardUpload() {
+      uni.showToast({
+        title: '身份证上传功能开发中',
+        icon: 'none'
       })
     },
-    
-    uploadMedicalRecord() {
-      uni.chooseImage({
-        count: 5,
-        sizeType: ['compressed'],
-        sourceType: ['camera', 'album'],
-        success: (res) => {
-          this.formData.medicalRecords = res.tempFilePaths
-          uni.showToast({
-            title: '问诊资料上传成功',
-            icon: 'success'
-          })
-        },
-        fail: () => {
-          uni.showToast({
-            title: '上传失败，请重试',
-            icon: 'none'
-          })
-        }
+    handlePsychologicalInput(e) {
+      this.psychologicalDistress = e.detail.value
+    },
+    handleMedicalRecordUpload() {
+      uni.showToast({
+        title: '问诊资料上传功能开发中',
+        icon: 'none'
       })
     },
-    
-    submitApplication() {
+    handleSubmit() {
       // 验证必填项
-      if (this.formData.idCardImages.length === 0) {
+      if (!this.psychologicalDistress.trim()) {
         uni.showToast({
-          title: '请上传身份证照片',
+          title: '请描述您的心理困扰情况',
           icon: 'none'
         })
         return
       }
       
-      if (!this.formData.psychologicalIssue.trim()) {
-        uni.showToast({
-          title: '请填写心理困扰说明',
-          icon: 'none'
-        })
-        return
+      // 构建提交数据
+      const submitData = {
+        psychologicalDistress: this.psychologicalDistress,
+        idCardFiles: this.idCardFiles,
+        medicalRecords: this.medicalRecords
       }
       
-      // 提交申请
-      uni.showLoading({
-        title: '提交中...'
+      console.log('提交数据:', submitData)
+      uni.showToast({
+        title: '提交功能开发中',
+        icon: 'none'
       })
-      
-      // 模拟提交过程
-      setTimeout(() => {
-        uni.hideLoading()
-        uni.showToast({
-          title: '申请提交成功',
-          icon: 'success',
-          duration: 2000,
-          success: () => {
-            setTimeout(() => {
-              this.goBack()
-            }, 2000)
-          }
-        })
-      }, 1500)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.psychological-apply-page {
+.debt-apply-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #5DADE2 0%, #AED6F1 100%);
+  background-color: #EBF4FA;
   position: relative;
+  background: url('http://localhost:3000/static/apply-bg.png') no-repeat center center;
+  background-size: 100% 100%;
   
   .status-bar {
     height: var(--status-bar-height);
@@ -191,126 +156,109 @@ export default {
   
   .page-header {
     position: relative;
-    background: transparent;
-    padding: 20rpx 30rpx 40rpx;
+    padding: 20rpx 30rpx 60rpx;
+    overflow: hidden;
     
     .back-navigation {
       display: flex;
       align-items: center;
-      margin-bottom: 20rpx;
+      margin-bottom: 40rpx;
+      z-index: 10;
+      position: relative;
       
       .back-text {
         color: #FFFFFF;
         font-size: 32rpx;
         margin-left: 8rpx;
+        font-weight: normal;
       }
     }
     
-    .main-title {
-      color: #FFFFFF;
-      font-size: 48rpx;
-      font-weight: bold;
-      line-height: 1.2;
-      margin-bottom: 8rpx;
-    }
-    
-    .subtitle {
-      color: #FFFFFF;
-      font-size: 36rpx;
-      line-height: 1.5;
-      opacity: 0.9;
+    .title-group {
+      z-index: 10;
+      position: relative;
+      
+      .main-title {
+        color: #FFFFFF;
+        font-size: 48rpx;
+        font-weight: bold;
+        line-height: 1.2;
+        margin-bottom: 10rpx;
+      }
+      
+      .sub-title {
+        color: #FFFFFF;
+        font-size: 40rpx;
+        font-weight: bold;
+        line-height: 1.2;
+      }
     }
   }
   
-  .main-content {
-    background-color: #FFFFFF;
+  .content-background {
+    background-color: #f1f6fd;
     border-top-left-radius: 40rpx;
     border-top-right-radius: 40rpx;
-    margin: 0 5% 0 5%;
-    padding: 30rpx;
-    box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
-    margin-bottom: 120rpx;
+    margin-top: -40rpx;
+    position: relative;
+    z-index: 2;
+    padding: 25rpx 25rpx 60rpx;
+    min-height: calc(100vh - 300rpx);
     
-    .form-section {
-      margin-bottom: 40rpx;
+    .content-card {
+      background: #FFFFFF;
+      border-radius: 48rpx;
+      padding: 30rpx;
+      box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
+      margin-bottom: 30rpx;
       
-      &:last-child {
-        margin-bottom: 0;
-      }
-      
-      .section-title {
-        font-size: 32rpx;
-        font-weight: 600;
-        color: #333333;
+      .card-section-title {
+        color: #000;
+        font-size: 30rpx;
+        // font-weight: bold;
         margin-bottom: 20rpx;
-        
-        .title-main {
-          color: #333333;
-        }
-        
-        .title-optional {
-          color: #888888;
-          font-weight: normal;
-          font-size: 28rpx;
-        }
       }
       
-      .upload-area {
+      .file-upload-area {
         background-color: #F5F5F5;
-        border-radius: 12rpx;
-        padding: 60rpx 30rpx;
+        border-radius: 24rpx;
+        padding: 40rpx 30rpx;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        min-height: 160rpx;
+        
+        .upload-icon {
+          color: #C0C0C0;
+          font-size: 120rpx;
+          font-weight: normal;
+          line-height: 1;
+          margin-bottom: 15rpx;
+        }
         
         .upload-text {
           color: #888888;
           font-size: 28rpx;
-          margin-top: 16rpx;
+          font-weight: normal;
           text-align: center;
         }
       }
       
-      .input-area {
-        background-color: #F5F5F5;
-        border-radius: 12rpx;
-        padding: 20rpx;
-        
-        .textarea-input {
-          width: 100%;
-          min-height: 80rpx;
-          font-size: 28rpx;
-          color: #333333;
-          background: transparent;
-          border: none;
-          outline: none;
-          resize: none;
-          
-          &::placeholder {
-            color: #888888;
-          }
-        }
+      .psychological-input-area {
+        position: relative;
       }
     }
-  }
-  
-  .bottom-action {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(135deg, #5DADE2 0%, #AED6F1 100%);
-    padding: 30rpx 5% 40rpx;
     
     .submit-button {
-      background-color: #2979FF;
+      background-color: #347ff1;
       border-radius: 50rpx;
-      padding: 28rpx 0;
+      height: 96rpx;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4rpx 12rpx rgba(41, 121, 255, 0.3);
+      margin: 40rpx auto 0 auto;
+      width: 90%;
       
       .submit-text {
         color: #FFFFFF;
@@ -323,7 +271,7 @@ export default {
   
   .home-indicator {
     position: fixed;
-    bottom: 8rpx;
+    bottom: 16rpx;
     left: 50%;
     transform: translateX(-50%);
     width: 268rpx;

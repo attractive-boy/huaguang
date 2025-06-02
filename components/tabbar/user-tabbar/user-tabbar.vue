@@ -57,7 +57,31 @@ export default {
       '/pages/user/profile/index'
     ]
     const currentRoute = getCurrentPages()[getCurrentPages().length - 1].route
-    this.current = routes.findIndex(route => route.includes(currentRoute))
+    
+    // 调试：输出当前路由信息
+    console.log('当前路由:', currentRoute)
+    console.log('完整页面信息:', getCurrentPages()[getCurrentPages().length - 1])
+    
+    // 特殊处理：如果是青年帮扶基金相关页面，都设置为选中青年帮扶基金标签
+    if (currentRoute.includes('/pages/user/fund/')) {
+      this.current = 1 // 青年帮扶基金的索引
+      console.log('匹配到青年帮扶基金页面，设置current为1')
+    } else if (currentRoute.includes('pages/user/fund/')) {
+      // 尝试不带开头斜杠的匹配
+      this.current = 1
+      console.log('匹配到青年帮扶基金页面（无开头斜杠），设置current为1')
+    } else {
+      this.current = routes.findIndex(route => route.includes(currentRoute))
+      console.log('使用默认匹配，current设置为:', this.current)
+    }
+    
+    // 如果没有匹配到，默认为0
+    if (this.current === -1) {
+      this.current = 0
+      console.log('没有匹配到任何路由，设置current为0')
+    }
+    
+    console.log('最终current值:', this.current)
   },
   methods: {
     onChange(index) {

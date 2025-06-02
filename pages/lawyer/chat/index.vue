@@ -2,19 +2,19 @@
   <view class="chat-page">
     <!-- 系统状态栏占位 -->
     <view class="status-bar" :style="{ background: themeColors.gradient }"></view>
-    
+
     <!-- 自定义导航栏 -->
     <view class="custom-navbar" :style="{ background: themeColors.gradient }">
       <view class="navbar-content">
         <!-- 返回按钮 -->
         <view class="back-button" @click="goBack">
-          <uv-icon name="arrow-left" color="#FFFFFF" size="50" ></uv-icon>
+          <uv-icon name="arrow-left" color="#FFFFFF" size="50"></uv-icon>
         </view>
-        
+
         <!-- 律师信息和计时器 -->
         <view class="lawyer-info">
-          <text class="lawyer-name">林默</text>
-          <text class="lawyer-desc">专业心理咨询师</text>
+          <text class="lawyer-name">李律师</text>
+          <text class="lawyer-desc">劳动仲裁方向专业律师</text>
           <view class="timer-container">
             <uv-icon name="http://localhost:3000/static/icons/shalou.png" color="#FFFFFF" size="32"></uv-icon>
             <text class="timer-text">19:58</text>
@@ -22,19 +22,14 @@
         </view>
       </view>
     </view>
-    
+
     <!-- 聊天内容区域 -->
-    <scroll-view 
-      class="chat-content" 
-      scroll-y="true" 
-      :scroll-top="scrollTop"
-      :style="{ height: chatHeight }"
-    >
+    <scroll-view class="chat-content" scroll-y="true" :scroll-top="scrollTop" :style="{ height: chatHeight }">
       <!-- 时间戳分隔符 -->
       <view class="timestamp-separator">
         <text class="timestamp-text">2025年4月24日 17:01</text>
       </view>
-      
+
       <!-- 接收的消息1 -->
       <view class="message-item received">
         <view class="avatar"></view>
@@ -42,7 +37,7 @@
           <text class="message-text">你好呀，我是心理咨询师林默。在这里，你可以放心地聊聊自己最近的感受。今天是什么让你想找个人说说话呢？</text>
         </view>
       </view>
-      
+
       <!-- 发送的消息1 -->
       <view class="message-item sent">
         <view class="message-bubble sent-bubble" :style="{ backgroundColor: themeColors.bubbleColor }">
@@ -50,7 +45,7 @@
         </view>
         <view class="avatar"></view>
       </view>
-      
+
       <!-- 接收的消息2 -->
       <view class="message-item received">
         <view class="avatar"></view>
@@ -58,7 +53,7 @@
           <text class="message-text">嗯，我能感觉到你现在真的很累...这种"被掏空"的状态持续多久了？是一两周，还是更久？</text>
         </view>
       </view>
-      
+
       <!-- 发送的消息2 -->
       <view class="message-item sent">
         <view class="message-bubble sent-bubble" :style="{ backgroundColor: themeColors.bubbleColor }">
@@ -66,16 +61,16 @@
         </view>
         <view class="avatar"></view>
       </view>
-      
+
       <!-- 视频邀请卡片 -->
-      <view class="video-invitation-card" :style="{ backgroundColor: themeColors.cardBg, borderColor: themeColors.cardBorder }">
+      <view class="video-invitation-card"
+        :style="{ backgroundColor: themeColors.cardBg, borderColor: themeColors.cardBorder }">
         <view class="invitation-info">
           <view class="video-icon" :style="{ backgroundColor: themeColors.iconColor }">
-            <uv-icon name="http://localhost:3000/static/icons/zixun-liao.png" color="#FFFFFF" size="32"></uv-icon>
+            <uv-icon name="http://localhost:3000/static/icons/video.png" color="#FFFFFF" size="32"></uv-icon>
           </view>
           <view class="invitation-text">
-            <text class="invitation-line1">为了让咨询师更好的了解你,</text>
-            <text class="invitation-line2">建议向她发送测试结果哦。</text>
+            <text class="invitation-line1">对方给你发送了视频邀请，你是否同意</text>
           </view>
         </view>
         <view class="invitation-buttons">
@@ -88,34 +83,24 @@
         </view>
       </view>
     </scroll-view>
-    
+
     <!-- 消息输入区域 -->
     <view class="message-input-area">
       <view class="input-container">
-        <input 
-          class="message-input" 
-          placeholder="请输入消息" 
-          v-model="inputMessage"
-          @confirm="sendMessage"
-        />
+        <input class="message-input" placeholder="请输入消息" v-model="inputMessage" @confirm="sendMessage" />
         <view class="add-button" @click="showMoreOptions">
           <uv-icon name="plus-circle" color="#888888" size="54"></uv-icon>
         </view>
       </view>
     </view>
-    
+
     <!-- 快捷操作栏 -->
     <view class="quick-actions">
-     
-      <view class="action-item" @click="sendTestResult">
-        <view class="action-icon" >
-          <uv-icon name="http://localhost:3000/static/icons/send_test.png" color="#FFFFFF" size="64"></uv-icon>
-        </view>
-        <text class="action-label">发送测试结果</text>
-      </view>
+
+
       <view class="action-item" @click="openAlbum">
-        <view class="action-icon" >
-          <uv-icon name="http://localhost:3000/static/icons/photo.png" color="#FFFFFF" size="64"></uv-icon>
+        <view class="action-icon">
+          <uv-icon name="http://localhost:3000/static/icons/photo-blue.png" color="#FFFFFF" size="64"></uv-icon>
         </view>
         <text class="action-label">相册</text>
       </view>
@@ -132,7 +117,7 @@ export default {
       scrollTop: 0,
       inputMessage: '',
       messages: [],
-      themeType: 'pink' // 默认粉色主题
+      themeType: 'blue' // 默认蓝色主题
     }
   },
   onLoad(options) {
@@ -193,7 +178,7 @@ export default {
     goBack() {
       uni.navigateBack()
     },
-    
+
     // 计算聊天区域高度
     calculateChatHeight() {
       const systemInfo = uni.getSystemInfoSync()
@@ -201,10 +186,10 @@ export default {
       const navBarHeight = 60 // 自定义导航栏高度
       const inputAreaHeight = 50 // 输入区域高度
       const quickActionsHeight = 80 // 快捷操作栏高度
-      
+
       this.chatHeight = `${systemInfo.windowHeight - statusBarHeight - navBarHeight - inputAreaHeight - quickActionsHeight}px`
     },
-    
+
     // 发送消息
     sendMessage() {
       if (this.inputMessage.trim()) {
@@ -213,7 +198,7 @@ export default {
         this.inputMessage = ''
       }
     },
-    
+
     // 显示更多选项
     showMoreOptions() {
       uni.showActionSheet({
@@ -223,7 +208,7 @@ export default {
         }
       })
     },
-    
+
     // 打开相册
     openAlbum() {
       uni.chooseImage({
@@ -235,7 +220,7 @@ export default {
         }
       })
     },
-    
+
     // 拒绝视频邀请
     rejectVideo() {
       uni.showToast({
@@ -243,7 +228,7 @@ export default {
         icon: 'none'
       })
     },
-    
+
     // 接受视频邀请
     acceptVideo() {
       uni.showToast({
@@ -251,7 +236,7 @@ export default {
         icon: 'none'
       })
     },
-    
+
     // 语音通话
     makeVoiceCall() {
       uni.showToast({
@@ -259,7 +244,7 @@ export default {
         icon: 'none'
       })
     },
-    
+
     // 视频通话
     makeVideoCall() {
       uni.showToast({
@@ -267,7 +252,7 @@ export default {
         icon: 'none'
       })
     },
-    
+
     // 发送测试结果
     sendTestResult() {
       uni.showToast({
@@ -300,14 +285,14 @@ export default {
   padding: 15px 15px;
   // 添加阴影
   box-shadow: 0 20px 4px rgba(0, 0, 0, 0.1);
-  
+
   .navbar-content {
     display: flex;
     align-items: center;
     position: relative;
     height: 60px;
   }
-  
+
   .back-button {
     position: absolute;
     left: 0;
@@ -315,32 +300,32 @@ export default {
     transform: translateY(-50%);
     padding: 8px;
   }
-  
+
   .lawyer-info {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
     .lawyer-name {
       color: #FFFFFF;
       font-size: 16px;
       font-weight: bold;
       margin-bottom: 2px;
     }
-    
+
     .lawyer-desc {
       color: #FFFFFF;
       font-size: 12px;
       margin-bottom: 4px;
     }
-    
+
     .timer-container {
       display: flex;
       align-items: center;
       gap: 4px;
-      
+
       .timer-text {
         color: #FFFFFF;
         font-size: 20px;
@@ -354,14 +339,14 @@ export default {
 .chat-content {
   flex: 1;
   // padding: 15px;
-  background-color: rgb(255, 248, 248);
+  background-color: #f8faff;
 }
 
 // 时间戳分隔符
 .timestamp-separator {
   text-align: center;
   margin: 20px 0;
-  
+
   .timestamp-text {
     color: #AAAAAA;
     font-size: 10px;
@@ -374,10 +359,10 @@ export default {
   margin-bottom: 35rpx;
   margin-right: 12rpx;
   margin-left: 30rpx;
-  
+
   &.received {
     justify-content: flex-start;
-    
+
     .avatar {
       width: 40px;
       height: 40px;
@@ -385,16 +370,16 @@ export default {
       background-color: #D9D9D9;
       margin-right: 8px;
     }
-    
+
     .message-bubble {
       max-width: 70%;
     }
   }
-  
+
   &.sent {
     justify-content: flex-end;
     padding-right: 15px;
-    
+
     .avatar {
       width: 40px;
       height: 40px;
@@ -403,7 +388,7 @@ export default {
       margin-left: 8px;
       flex-shrink: 0;
     }
-    
+
     .message-bubble {
       max-width: 70%;
     }
@@ -414,25 +399,25 @@ export default {
 .message-bubble {
   padding: 10px 12px;
   border-radius: 12px;
-  
+
   .message-text {
     font-size: 14px;
     line-height: 1.4;
   }
-  
+
   &.received-bubble {
     background-color: #FFFFFF;
     border-bottom-left-radius: 4px;
-    
+
     .message-text {
       color: #333333;
     }
   }
-  
+
   &.sent-bubble {
     // background-color 通过动态绑定设置
     border-bottom-right-radius: 4px;
-    
+
     .message-text {
       color: #FFFFFF;
     }
@@ -443,20 +428,20 @@ export default {
 .video-invitation-card {
   margin: 20px auto;
   width: 70%;
-  background: linear-gradient(180deg, rgb(255, 224, 224) 0%, rgb(255, 252, 252) 100%) !important;
+  background: linear-gradient(180deg, #e0e9ff 0%, #fff 100%) !important;
   border: 3rpx solid;
   border-radius: 12px;
   padding: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   .invitation-info {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
     width: 100%;
-    
+
     .video-icon {
       width: 32px;
       height: 32px;
@@ -468,11 +453,11 @@ export default {
       margin-right: 4px;
       flex-shrink: 0;
     }
-    
+
     .invitation-text {
       flex: 1;
       text-align: left;
-      
+
       .invitation-line1,
       .invitation-line2 {
         display: block;
@@ -482,13 +467,13 @@ export default {
       }
     }
   }
-  
+
   .invitation-buttons {
     display: flex;
     justify-content: space-between;
     width: 100%;
     gap: 15px;
-    
+
     .reject-button,
     .accept-button {
       flex: 1;
@@ -499,22 +484,23 @@ export default {
       font-weight: 500;
       font-size: 0.8rem;
     }
-    
+
     .reject-button {
       background-color: #F0F0F0;
-      
+
       .reject-text {
         color: #666666;
         font-size: 12px;
       }
     }
-    
+
     .accept-button {
+
       // background-color 通过动态绑定设置
       .accept-text {
         // color 通过动态绑定设置
         font-size: 12px;
-        
+
       }
     }
   }
@@ -525,12 +511,12 @@ export default {
   background-color: #FFFFFF;
   padding: 10px 15px;
   border-top: 1px solid #EEEEEE;
-  
+
   .input-container {
     position: relative;
     display: flex;
     align-items: center;
-    
+
     .message-input {
       flex: 1;
       height: 36px;
@@ -540,12 +526,13 @@ export default {
       padding-right: 45px;
       font-size: 14px;
       border: none;
-      
+      background-color: #f6f8ff;
+
       &::placeholder {
         color: #BDBDBD;
       }
     }
-    
+
     .add-button {
       position: absolute;
       right: 8px;
@@ -558,7 +545,7 @@ export default {
       justify-content: center;
       border-radius: 50%;
       background-color: transparent;
-      
+
       &:active {
         background-color: rgba(0, 0, 0, 0.05);
       }
@@ -572,14 +559,14 @@ export default {
   padding: 20px 20px;
   display: flex;
   justify-content: space-around;
-  
+
   .action-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
     flex: 1;
-    
+
     .action-icon {
       width: 48px;
       height: 48px;
@@ -590,13 +577,13 @@ export default {
       // background-color 通过动态绑定设置
       // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
       transition: all 0.3s ease;
-      
+
       &:active {
         transform: scale(0.95);
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
       }
     }
-    
+
     .action-label {
       color: #666666;
       font-size: 11px;

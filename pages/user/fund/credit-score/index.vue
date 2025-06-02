@@ -31,15 +31,15 @@
         <view class="card-content">
           <view class="card-left">
             <view class="icon-container credit-card-icon">
-              <image :src="config.staticBaseUrl + '/icons/card.png'" style="width: 60rpx; height: 60rpx;"></image>
+              <image :src="config.staticBaseUrl + (isReminderSet ? '/icons/huan.png' : '/icons/card.png')" style="width: 60rpx; height: 60rpx;"></image>
             </view>
             <view class="text-content">
               <text class="main-text">按时完成信用卡还款</text>
-              <text class="sub-text">点击设置提醒</text>
+              <text class="sub-text">{{ isReminderSet ? `下次还款日期${paymentDayText}号` : '点击设置提醒' }}</text>
             </view>
           </view>
           <view class="card-right">
-            <uv-button type="primary" size="small" shape="circle" @click="handleSetReminder">去设置</uv-button>
+            <uv-button type="primary" size="small" shape="circle" @click="handleSetReminder">{{ isReminderSet ? '去还款' : '去设置' }}</uv-button>
           </view>
         </view>
       </view>
@@ -108,6 +108,18 @@
 
     <!-- 底部TabBar -->
     <user-tabbar></user-tabbar>
+
+    <!-- 日历组件 -->
+    <uv-calendar 
+      ref="calendar" 
+      mode="single" 
+      :show="false"
+      :closeOnClickOverlay="true"
+      :closeOnClickConfirm="true"
+      title="选择还款日期"
+      confirmText="确定"
+      @confirm="onCalendarConfirm"
+    ></uv-calendar>
   </view>
 </template>
 
@@ -123,6 +135,8 @@ export default {
   data() {
     return {
       remainingDebt: 85166,
+      selectedDate: null,
+      isReminderSet: false,
       creditKnowledge: {
         question1: {
           question: "什么是信用?",
@@ -158,6 +172,11 @@ export default {
       return {
         background: `url('${this.config.staticBaseUrl}/score_bg.png') no-repeat center center`
       }
+    },
+    paymentDayText() {
+      if (!this.selectedDate) return ''
+      const date = new Date(this.selectedDate)
+      return date.getDate()
     }
   },
   methods: {
@@ -165,10 +184,17 @@ export default {
       uni.navigateBack()
     },
     handleSetReminder() {
-      uni.showToast({
-        icon: 'none',
-        title: '设置提醒功能'
-      })
+      this.$refs.calendar.open()
+    },
+    onCalendarConfirm(result) {
+      if (result && result.length > 0) {
+        this.selectedDate = result[0]
+        this.isReminderSet = true
+        uni.showToast({
+          icon: 'success',
+          title: `已设置${this.paymentDayText}号提醒`
+        })
+      }
     }
   }
 }

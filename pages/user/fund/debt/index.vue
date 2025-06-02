@@ -100,6 +100,8 @@ export default {
   min-height: 100vh;
   background-color: #EBF4FA;
   position: relative;
+  background: url('http://localhost:3000/static/apply-bg.png') no-repeat center center;
+  background-size: 100% 100%;
   
   .status-bar {
     height: var(--status-bar-height);
@@ -108,7 +110,7 @@ export default {
   
   .page-header {
     position: relative;
-    background: linear-gradient(135deg, #4A90E2 0%, #A0C8F0 100%);
+    // background: linear-gradient(135deg, #4A90E2 0%, #A0C8F0 100%);
     padding: 20rpx 30rpx 60rpx;
     overflow: hidden;
     
@@ -149,7 +151,7 @@ export default {
   }
   
   .content-background {
-    background-color: #EBF4FA;
+    background-color: #f1f6fd;
     border-top-left-radius: 40rpx;
     border-top-right-radius: 40rpx;
     margin-top: -40rpx;
@@ -226,15 +228,14 @@ export default {
     }
     
     .submit-button {
-      background-color: #4285F4;
+      background-color: #347ff1;
       border-radius: 50rpx;
       height: 96rpx;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto;
+      margin: 300rpx auto 0 auto;
       width: 90%;
-      box-shadow: 0 4rpx 12rpx rgba(66, 133, 244, 0.3);
       
       .submit-text {
         color: #FFFFFF;
